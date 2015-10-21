@@ -77,10 +77,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DisplayHistogram.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RoiExtraction.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DisplayHistogram.h" />
     <ClInclude Include="RoiExtraction.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

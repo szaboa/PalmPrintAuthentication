@@ -21,9 +21,15 @@
     <ClCompile Include="RoiExtraction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DisplayHistogram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RoiExtraction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DisplayHistogram.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
