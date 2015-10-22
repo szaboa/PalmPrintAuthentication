@@ -80,10 +80,12 @@
     <ClCompile Include="DisplayHistogram.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RoiExtraction.cpp" />
+    <ClCompile Include="Treshold.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DisplayHistogram.h" />
     <ClInclude Include="RoiExtraction.h" />
+    <ClInclude Include="Treshold.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
