@@ -77,15 +77,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DisplayHistogram.cpp" />
+    <ClCompile Include="Histogram.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RegionSegmentation.cpp" />
     <ClCompile Include="RoiExtraction.cpp" />
-    <ClCompile Include="Treshold.cpp" />
+    <ClCompile Include="PixelValueTreshold.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DisplayHistogram.h" />
+    <ClInclude Include="Histogram.h" />
+    <ClInclude Include="RegionSegmentation.h" />
     <ClInclude Include="RoiExtraction.h" />
-    <ClInclude Include="Treshold.h" />
+    <ClInclude Include="PixelValueTreshold.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

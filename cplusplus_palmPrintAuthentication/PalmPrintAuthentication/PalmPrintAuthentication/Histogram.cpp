@@ -1,4 +1,4 @@
-#include "DisplayHistogram.h"
+#include "Histogram.h"
 #include <vector>
 #include <iostream>
 #include <algorithm>
@@ -6,12 +6,27 @@
 using namespace cv;
 using namespace std;
 
-DisplayHistogram::DisplayHistogram(Mat img) : img(img)
-{
-	calculateHistogram();
+
+Histogram* Histogram::mInstance = NULL;
+
+int Histogram::minValueChanel1, Histogram::minValueChanel2, Histogram::minValueChanel3;
+int Histogram::maxValueChanel1, Histogram::maxValueChanel2, Histogram::maxValueChanel3;
+
+Mat Histogram::img;
+
+Histogram* Histogram::getInstance(){
+	if (!mInstance){
+		mInstance = new Histogram;
+	}
+	
+	return mInstance;
 }
 
-void DisplayHistogram::calculateHistogram(){
+void Histogram::init(Mat pimg){
+	img = pimg;
+	calculateHistogram();
+}
+void Histogram::calculateHistogram(){
 	// separate the image in 3 chanels
 	vector<Mat> chanels;
 	split(img, chanels);
@@ -104,40 +119,37 @@ void DisplayHistogram::calculateHistogram(){
 	minValueChanel3 = *it_minChanel3;
 	maxValueChanel3 = *it_maxChanel3;
 
-	cout << "Min value [Cr]: " << *it_minChanel2 << endl;
-	cout << "Max value [Cr]: " << *it_maxChanel2 << endl;
-	cout << "Min value [Cb]: " << *it_minChanel3 << endl;
-	cout << "Max value [Cb]: " << *it_maxChanel3 << endl;
+	cout << "Min value [Cb]: " << *it_minChanel2 << endl;
+	cout << "Max value [Cb]: " << *it_maxChanel2 << endl;
+	cout << "Min value [Cr]: " << *it_minChanel3 << endl;
+	cout << "Max value [Cr]: " << *it_maxChanel3 << endl;
 
 	/// Display
 	namedWindow("calcHist", CV_WINDOW_AUTOSIZE);
 	imshow("calcHist", histImage);
 }
 
-int DisplayHistogram::getMinValueChanel1(){
+int Histogram::getMinValueChanel1(){
 	return minValueChanel1;
 }
 
-int DisplayHistogram::getMaxValueChanel1(){
+int Histogram::getMaxValueChanel1(){
 	return maxValueChanel1;
 }
 
-int DisplayHistogram::getMinValueChanel2(){
+int Histogram::getMinValueChanel2(){
 	return minValueChanel2;
 }
 
-int DisplayHistogram::getMaxValueChanel2(){
+int Histogram::getMaxValueChanel2(){
 	return maxValueChanel2;
 }
 
-int DisplayHistogram::getMinValueChanel3(){
+int Histogram::getMinValueChanel3(){
 	return minValueChanel3;
 }
 
-int DisplayHistogram::getMaxValueChanel3(){
+int Histogram::getMaxValueChanel3(){
 	return maxValueChanel3;
 }
 
-DisplayHistogram::~DisplayHistogram()
-{
-}

@@ -2,7 +2,7 @@
 
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
-
+#include <vector>
 using namespace cv;
 
 /*
@@ -14,16 +14,16 @@ class RoiExtraction
 
 private:
 	/*Cropped image size from the center of the original image*/
-	const int CENTER_SIZE = 50;
+	const int CENTER_SIZE = 20;
 
 	/*Original image*/
 	Mat inputImage;
 
-	/*Cropped image from the center of the original image*/
+	/*Cropped image from the center of the original image*/	
 	Mat centerOfImage;
-
+		
 	/*
-	* Crop the center of the original image (using @CENTER_SIZE range)
+	* Crops the center of the original image (using @CENTER_SIZE range)
 	* and convert it to YCbCr color model
 	*/
 	Mat cropCenterOfInputImage();

@@ -21,10 +21,13 @@
     <ClCompile Include="RoiExtraction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DisplayHistogram.cpp">
+    <ClCompile Include="Histogram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Treshold.cpp">
+    <ClCompile Include="PixelValueTreshold.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RegionSegmentation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,10 +35,13 @@
     <ClInclude Include="RoiExtraction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DisplayHistogram.h">
+    <ClInclude Include="Histogram.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Treshold.h">
+    <ClInclude Include="PixelValueTreshold.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RegionSegmentation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
