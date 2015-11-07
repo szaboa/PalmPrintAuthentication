@@ -35,7 +35,9 @@ void RegionSegmentation::applyRegionGrowingAlgorithmEucDistance(Mat img){
 
 Mat RegionSegmentation::applyRegionGrowingAlgorithm(Mat img){
 
-	Mat outputImage = img;
+	//Mat outputImage = img;
+	Mat grayscaleMat(img.size(), CV_8U, Scalar(0,0,0));
+
 	// get size of the original image
 	Size imgSize = img.size();
 	int width = imgSize.width;
@@ -64,8 +66,8 @@ Mat RegionSegmentation::applyRegionGrowingAlgorithm(Mat img){
 
 	visited[seedPoint.x][seedPoint.y] = true;
 
-	Scalar minTresholdValue(0, Histogram::getMinValueChanel2() , Histogram::getMinValueChanel3() );
-	Scalar maxTresholdValue(255, Histogram::getMaxValueChanel2() , Histogram::getMaxValueChanel3());
+	Scalar minTresholdValue(0, Histogram::getMinValueChanel2() - 5, Histogram::getMinValueChanel3() -5 );
+	Scalar maxTresholdValue(255, Histogram::getMaxValueChanel2() + 5, Histogram::getMaxValueChanel3() +5);
 
 
 	while (!processQueue.empty()){
@@ -81,21 +83,13 @@ Mat RegionSegmentation::applyRegionGrowingAlgorithm(Mat img){
 			//if (p.x >= 0 && p.x < width && p.y >= 0 && p.y < height &&  visited[p.x][p.y] == false){
 			if (p.x >= 0 && p.x < width && p.y >= 0 && p.y < height &&  visited[p.x][p.y] == false){
 				Scalar pValue(
-					outputImage.at<Vec3b>(p.y, p.x)[0],
-					outputImage.at<Vec3b>(p.y, p.x)[1],
-					outputImage.at<Vec3b>(p.y, p.x)[2]);
+					img.at<Vec3b>(p.y, p.x)[0],
+					img.at<Vec3b>(p.y, p.x)[1],
+					img.at<Vec3b>(p.y, p.x)[2]);
 				bool inRegion = PixelValueTreshold::inRange(pValue, minTresholdValue, maxTresholdValue);
 				if (inRegion){
-					outputImage.at<Vec3b>(p.y, p.x)[0] = 255;
-					outputImage.at<Vec3b>(p.y, p.x)[1] = 255;
-					outputImage.at<Vec3b>(p.y, p.x)[2] = 255;
+					grayscaleMat.at<uchar>(p.y, p.x) = 255;
 					processQueue.push(p);
-				}
-				else{
-					outputImage.at<Vec3b>(p.y, p.x)[0] = 0;
-					outputImage.at<Vec3b>(p.y, p.x)[1] = 0;
-					outputImage.at<Vec3b>(p.y, p.x)[2] = 0;
-
 				}
 
 				visited[p.x][p.y] = true;
@@ -110,7 +104,7 @@ Mat RegionSegmentation::applyRegionGrowingAlgorithm(Mat img){
 	}
 	delete[] visited;
 
-	return outputImage;
+	return grayscaleMat;
 }
 
 vector<Point> RegionSegmentation::getNeighbourPoints(const Point &point){
