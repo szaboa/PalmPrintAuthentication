@@ -7,31 +7,6 @@
 
 using namespace std;
 
-void RegionSegmentation::applyRegionGrowingAlgorithmEucDistance(Mat img){
-	Size imgSize = img.size();
-	int width = imgSize.width;
-	int height = imgSize.height;
-
-	float avgDistance;
-
-	for (int i = width / 2 - 10; i < width / 2 + 10; i++){
-		for (int j = height / 2 - 10; j < height / 2 + 10; ++j){
-			Scalar v1(
-				img.at<Vec3b>(i, j)[0],
-				img.at<Vec3b>(i, j)[1],
-				img.at<Vec3b>(i, j)[2]);
-
-			Scalar v2(
-				img.at<Vec3b>(i+1, j+1)[0],
-				img.at<Vec3b>(i+1, j+1)[1],
-				img.at<Vec3b>(i+1, j+1)[2]);
-			
-			float dist = sqrt((v1.val[0] - v2.val[0]) * (v1.val[0] - v2.val[0]) + (v1.val[1] - v2.val[1]) * (v1.val[1] - v2.val[1]) + (v1.val[2] - v2.val[2]) * (v1.val[2] - v2.val[2]));
-			
-			
-		}
-	}
-}
 
 Mat RegionSegmentation::applyRegionGrowingAlgorithm(Mat img){
 
@@ -57,7 +32,7 @@ Mat RegionSegmentation::applyRegionGrowingAlgorithm(Mat img){
 	}
 
 	// seed point
-	Point seedPoint(width / 2, height / 2);
+	Point seedPoint(0, height / 2);
 
 	// points which needs to be evaluated
 	queue<Point> processQueue;

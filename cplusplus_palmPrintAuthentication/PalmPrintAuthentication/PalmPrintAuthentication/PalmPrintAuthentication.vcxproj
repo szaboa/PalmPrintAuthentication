@@ -79,12 +79,14 @@
   <ItemGroup>
     <ClCompile Include="Histogram.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MorphologicalOperation.cpp" />
     <ClCompile Include="RegionSegmentation.cpp" />
     <ClCompile Include="RoiExtraction.cpp" />
     <ClCompile Include="PixelValueTreshold.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Histogram.h" />
+    <ClInclude Include="MorphologicalOperation.h" />
     <ClInclude Include="RegionSegmentation.h" />
     <ClInclude Include="RoiExtraction.h" />
     <ClInclude Include="PixelValueTreshold.h" />

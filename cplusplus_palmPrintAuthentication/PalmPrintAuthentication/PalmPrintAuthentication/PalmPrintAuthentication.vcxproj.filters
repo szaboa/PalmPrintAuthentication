@@ -30,6 +30,9 @@
     <ClCompile Include="RegionSegmentation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MorphologicalOperation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RoiExtraction.h">
@@ -42,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RegionSegmentation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MorphologicalOperation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

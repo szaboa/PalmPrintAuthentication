@@ -10,7 +10,8 @@ using namespace cv;
 int main(int argc, char *argv[]){
 
 	// reading sample palmprint image
-	Mat image = imread("sample_images/sample_picture_2015-10-21_12-22-29.jpg");
+	Mat image = imread("sample_images/20151112_173809.jpg");
+	resize(image, image, Size(640, 480));
 
 	RoiExtraction roiExtraction(image);
 
