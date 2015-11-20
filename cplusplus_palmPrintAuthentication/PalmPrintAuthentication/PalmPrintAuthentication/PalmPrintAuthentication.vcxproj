@@ -77,6 +77,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BoundaryTracking.cpp" />
     <ClCompile Include="Histogram.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MorphologicalOperation.cpp" />
@@ -85,6 +86,7 @@
     <ClCompile Include="PixelValueTreshold.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BoundaryTracking.h" />
     <ClInclude Include="Histogram.h" />
     <ClInclude Include="MorphologicalOperation.h" />
     <ClInclude Include="RegionSegmentation.h" />
