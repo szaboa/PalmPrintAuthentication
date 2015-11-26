@@ -68,13 +68,14 @@ vector<Point> BoundaryTracking::getBoundary(const Mat &img){
 	Point currentPoint = startingPoint;
 	int dir = 7;
 
-	for (int i = 0; i < 500;++i){
+	
+	do{
 		currentPoint = getNextBoundaryPoint(img, dir, currentPoint);
 
-		cout << "Dir: " << dir << endl;
+		//cout << "Dir: " << dir << endl;
 		boundaryVector.push_back(currentPoint);
 
-	}
+	} while (currentPoint.x != 0);
 
 	return boundaryVector;
 }

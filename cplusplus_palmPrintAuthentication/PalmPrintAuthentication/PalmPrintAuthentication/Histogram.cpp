@@ -119,10 +119,7 @@ void Histogram::calculateHistogram(){
 	minValueChanel3 = *it_minChanel3;
 	maxValueChanel3 = *it_maxChanel3;
 
-	cout << "Min value [Cb]: " << *it_minChanel2 << endl;
-	cout << "Max value [Cb]: " << *it_maxChanel2 << endl;
-	cout << "Min value [Cr]: " << *it_minChanel3 << endl;
-	cout << "Max value [Cr]: " << *it_maxChanel3 << endl;
+
 
 	/// Display
 	namedWindow("calcHist", CV_WINDOW_AUTOSIZE);

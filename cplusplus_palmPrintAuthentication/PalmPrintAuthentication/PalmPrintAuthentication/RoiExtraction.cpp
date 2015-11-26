@@ -11,6 +11,7 @@
 #include <math.h>
 #include <algorithm>
 #include "BoundaryTracking.h"
+#include <fstream>
 
 using namespace std;
 using namespace cv;
@@ -62,92 +63,111 @@ RoiExtraction::RoiExtraction(Mat inputImage) : inputImage(inputImage)
 	 
 	vector<Point> boundaryVector = BoundaryTracking::getBoundary(output); 
 
-	for (Point p : boundaryVector){
-		circle(inputImage, Point(p.x + inputImage.cols/2, p.y), 2, Scalar(0, 0, 255));
+	//for (auto it = boundaryVector.begin(); it < boundaryVector.end() - 10; it += 10){
+//		line(inputImage, Point(it->x + inputImage.cols / 2, it->y), Point((it + 10)->x + inputImage.cols / 2, (it + 10)->y), Scalar(0, 0, 255), 1);
+	//}
+	Point top, bottom;
+
+	bool foundUpper = false;
+	for (int i = 0; i < output.rows; ++i){
+		if (foundUpper){
+			if (output.at<uchar>(i, 0) == 0){
+				top.x = 0;
+				top.y = i;
+				break;
+			}
+		}
+		else{
+			if (output.at<uchar>(i, 0) == 255){
+				foundUpper = true;
+				bottom.x = 0;
+	     		bottom.y = i;
+			}
+		}
+		
 	}
-	// ---------------
+
+
+	Point centerPoint(inputImage.cols / 2, (top.y + bottom.y) / 2);
+	circle(inputImage, centerPoint, 2, CV_RGB(0, 255, 0), -1);
+
+	vector<point_with_distance> distances;
 	
-	// FIND CONTOURS BY APPLYING CANNY 
+	
+	
+	for (int i = 0; i < boundaryVector.size(); ++i){
 
-	//Mat canny_output;
-	//vector<vector<Point> > contours;
-	//vector<Vec4i> hierarchy;
-	//RNG rng(12345);
-	///// Detect edges using canny
-	//Canny(output, canny_output, 100, 100 * 2, 3);
-	///// Find contours
-	//findContours(canny_output, contours, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
+		point_with_distance p;
+		p.p.x = boundaryVector.at(i).x + inputImage.cols/2;
+		p.p.y = boundaryVector.at(i).y;
 
-	///// Draw contours
-	//Mat drawing = Mat::zeros(canny_output.size(), CV_8UC3);
-	//for (int i = 0; i< contours.size(); i++)
-	//{
-	//	Scalar color = Scalar(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255));
-	//	//circle(drawing, contours[0][i], 0, Scalar(0, 0, 255));
-	//	drawContours(drawing, contours, i, color, 1, 8, hierarchy, 0, Point());
-	//}
-	//// get first top / bottom non-zero point
-	//Point top, bottom;
+		p.d = sqrt(pow(centerPoint.x - p.p.x, 2) + pow(centerPoint.y - p.p.y, 2));
+		distances.push_back(p);
+	}
 
-	//bool foundUpper = false;
-	//for (int i = 0; i < output.rows; ++i){
-	//	if (foundUpper){
-	//		if (output.at<uchar>(i, 0) == 0){
-	//			top.x = 0;
-	//			top.y = i;
-	//			break;
-	//		}
-	//	}
-	//	else{
-	//		if (output.at<uchar>(i, 0) == 255){
-	//			foundUpper = true;
-	//			bottom.x = 0;
-	//			bottom.y = i;
-	//		}
-	//	}
-	//	
-	//}
+	// mean filtering
+	vector<point_with_distance> filtered_distances = distances;
+	
+	double sum = 0.0;
+	double kernel_size = 5;
 
-	//cout << endl << top.x << " " << top.y << endl << bottom.x << " " << bottom.y << endl;
-	//Point centerPoint(inputImage.cols / 2, (top.y + bottom.y) / 2);
-	//circle(inputImage, centerPoint, 2, CV_RGB(0, 255, 0), -1);
+	for (int index = 2; index < distances.size()-2; index++){
+		sum = distances.at(index - 2).d + distances.at(index - 1).d + distances.at(index).d + distances.at(index + 1).d + distances.at(index + 2).d;
+		filtered_distances.at(index).d = sum / kernel_size;
+		//cout << sum / kernel_size << endl;
+	}
 
-	//vector<point_with_distance> distances;
+	int n = 5;
+	vector<point_with_distance> minimums;
+	for (int i = 50; i < filtered_distances.size() - 50; ++i){
+		if (filtered_distances.at(i - n).d > filtered_distances.at(i).d && filtered_distances.at(i + n).d > filtered_distances.at(i).d)
+		{
+			point_with_distance temp;
+			temp.p = filtered_distances.at(i).p;
+			temp.d = filtered_distances.at(i).d;
+			
+			//circle(inputImage, filtered_distances.at(i).p, 2, CV_RGB(0, 255, 0), -1);
+			minimums.push_back(temp);
+		}
+	}
 
-	//
-	//for (int i = 0; i < contours.size(); ++i){
-	//	for (int j = 0; j < contours[i].size(); ++j){
-	//		//cout << contours[i][j].x << " " << contours[i][j].y << endl;
-	//		point_with_distance p;
-	//		p.p.x = contours[i][j].x + inputImage.cols/2;
-	//		p.p.y = contours[i][j].y;
-	//		p.d = sqrt(pow(centerPoint.x - p.p.x, 2) + pow(centerPoint.y - p.p.y, 2));
-	//		distances.push_back(p);
-	//	}
-	//	
-	//}
-	//
-	////sort(distances.begin(), distances.end(), [](const point_with_distance &a, const point_with_distance &b){ return a.d < b.d;  });
+	cout << "MIN size: " << minimums.size() << endl;
 
-	//
+	vector<vector<point_with_distance>> min_clusters;
+	vector<point_with_distance> temp_row;
+	for (int i = 0; i < minimums.size() - 1; ++i){
+		point_with_distance current, next;
+		current = minimums.at(i);
+		next = minimums.at(i + 1);
+		float dist = sqrt(pow(current.p.x - next.p.x, 2) + pow(current.p.y - next.p.y, 2));
+		if (dist > 10){
+			min_clusters.push_back(temp_row);
+			temp_row.clear();
+		}
+		else{
+			temp_row.push_back(current);
+		}
+	}
 
-	//auto it = distances.begin();
-	//for (auto it = distances.begin() + 1; it < distances.end() - 6; it+=6){
-	//	if (it->d < (it - 1)->d && it->d < (it + 1)->d){
-	//		circle(inputImage, it->p, 2, CV_RGB(0, 255, 0), -1);
-	//	}
-	//}
+	if (temp_row.size() != 0) min_clusters.push_back(temp_row);
+	
+	if (min_clusters.size() != 3) {
+		cout << "Error : keypoints";
+		return;
+	}
 
-	//
-	//Mat distanceGraph(Size(distances.size(), 400),CV_8U,Scalar(0,0,0));
-	//namedWindow("Distance Graph", CV_WINDOW_AUTOSIZE);
-	//cout << "Number of contours: " << contours.size() << endl;
-	//for (int i = 0;i<distances.size();++i){
-	//	circle(distanceGraph, Point(i,distances.at(i).d), 2, CV_RGB(255, 255, 255), -1);
-	//}
-	//imshow("Distance Graph", distanceGraph);
-	//
-	//
+	point_with_distance keypoint1, keypoint2, keypoint3;
+	keypoint1 = *min_element(min_clusters[0].begin(), min_clusters[0].end(), [](const point_with_distance& x, const point_with_distance& y) {return x.d < y.d; });
+	circle(inputImage, keypoint1.p, 2, CV_RGB(0, 255, 0), -1);
+
+	keypoint2 = *min_element(min_clusters[1].begin(), min_clusters[1].end(), [](const point_with_distance& x, const point_with_distance& y) {return x.d < y.d; });
+	circle(inputImage, keypoint2.p, 2, CV_RGB(0, 255, 0), -1);
+
+	keypoint3 = *min_element(min_clusters[2].begin(), min_clusters[2].end(), [](const point_with_distance& x, const point_with_distance& y) {return x.d < y.d; });
+	circle(inputImage, keypoint3.p, 2, CV_RGB(0, 255, 0), -1);
+
+	line(inputImage, keypoint1.p, keypoint3.p, Scalar(0, 0, 255), 1);
+
 
 	namedWindow("Original Image", CV_WINDOW_AUTOSIZE);
 	imshow("Original Image", inputImage);
