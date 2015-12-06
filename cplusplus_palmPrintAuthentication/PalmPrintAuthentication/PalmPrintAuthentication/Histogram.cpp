@@ -122,8 +122,8 @@ void Histogram::calculateHistogram(){
 
 
 	/// Display
-	namedWindow("calcHist", CV_WINDOW_AUTOSIZE);
-	imshow("calcHist", histImage);
+	//namedWindow("calcHist", CV_WINDOW_AUTOSIZE);
+	//imshow("calcHist", histImage);
 }
 
 int Histogram::getMinValueChanel1(){

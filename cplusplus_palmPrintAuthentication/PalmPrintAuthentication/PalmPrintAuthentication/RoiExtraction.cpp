@@ -22,9 +22,9 @@ struct point_with_distance{
 };
 RoiExtraction::RoiExtraction(Mat inputImage) : inputImage(inputImage)
 {
-	char* sourceWindow = "Source";
-	namedWindow(sourceWindow, CV_WINDOW_AUTOSIZE);
-	imshow(sourceWindow, inputImage);
+	//char* sourceWindow = "Source";
+	//namedWindow(sourceWindow, CV_WINDOW_AUTOSIZE);
+	//imshow(sourceWindow, inputImage);
 	
 	// crop center of input image
 	centerOfImage = cropCenterOfInputImage();
@@ -167,20 +167,39 @@ RoiExtraction::RoiExtraction(Mat inputImage) : inputImage(inputImage)
 	circle(inputImage, keypoint3.p, 2, CV_RGB(0, 255, 0), -1);
 
 	line(inputImage, keypoint1.p, keypoint3.p, Scalar(0, 0, 255), 1);
+	
+	double slope = 0.0;
+	double per_slope = 0.0;
 
+	if (keypoint3.p.x - keypoint1.p.x == 0){
+		per_slope = 0;
+	}
+	else{
+		slope = (keypoint3.p.y - keypoint1.p.y) / (keypoint3.p.x - keypoint1.p.x);
+		per_slope = -1 / slope;
+	}
+	
+
+	Point keypoint1_1, keypoint3_1;
+	double dist = sqrt(pow(keypoint1.p.x - keypoint3.p.x, 2) + pow(keypoint1.p.y - keypoint3.p.y, 2));
+	keypoint1_1.x = keypoint1.p.x - dist;
+	keypoint1_1.y = per_slope*(keypoint1_1.x - keypoint1.p.x) + keypoint1.p.y;
+
+	keypoint3_1.x = keypoint3.p.x - dist;
+	keypoint3_1.y = per_slope*(keypoint3_1.x - keypoint3.p.x) + keypoint3.p.y;
+
+
+	line(inputImage, keypoint1.p, keypoint1_1, Scalar(0, 0, 255), 1);
+	line(inputImage, keypoint3.p, keypoint3_1, Scalar(0, 0, 255), 1);
+	line(inputImage, keypoint1_1, keypoint3_1, Scalar(0, 0, 255), 1);
+	//cout << endl << keypoint3.p.x << " "  << keypoint1.p.x << endl;
+	//double slope = (keypoint3.p.y - keypoint1.p.y) / (keypoint3.p.x - keypoint1.p.x);
+	cout << endl << "Slope: " << slope << endl;
 
 	namedWindow("Original Image", CV_WINDOW_AUTOSIZE);
 	imshow("Original Image", inputImage);
 
-
-	///// Show in a window
-	//namedWindow("Contours", CV_WINDOW_AUTOSIZE);
-	//imshow("Contours", drawing);
-
 	waitKey(0);
-
-	
-
 }
 
 
@@ -193,9 +212,9 @@ Mat RoiExtraction::cropCenterOfInputImage(){
 	Mat croppedImageYCbCr;
 	cvtColor(croppedImage, croppedImageYCbCr, CV_BGR2YCrCb);
 
-	char* croppedImageWindow = "Cropped Image";
-	namedWindow(croppedImageWindow, CV_WINDOW_AUTOSIZE);
-	imshow(croppedImageWindow, croppedImageYCbCr);
+	//char* croppedImageWindow = "Cropped Image";
+	//namedWindow(croppedImageWindow, CV_WINDOW_AUTOSIZE);
+	//imshow(croppedImageWindow, croppedImageYCbCr);
 
 	return croppedImageYCbCr;
 }
