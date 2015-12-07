@@ -16,130 +16,171 @@
 using namespace std;
 using namespace cv;
 
-struct point_with_distance{
-	Point p;
-	double d;
+
+
+// Struct for holding a boundary point and it's distance from center point
+struct Point_with_distance{
+	Point point;
+	double distance;
 };
 RoiExtraction::RoiExtraction(Mat inputImage) : inputImage(inputImage)
 {
-	//char* sourceWindow = "Source";
-	//namedWindow(sourceWindow, CV_WINDOW_AUTOSIZE);
-	//imshow(sourceWindow, inputImage);
-	
-	// crop center of input image
+
+	// Crop center of input image
 	centerOfImage = cropCenterOfInputImage();
 	
-	// get an instance from Histogram
-	Histogram::getInstance()->init(centerOfImage);
-
-	//split input image to YCbCr chanels
-	Mat inputImageYCbCr;
-	cvtColor(inputImage, inputImageYCbCr, COLOR_BGR2YCrCb);
-	vector<Mat> ycbcr_planes;
-	split(inputImageYCbCr, ycbcr_planes);
-
-
-	// CROP THE RIGHT SIDE OF THE IMAGE
-	Rect rightSideRoi(inputImage.cols / 2, 0, inputImage.cols / 2, inputImage.rows);
-	Mat rightSide = inputImageYCbCr(rightSideRoi);
+	// Get the segmented image after region growing
+	Mat segmentedImage = applyRegionGrowing();
 	
-	cout << "Start region growing algorithm.." << endl;
-	chrono::time_point<chrono::system_clock> start, end;
-	start = chrono::system_clock::now();
+	// Apply dilatation to fill the black holes
+	segmentedImage = MorphologicalOperation::dilate(segmentedImage);
 
-
-	// APPLY REGION GROWING ALGORITHM
-	Mat output = RegionSegmentation::applyRegionGrowingAlgorithm(rightSide);
-	end = chrono::system_clock::now();
-	chrono::duration<double> elapsed_seconds = end - start;
-
-	cout << "Finished in: " << elapsed_seconds.count() << " seconds";
-
-	
-	// APPLY DILATION 
-	output = MorphologicalOperation::dilate(output);
+	// Show the segmented image after dilatation
 	namedWindow("After region growing and dilation", CV_WINDOW_AUTOSIZE);
-	imshow("After region growing and dilation", output);
-	 
-	vector<Point> boundaryVector = BoundaryTracking::getBoundary(output); 
+	imshow("After region growing and dilation", segmentedImage);
+	
 
-	//for (auto it = boundaryVector.begin(); it < boundaryVector.end() - 10; it += 10){
-//		line(inputImage, Point(it->x + inputImage.cols / 2, it->y), Point((it + 10)->x + inputImage.cols / 2, (it + 10)->y), Scalar(0, 0, 255), 1);
-	//}
-	Point top, bottom;
+	// Get keypoints from the segmented image
+	Keypoints struct_keypoints = findKeypoints(segmentedImage);
 
-	bool foundUpper = false;
-	for (int i = 0; i < output.rows; ++i){
-		if (foundUpper){
-			if (output.at<uchar>(i, 0) == 0){
-				top.x = 0;
-				top.y = i;
+	// Check if the keypoints were found with success
+	if (struct_keypoints.success){
+		cout << "Keypoints found successfuly";
+
+		// Calculate, draw and set the square ROI, based on the keypoints
+		calcAndDrawSquareRoi(struct_keypoints);
+	}
+	else{
+		cout << "Keypoints are not found successfuly";
+	}
+}
+
+void RoiExtraction::calcAndDrawSquareRoi(const Keypoints &keypoints){
+	
+	// Draw a line between the first and third keypoint
+	line(inputImage, keypoints.keypoint1, keypoints.keypoint3, Scalar(0, 0, 255), 1);
+
+	// Calculating the perpendicular slope to the previous line
+	double slope = 0.0;
+	double perpendicular_slope = 0.0;
+
+	if (keypoints.keypoint3.x - keypoints.keypoint1.x == 0){
+		perpendicular_slope = 0;
+	}
+	else{
+		slope = (keypoints.keypoint3.y - keypoints.keypoint1.y) / (keypoints.keypoint3.x - keypoints.keypoint1.x);
+		perpendicular_slope = -1 / slope;
+	}
+
+
+	// Calculating the ROI's top left and bottom left points, 
+	// by finding the lines which goes through these points and are perpendicular to the line between keypoint1 and keypoint3
+
+	Point keypoint1_1, keypoint3_1;
+	double dist = sqrt(pow(keypoints.keypoint1.x - keypoints.keypoint3.x, 2) + pow(keypoints.keypoint1.y - keypoints.keypoint3.y, 2));
+	keypoint1_1.x = keypoints.keypoint1.x - dist;
+	keypoint1_1.y = perpendicular_slope*(keypoint1_1.x - keypoints.keypoint1.x) + keypoints.keypoint1.y;
+
+	keypoint3_1.x = keypoints.keypoint3.x - dist;
+	keypoint3_1.y = perpendicular_slope*(keypoint3_1.x - keypoints.keypoint3.x) + keypoints.keypoint3.y;
+
+	// Drawing the square ROI
+
+	line(inputImage, keypoints.keypoint1, keypoint1_1, Scalar(0, 0, 255), 1);
+	line(inputImage, keypoints.keypoint3, keypoint3_1, Scalar(0, 0, 255), 1);
+	line(inputImage, keypoint1_1, keypoint3_1, Scalar(0, 0, 255), 1);
+	
+	namedWindow("Original Image", CV_WINDOW_AUTOSIZE);
+	imshow("Original Image", inputImage);
+
+	waitKey(0);
+}
+
+Keypoints RoiExtraction::findKeypoints(const Mat &segmentedImage){
+
+	// Get boundary points, by applying boundary tracking alogirthm
+	vector<Point> boundaryVector = BoundaryTracking::getBoundary(segmentedImage);
+
+	// Find start and end points (vertically) at left side of the image
+	Point startPoint, endPoint;
+
+	bool foundStart = false;
+	for (int i = 0; i < segmentedImage.rows; ++i){
+		if (foundStart){
+			if (segmentedImage.at<uchar>(i, 0) == 0){
+				startPoint.x = 0;
+				startPoint.y = i;
 				break;
 			}
 		}
 		else{
-			if (output.at<uchar>(i, 0) == 255){
-				foundUpper = true;
-				bottom.x = 0;
-	     		bottom.y = i;
+			if (segmentedImage.at<uchar>(i, 0) == 255){
+				foundStart = true;
+				endPoint.x = 0;
+				endPoint.y = i;
 			}
 		}
-		
 	}
 
-
-	Point centerPoint(inputImage.cols / 2, (top.y + bottom.y) / 2);
+	// Find the center point (vertically) at left side of the image
+	Point centerPoint(inputImage.cols / 2, (startPoint.y + endPoint.y) / 2);
 	circle(inputImage, centerPoint, 2, CV_RGB(0, 255, 0), -1);
 
-	vector<point_with_distance> distances;
-	
-	
-	
+
+	// Calculate dinstances between the center points and every boundary point 
+	vector<Point_with_distance> distancesFromCenterPoint;
+
 	for (int i = 0; i < boundaryVector.size(); ++i){
 
-		point_with_distance p;
-		p.p.x = boundaryVector.at(i).x + inputImage.cols/2;
-		p.p.y = boundaryVector.at(i).y;
+		Point_with_distance p;
+		p.point.x = boundaryVector.at(i).x + inputImage.cols / 2;
+		p.point.y = boundaryVector.at(i).y;
 
-		p.d = sqrt(pow(centerPoint.x - p.p.x, 2) + pow(centerPoint.y - p.p.y, 2));
-		distances.push_back(p);
+		p.distance = sqrt(pow(centerPoint.x - p.point.x, 2) + pow(centerPoint.y - p.point.y, 2));
+		distancesFromCenterPoint.push_back(p);
 	}
 
-	// mean filtering
-	vector<point_with_distance> filtered_distances = distances;
+	// Finding the local minimums on the distance function, these will be keypoints
+	// Applying a Mean filter on distance function, to get rid of false local minimums
 	
+	vector<Point_with_distance> filtered_distances = distancesFromCenterPoint;
+
 	double sum = 0.0;
 	double kernel_size = 5;
 
-	for (int index = 2; index < distances.size()-2; index++){
-		sum = distances.at(index - 2).d + distances.at(index - 1).d + distances.at(index).d + distances.at(index + 1).d + distances.at(index + 2).d;
-		filtered_distances.at(index).d = sum / kernel_size;
-		//cout << sum / kernel_size << endl;
+	for (int index = 2; index < distancesFromCenterPoint.size() - 2; index++){
+		sum = distancesFromCenterPoint.at(index - 2).distance + distancesFromCenterPoint.at(index - 1).distance + distancesFromCenterPoint.at(index).distance + distancesFromCenterPoint.at(index + 1).distance + distancesFromCenterPoint.at(index + 2).distance;
+		filtered_distances.at(index).distance = sum / kernel_size;
 	}
 
-	int n = 5;
-	vector<point_with_distance> minimums;
+	// Searcing for local minimums, with a predefined stepsize,
+	// Check if the stepsize'th previous point is bigger than the current points and the stepsize'th next point is also bigger than the current point
+	// If the previous condition is true, then the current point will be stored as a local minimum
+	
+	int stepsize = 5;
+	vector<Point_with_distance> minimums;
 	for (int i = 50; i < filtered_distances.size() - 50; ++i){
-		if (filtered_distances.at(i - n).d > filtered_distances.at(i).d && filtered_distances.at(i + n).d > filtered_distances.at(i).d)
+		if (filtered_distances.at(i - stepsize).distance > filtered_distances.at(i).distance && filtered_distances.at(i + stepsize).distance > filtered_distances.at(i).distance)
 		{
-			point_with_distance temp;
-			temp.p = filtered_distances.at(i).p;
-			temp.d = filtered_distances.at(i).d;
-			
-			//circle(inputImage, filtered_distances.at(i).p, 2, CV_RGB(0, 255, 0), -1);
+			Point_with_distance temp;
+			temp.point = filtered_distances.at(i).point;
+			temp.distance = filtered_distances.at(i).distance;
 			minimums.push_back(temp);
 		}
 	}
 
-	cout << "MIN size: " << minimums.size() << endl;
 
-	vector<vector<point_with_distance>> min_clusters;
-	vector<point_with_distance> temp_row;
+	// Creating three clusters, these will contain local minimum points around the keypoints (valleys between fingers)
+	// Iterating through the local minimums, if the distance is higher than 10 pixels between the next and current point, then the next point will be classified into a new cluster,
+	// otherwise, it will be classified into the current cluster
+
+	vector<vector<Point_with_distance>> min_clusters;
+	vector<Point_with_distance> temp_row;
 	for (int i = 0; i < minimums.size() - 1; ++i){
-		point_with_distance current, next;
+		Point_with_distance current, next;
 		current = minimums.at(i);
 		next = minimums.at(i + 1);
-		float dist = sqrt(pow(current.p.x - next.p.x, 2) + pow(current.p.y - next.p.y, 2));
+		float dist = sqrt(pow(current.point.x - next.point.x, 2) + pow(current.point.y - next.point.y, 2));
 		if (dist > 10){
 			min_clusters.push_back(temp_row);
 			temp_row.clear();
@@ -150,58 +191,68 @@ RoiExtraction::RoiExtraction(Mat inputImage) : inputImage(inputImage)
 	}
 
 	if (temp_row.size() != 0) min_clusters.push_back(temp_row);
-	
+
+	// Returning this struct
+	Keypoints keypoints;
+
+	// If the number of the clusters isn't three, then something went wrong
 	if (min_clusters.size() != 3) {
-		cout << "Error : keypoints";
-		return;
-	}
-
-	point_with_distance keypoint1, keypoint2, keypoint3;
-	keypoint1 = *min_element(min_clusters[0].begin(), min_clusters[0].end(), [](const point_with_distance& x, const point_with_distance& y) {return x.d < y.d; });
-	circle(inputImage, keypoint1.p, 2, CV_RGB(0, 255, 0), -1);
-
-	keypoint2 = *min_element(min_clusters[1].begin(), min_clusters[1].end(), [](const point_with_distance& x, const point_with_distance& y) {return x.d < y.d; });
-	circle(inputImage, keypoint2.p, 2, CV_RGB(0, 255, 0), -1);
-
-	keypoint3 = *min_element(min_clusters[2].begin(), min_clusters[2].end(), [](const point_with_distance& x, const point_with_distance& y) {return x.d < y.d; });
-	circle(inputImage, keypoint3.p, 2, CV_RGB(0, 255, 0), -1);
-
-	line(inputImage, keypoint1.p, keypoint3.p, Scalar(0, 0, 255), 1);
-	
-	double slope = 0.0;
-	double per_slope = 0.0;
-
-	if (keypoint3.p.x - keypoint1.p.x == 0){
-		per_slope = 0;
+		keypoints.success = false;
 	}
 	else{
-		slope = (keypoint3.p.y - keypoint1.p.y) / (keypoint3.p.x - keypoint1.p.x);
-		per_slope = -1 / slope;
+
+		// Search minimums in the clusters, based on the distance from the center point. These will be the keypoints.
+
+		Point_with_distance keypoint1, keypoint2, keypoint3;
+		keypoint1 = *min_element(min_clusters[0].begin(), min_clusters[0].end(), [](const Point_with_distance& x, const Point_with_distance& y) {return x.distance < y.distance; });
+		circle(inputImage, keypoint1.point, 2, CV_RGB(0, 255, 0), -1);
+
+		keypoint2 = *min_element(min_clusters[1].begin(), min_clusters[1].end(), [](const Point_with_distance& x, const Point_with_distance& y) {return x.distance < y.distance; });
+		circle(inputImage, keypoint2.point, 2, CV_RGB(0, 255, 0), -1);
+
+		keypoint3 = *min_element(min_clusters[2].begin(), min_clusters[2].end(), [](const Point_with_distance& x, const Point_with_distance& y) {return x.distance < y.distance; });
+		circle(inputImage, keypoint3.point, 2, CV_RGB(0, 255, 0), -1);
+
+
+		keypoints.centerPoint = centerPoint;
+		keypoints.keypoint1 = keypoint1.point;
+		keypoints.keypoint2 = keypoint2.point;
+		keypoints.keypoint3 = keypoint3.point;
+		keypoints.success = true;
 	}
-	
 
-	Point keypoint1_1, keypoint3_1;
-	double dist = sqrt(pow(keypoint1.p.x - keypoint3.p.x, 2) + pow(keypoint1.p.y - keypoint3.p.y, 2));
-	keypoint1_1.x = keypoint1.p.x - dist;
-	keypoint1_1.y = per_slope*(keypoint1_1.x - keypoint1.p.x) + keypoint1.p.y;
-
-	keypoint3_1.x = keypoint3.p.x - dist;
-	keypoint3_1.y = per_slope*(keypoint3_1.x - keypoint3.p.x) + keypoint3.p.y;
-
-
-	line(inputImage, keypoint1.p, keypoint1_1, Scalar(0, 0, 255), 1);
-	line(inputImage, keypoint3.p, keypoint3_1, Scalar(0, 0, 255), 1);
-	line(inputImage, keypoint1_1, keypoint3_1, Scalar(0, 0, 255), 1);
-	//cout << endl << keypoint3.p.x << " "  << keypoint1.p.x << endl;
-	//double slope = (keypoint3.p.y - keypoint1.p.y) / (keypoint3.p.x - keypoint1.p.x);
-	cout << endl << "Slope: " << slope << endl;
-
-	namedWindow("Original Image", CV_WINDOW_AUTOSIZE);
-	imshow("Original Image", inputImage);
-
-	waitKey(0);
+	return keypoints;
 }
 
+Mat RoiExtraction::applyRegionGrowing(){
+	// get an instance from Histogram
+	Histogram::getInstance()->init(centerOfImage);
+
+	//split input image to YCbCr chanels
+	Mat inputImageYCbCr;
+	cvtColor(inputImage, inputImageYCbCr, COLOR_BGR2YCrCb);
+	vector<Mat> ycbcr_planes;
+	split(inputImageYCbCr, ycbcr_planes);
+
+
+	// crop the right side of the image, reduce computation
+	Rect rightSideRoi(inputImage.cols / 2, 0, inputImage.cols / 2, inputImage.rows);
+	Mat rightSide = inputImageYCbCr(rightSideRoi);
+
+	cout << "Start region growing algorithm.." << endl;
+	chrono::time_point<chrono::system_clock> start, end;
+	start = chrono::system_clock::now();
+
+
+	// start region growing algorithm
+	Mat segmentedImage = RegionSegmentation::applyRegionGrowingAlgorithm(rightSide);
+	end = chrono::system_clock::now();
+	chrono::duration<double> elapsed_seconds = end - start;
+
+	cout << "Finished in: " << elapsed_seconds.count() << " seconds" << endl;
+
+	return segmentedImage;
+}
 
 Mat RoiExtraction::cropCenterOfInputImage(){
 	Size inputImageSize = inputImage.size();
@@ -211,10 +262,6 @@ Mat RoiExtraction::cropCenterOfInputImage(){
 
 	Mat croppedImageYCbCr;
 	cvtColor(croppedImage, croppedImageYCbCr, CV_BGR2YCrCb);
-
-	//char* croppedImageWindow = "Cropped Image";
-	//namedWindow(croppedImageWindow, CV_WINDOW_AUTOSIZE);
-	//imshow(croppedImageWindow, croppedImageYCbCr);
 
 	return croppedImageYCbCr;
 }
