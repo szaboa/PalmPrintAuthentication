@@ -12,6 +12,8 @@
 #include <algorithm>
 #include "BoundaryTracking.h"
 #include <fstream>
+#include "Logger.h"
+
 
 using namespace std;
 using namespace cv;
@@ -29,6 +31,7 @@ RoiExtraction::RoiExtraction(Mat inputImage) : inputImage(inputImage)
 	// Crop center of input image
 	centerOfImage = cropCenterOfInputImage();
 	
+	Logger::log(TAG, "Applying region growing algorithm..");
 	// Get the segmented image after region growing
 	Mat segmentedImage = applyRegionGrowing();
 	
@@ -39,19 +42,19 @@ RoiExtraction::RoiExtraction(Mat inputImage) : inputImage(inputImage)
 	namedWindow("After region growing and dilation", CV_WINDOW_AUTOSIZE);
 	imshow("After region growing and dilation", segmentedImage);
 	
-
+	Logger::log(TAG, "Finding keypoints..");
 	// Get keypoints from the segmented image
 	Keypoints struct_keypoints = findKeypoints(segmentedImage);
 
 	// Check if the keypoints were found with success
 	if (struct_keypoints.success){
-		cout << "Keypoints found successfuly";
+		Logger::log(TAG, "Keypoints found successfuly.");
 
 		// Calculate, draw and set the square ROI, based on the keypoints
 		calcAndDrawSquareRoi(struct_keypoints);
 	}
 	else{
-		cout << "Keypoints are not found successfuly";
+		Logger::log(TAG, "Error, keypoints are not found.");
 	}
 }
 
@@ -239,18 +242,10 @@ Mat RoiExtraction::applyRegionGrowing(){
 	Rect rightSideRoi(inputImage.cols / 2, 0, inputImage.cols / 2, inputImage.rows);
 	Mat rightSide = inputImageYCbCr(rightSideRoi);
 
-	cout << "Start region growing algorithm.." << endl;
-	chrono::time_point<chrono::system_clock> start, end;
-	start = chrono::system_clock::now();
-
 
 	// start region growing algorithm
 	Mat segmentedImage = RegionSegmentation::applyRegionGrowingAlgorithm(rightSide);
-	end = chrono::system_clock::now();
-	chrono::duration<double> elapsed_seconds = end - start;
-
-	cout << "Finished in: " << elapsed_seconds.count() << " seconds" << endl;
-
+	
 	return segmentedImage;
 }
 

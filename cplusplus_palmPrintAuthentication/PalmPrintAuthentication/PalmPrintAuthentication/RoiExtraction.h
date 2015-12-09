@@ -3,6 +3,8 @@
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 #include <vector>
+#include <string>
+
 using namespace cv;
 
 /*
@@ -51,6 +53,7 @@ private:
 
 
 public:
+	const std::string TAG = "RoiExtraction";
 	/* Extracted suqre ROI based on the keypoints */
 	Mat squareRoi;
 	
