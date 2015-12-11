@@ -28,6 +28,7 @@ struct Point_with_distance{
 RoiExtraction::RoiExtraction(Mat inputImage) : inputImage(inputImage)
 {
 
+	inputImageCopy =  inputImage.clone();
 	// Crop center of input image
 	centerOfImage = cropCenterOfInputImage();
 	
@@ -93,6 +94,13 @@ void RoiExtraction::calcAndDrawSquareRoi(const Keypoints &keypoints){
 	line(inputImage, keypoints.keypoint3, keypoint3_1, Scalar(0, 0, 255), 1);
 	line(inputImage, keypoint1_1, keypoint3_1, Scalar(0, 0, 255), 1);
 	
+
+	//Extract the square ROI
+	Mat squareRoi = inputImageCopy(Rect(keypoint1_1, keypoints.keypoint3));
+	
+	namedWindow("Square Roi", CV_WINDOW_AUTOSIZE);
+	imshow("Square Roi", squareRoi);
+
 	namedWindow("Original Image", CV_WINDOW_AUTOSIZE);
 	imshow("Original Image", inputImage);
 

@@ -30,7 +30,7 @@ private:
 	const int CENTER_SIZE = 20;
 
 	/*Original image*/
-	Mat inputImage;
+	Mat inputImage, inputImageCopy;
 
 	/*Cropped image from the center of the original image*/	
 	Mat centerOfImage;
