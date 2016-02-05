@@ -96,15 +96,12 @@ void RoiExtraction::calcAndDrawSquareRoi(const Keypoints &keypoints){
 	
 
 	//Extract the square ROI
-	Mat squareRoi = inputImageCopy(Rect(keypoint1_1, keypoints.keypoint3));
+	squareRoi = inputImageCopy(Rect(keypoint1_1, keypoints.keypoint3));
 	
-	namedWindow("Square Roi", CV_WINDOW_AUTOSIZE);
-	imshow("Square Roi", squareRoi);
 
 	namedWindow("Original Image", CV_WINDOW_AUTOSIZE);
 	imshow("Original Image", inputImage);
 
-	waitKey(0);
 }
 
 Keypoints RoiExtraction::findKeypoints(const Mat &segmentedImage){
@@ -269,7 +266,9 @@ Mat RoiExtraction::cropCenterOfInputImage(){
 	return croppedImageYCbCr;
 }
 
-
+Mat RoiExtraction::getSquareRoi(){
+	return squareRoi;
+}
 RoiExtraction::~RoiExtraction()
 {
 }

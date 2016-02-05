@@ -82,6 +82,7 @@
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MorphologicalOperation.cpp" />
+    <ClCompile Include="PrincipalLineExtraction.cpp" />
     <ClCompile Include="RegionSegmentation.cpp" />
     <ClCompile Include="RoiExtraction.cpp" />
     <ClCompile Include="PixelValueTreshold.cpp" />
@@ -91,6 +92,7 @@
     <ClInclude Include="Histogram.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="MorphologicalOperation.h" />
+    <ClInclude Include="PrincipalLineExtraction.h" />
     <ClInclude Include="RegionSegmentation.h" />
     <ClInclude Include="RoiExtraction.h" />
     <ClInclude Include="PixelValueTreshold.h" />

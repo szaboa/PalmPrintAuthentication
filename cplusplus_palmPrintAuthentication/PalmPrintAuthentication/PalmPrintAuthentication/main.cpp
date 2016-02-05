@@ -2,6 +2,7 @@
 #include "opencv2/imgproc/imgproc.hpp"
 #include <iostream>
 #include "RoiExtraction.h"
+#include "PrincipalLineExtraction.h"
 #include "Logger.h"
 #include <string>
 
@@ -24,5 +25,7 @@ int main(int argc, char *argv[]){
 	Logger::log(TAG, "Image resized to 640x480.");
 
 	RoiExtraction roiExtraction(image);
+
+	PrincipalLineExtraction lineExtraction(roiExtraction.getSquareRoi());
 	return 0;
 }
