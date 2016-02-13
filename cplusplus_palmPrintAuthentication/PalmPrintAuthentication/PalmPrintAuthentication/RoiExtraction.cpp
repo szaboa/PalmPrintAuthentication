@@ -40,8 +40,9 @@ RoiExtraction::RoiExtraction(Mat inputImage) : inputImage(inputImage)
 	segmentedImage = MorphologicalOperation::dilate(segmentedImage);
 
 	// Show the segmented image after dilatation
-	namedWindow("After region growing and dilation", CV_WINDOW_AUTOSIZE);
-	imshow("After region growing and dilation", segmentedImage);
+	//namedWindow("After region growing and dilation", CV_WINDOW_AUTOSIZE);
+	//imshow("After region growing and dilation", segmentedImage);
+	
 	
 	Logger::log(TAG, "Finding keypoints..");
 	// Get keypoints from the segmented image
@@ -57,6 +58,7 @@ RoiExtraction::RoiExtraction(Mat inputImage) : inputImage(inputImage)
 	else{
 		Logger::log(TAG, "Error, keypoints are not found.");
 	}
+	
 }
 
 void RoiExtraction::calcAndDrawSquareRoi(const Keypoints &keypoints){
@@ -82,10 +84,10 @@ void RoiExtraction::calcAndDrawSquareRoi(const Keypoints &keypoints){
 
 	Point keypoint1_1, keypoint3_1;
 	double dist = sqrt(pow(keypoints.keypoint1.x - keypoints.keypoint3.x, 2) + pow(keypoints.keypoint1.y - keypoints.keypoint3.y, 2));
-	keypoint1_1.x = keypoints.keypoint1.x - dist;
+	keypoint1_1.x = keypoints.keypoint1.x + dist;
 	keypoint1_1.y = perpendicular_slope*(keypoint1_1.x - keypoints.keypoint1.x) + keypoints.keypoint1.y;
 
-	keypoint3_1.x = keypoints.keypoint3.x - dist;
+	keypoint3_1.x = keypoints.keypoint3.x + dist;
 	keypoint3_1.y = perpendicular_slope*(keypoint3_1.x - keypoints.keypoint3.x) + keypoints.keypoint3.y;
 
 	// Drawing the square ROI
@@ -105,6 +107,7 @@ void RoiExtraction::calcAndDrawSquareRoi(const Keypoints &keypoints){
 }
 
 Keypoints RoiExtraction::findKeypoints(const Mat &segmentedImage){
+	namedWindow("Original Image", CV_WINDOW_AUTOSIZE);
 
 	// Get boundary points, by applying boundary tracking alogirthm
 	vector<Point> boundaryVector = BoundaryTracking::getBoundary(segmentedImage);
@@ -115,25 +118,24 @@ Keypoints RoiExtraction::findKeypoints(const Mat &segmentedImage){
 	bool foundStart = false;
 	for (int i = 0; i < segmentedImage.rows; ++i){
 		if (foundStart){
-			if (segmentedImage.at<uchar>(i, 0) == 0){
-				startPoint.x = 0;
+			if (segmentedImage.at<uchar>(i, segmentedImage.cols-1) == 0){
+				startPoint.x = segmentedImage.cols - 1;
 				startPoint.y = i;
 				break;
 			}
 		}
 		else{
-			if (segmentedImage.at<uchar>(i, 0) == 255){
+			if (segmentedImage.at<uchar>(i, segmentedImage.cols-1) == 255){
 				foundStart = true;
-				endPoint.x = 0;
+				endPoint.x = segmentedImage.cols - 1;
 				endPoint.y = i;
 			}
 		}
 	}
 
 	// Find the center point (vertically) at left side of the image
-	Point centerPoint(inputImage.cols / 2, (startPoint.y + endPoint.y) / 2);
+	Point centerPoint(inputImage.cols/2 + 200, (startPoint.y + endPoint.y) / 2);
 	circle(inputImage, centerPoint, 2, CV_RGB(0, 255, 0), -1);
-
 
 	// Calculate dinstances between the center points and every boundary point 
 	vector<Point_with_distance> distancesFromCenterPoint;
@@ -141,7 +143,7 @@ Keypoints RoiExtraction::findKeypoints(const Mat &segmentedImage){
 	for (int i = 0; i < boundaryVector.size(); ++i){
 
 		Point_with_distance p;
-		p.point.x = boundaryVector.at(i).x + inputImage.cols / 2;
+		p.point.x = boundaryVector.at(i).x;
 		p.point.y = boundaryVector.at(i).y;
 
 		p.distance = sqrt(pow(centerPoint.x - p.point.x, 2) + pow(centerPoint.y - p.point.y, 2));
@@ -161,10 +163,11 @@ Keypoints RoiExtraction::findKeypoints(const Mat &segmentedImage){
 		filtered_distances.at(index).distance = sum / kernel_size;
 	}
 
+
 	// Searcing for local minimums, with a predefined stepsize,
 	// Check if the stepsize'th previous point is bigger than the current points and the stepsize'th next point is also bigger than the current point
 	// If the previous condition is true, then the current point will be stored as a local minimum
-	
+
 	int stepsize = 5;
 	vector<Point_with_distance> minimums;
 	for (int i = 50; i < filtered_distances.size() - 50; ++i){
@@ -204,7 +207,7 @@ Keypoints RoiExtraction::findKeypoints(const Mat &segmentedImage){
 	Keypoints keypoints;
 
 	// If the number of the clusters isn't three, then something went wrong
-	if (min_clusters.size() != 3) {
+	if (min_clusters.size() != 4) {
 		keypoints.success = false;
 	}
 	else{
@@ -212,13 +215,13 @@ Keypoints RoiExtraction::findKeypoints(const Mat &segmentedImage){
 		// Search minimums in the clusters, based on the distance from the center point. These will be the keypoints.
 
 		Point_with_distance keypoint1, keypoint2, keypoint3;
-		keypoint1 = *min_element(min_clusters[0].begin(), min_clusters[0].end(), [](const Point_with_distance& x, const Point_with_distance& y) {return x.distance < y.distance; });
+		keypoint1 = *min_element(min_clusters[1].begin(), min_clusters[1].end(), [](const Point_with_distance& x, const Point_with_distance& y) {return x.distance < y.distance; });
 		circle(inputImage, keypoint1.point, 2, CV_RGB(0, 255, 0), -1);
 
-		keypoint2 = *min_element(min_clusters[1].begin(), min_clusters[1].end(), [](const Point_with_distance& x, const Point_with_distance& y) {return x.distance < y.distance; });
+		keypoint2 = *min_element(min_clusters[2].begin(), min_clusters[2].end(), [](const Point_with_distance& x, const Point_with_distance& y) {return x.distance < y.distance; });
 		circle(inputImage, keypoint2.point, 2, CV_RGB(0, 255, 0), -1);
 
-		keypoint3 = *min_element(min_clusters[2].begin(), min_clusters[2].end(), [](const Point_with_distance& x, const Point_with_distance& y) {return x.distance < y.distance; });
+		keypoint3 = *min_element(min_clusters[3].begin(), min_clusters[3].end(), [](const Point_with_distance& x, const Point_with_distance& y) {return x.distance < y.distance; });
 		circle(inputImage, keypoint3.point, 2, CV_RGB(0, 255, 0), -1);
 
 
@@ -244,9 +247,8 @@ Mat RoiExtraction::applyRegionGrowing(){
 
 
 	// crop the right side of the image, reduce computation
-	Rect rightSideRoi(inputImage.cols / 2, 0, inputImage.cols / 2, inputImage.rows);
+	Rect rightSideRoi(0, 0, inputImage.cols/2 + 200, inputImage.rows);
 	Mat rightSide = inputImageYCbCr(rightSideRoi);
-
 
 	// start region growing algorithm
 	Mat segmentedImage = RegionSegmentation::applyRegionGrowingAlgorithm(rightSide);
@@ -257,7 +259,7 @@ Mat RoiExtraction::applyRegionGrowing(){
 Mat RoiExtraction::cropCenterOfInputImage(){
 	Size inputImageSize = inputImage.size();
 
-	Rect roi = Rect((inputImageSize.width) / 2 - CENTER_SIZE / 2, (inputImageSize.height) / 2 - CENTER_SIZE / 2, CENTER_SIZE, CENTER_SIZE);
+	Rect roi = Rect((inputImageSize.width) / 2 + 100 - CENTER_SIZE / 2, (inputImageSize.height) / 2 - CENTER_SIZE / 2, CENTER_SIZE, CENTER_SIZE);
 	Mat croppedImage = inputImage(roi);
 
 	Mat croppedImageYCbCr;

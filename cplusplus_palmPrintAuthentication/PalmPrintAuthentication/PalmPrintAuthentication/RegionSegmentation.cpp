@@ -32,7 +32,7 @@ Mat RegionSegmentation::applyRegionGrowingAlgorithm(Mat img){
 	}
 
 	// seed point
-	Point seedPoint(0, height / 2);
+	Point seedPoint(width-1, height / 2);
 
 	// points which needs to be evaluated
 	queue<Point> processQueue;

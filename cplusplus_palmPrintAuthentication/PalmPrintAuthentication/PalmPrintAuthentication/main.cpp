@@ -13,7 +13,7 @@ int main(int argc, char *argv[]){
 	const std::string TAG = "main.cpp";
 
 	// reading sample palmprint image
-	Mat image = imread("sample_images/20151112_173809.jpg"); 
+	Mat image = imread("sample_images/database_img1.jpg"); 
 
 	if (!image.data){
 		Logger::log(TAG, "Error reading input image");

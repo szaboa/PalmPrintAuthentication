@@ -18,21 +18,23 @@ Point BoundaryTracking::getNextBoundaryPoint(const Mat &img, int &dir, Point cur
 	// init directionPoints
 	vector<Point> directionPoints;
 
+
 	directionPoints.push_back(Point(1, 0));
-	directionPoints.push_back(Point(1, 1));
-	directionPoints.push_back(Point(0, 1));
-	directionPoints.push_back(Point(-1, 1));
+	directionPoints.push_back(Point(1, -1));
+	directionPoints.push_back(Point(0, -1));
+	directionPoints.push_back(Point(-1, -1));
 
 	directionPoints.push_back(Point(-1, 0));
-	directionPoints.push_back(Point(-1, -1));
-	directionPoints.push_back(Point(0, -1));
-	directionPoints.push_back(Point(1, -1));
+	directionPoints.push_back(Point(-1, +1));
+	directionPoints.push_back(Point(0, +1));
+	directionPoints.push_back(Point(1, +1));
 	
 	Point nextPoint(0,0);
 	
-
+	int i_temp;
 	int startIndex = getNeighborhoodSearchIndex(dir);
 	for (int i = startIndex; i < startIndex + 8; ++i){
+
 		Point neighborPoint = currentPoint + directionPoints.at(i % 8);
 
 		if (neighborPoint.y >= 0 && neighborPoint.y < img.rows && neighborPoint.x >= 0 && neighborPoint.x < img.cols){
@@ -51,14 +53,14 @@ Point BoundaryTracking::getNextBoundaryPoint(const Mat &img, int &dir, Point cur
 vector<Point> BoundaryTracking::getBoundary(const Mat &img){
 
 	vector<Point> boundaryVector;
-
+	
 
 	Point startingPoint;
 	Size size = img.size();
 	
 	for (int y = 0; y < size.height; ++y){
-		if (img.at<uchar>(y, 0) == 255){
-			startingPoint.x = 0;
+		if (img.at<uchar>(y, size.width-1) == 255){
+			startingPoint.x = size.width-1;
 			startingPoint.y = y;
 			break;
 		}	
@@ -66,16 +68,16 @@ vector<Point> BoundaryTracking::getBoundary(const Mat &img){
 
 	boundaryVector.push_back(startingPoint); 
 	Point currentPoint = startingPoint;
-	int dir = 7;
+	int dir = 5;
 
 	
 	do{
 		currentPoint = getNextBoundaryPoint(img, dir, currentPoint);
-
-		//cout << "Dir: " << dir << endl;
 		boundaryVector.push_back(currentPoint);
 
-	} while (currentPoint.x != 0);
+	} while (currentPoint.x != size.width-1);
+
+
 
 	return boundaryVector;
 }
