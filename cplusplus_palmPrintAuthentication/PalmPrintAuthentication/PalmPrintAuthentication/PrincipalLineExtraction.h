@@ -10,20 +10,24 @@
 using namespace cv;
 
 /*
-	This class extracts the principal lines from the ROI
+	This class extracts the principal lines from the ROI (output of the RoiExtraction phase)
+	and stores it using chain codes
 */
 class PrincipalLineExtraction
 {
 public:
 
-	/* Converts the given ROI to gray scale image and change its resolution to 128x128 */
+	/* Convert the given ROI to gray scale image and change its resolution to 128x128 */
 	PrincipalLineExtraction(Mat roi);
 	~PrincipalLineExtraction();
 
 private:
+
+	/* Input image, this is the output of the RoiExtraction phase*/
 	Mat roi;
 
-	/*Linear normalization*/
-	void normalizeImage(Mat &img);
+	/* Locate principal lines in four directions (0, 45, 90, 135), then merge them, 
+	  and apply morphological operations to correct these lines*/
+	void locatePrincipalLines(Mat &img);
 };
 
