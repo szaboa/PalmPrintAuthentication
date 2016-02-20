@@ -13,6 +13,7 @@
 #include "BoundaryTracking.h"
 #include <fstream>
 #include "Logger.h"
+#include <math.h>
 
 
 using namespace std;
@@ -74,7 +75,8 @@ void RoiExtraction::calcAndDrawSquareRoi(const Keypoints &keypoints){
 		perpendicular_slope = 0;
 	}
 	else{
-		slope = (keypoints.keypoint3.y - keypoints.keypoint1.y) / (keypoints.keypoint3.x - keypoints.keypoint1.x);
+		slope = (double)(keypoints.keypoint3.y - keypoints.keypoint1.y) / (double)(keypoints.keypoint3.x - keypoints.keypoint1.x);
+		cout << "Slope: " << slope << endl;
 		perpendicular_slope = -1 / slope;
 	}
 
@@ -90,17 +92,58 @@ void RoiExtraction::calcAndDrawSquareRoi(const Keypoints &keypoints){
 	keypoint3_1.x = keypoints.keypoint3.x + dist;
 	keypoint3_1.y = perpendicular_slope*(keypoint3_1.x - keypoints.keypoint3.x) + keypoints.keypoint3.y;
 
+
 	// Drawing the square ROI
 
 	line(inputImage, keypoints.keypoint1, keypoint1_1, Scalar(0, 0, 255), 1);
 	line(inputImage, keypoints.keypoint3, keypoint3_1, Scalar(0, 0, 255), 1);
 	line(inputImage, keypoint1_1, keypoint3_1, Scalar(0, 0, 255), 1);
-	
 
+	// Calculating the rotation angle before cropping the square roi
+	double rotAlpha = 0.0;
+
+	if (keypoints.keypoint3.y - keypoints.keypoint1.y != 0){
+		rotAlpha = tan((double)(keypoints.keypoint3.x - keypoints.keypoint1.x) / (double)(keypoints.keypoint3.y - keypoints.keypoint1.y));
+	}
+
+	// Rotating the input image
+	Point2f centerPoint(inputImage.cols / 2.0F, inputImage.rows / 2.0F);
+
+	Mat rotMat = getRotationMatrix2D(centerPoint, -rotAlpha*(180/3.1415), 1.0);
+	
+	warpAffine(inputImage, inputImage, rotMat, inputImage.size());
+	warpAffine(inputImageCopy, inputImageCopy, rotMat, inputImage.size());
+	
+	// Getting the new keypoints by rotating the old ones with rotAlpha angle
+
+	double keypoint3x = keypoint3_1.x - inputImage.cols / 2;
+	double keypoint3y = keypoint3_1.y - inputImage.rows / 2;
+
+	double keypoint1x = keypoints.keypoint1.x - inputImage.cols / 2;
+	double keypoint1y = keypoints.keypoint1.y - inputImage.rows / 2;
+
+	Point newUpperLeftCorner;
+	Point newBottomRightCorner;
+
+	newBottomRightCorner.x = keypoint3x * cos(-rotAlpha) + keypoint3y * sin(-rotAlpha);
+	newBottomRightCorner.y = (-keypoint3x) * sin(-rotAlpha) + keypoint3y * cos(-rotAlpha);
+
+	newBottomRightCorner.x = newBottomRightCorner.x + inputImage.cols / 2;
+	newBottomRightCorner.y = newBottomRightCorner.y + inputImage.rows / 2;
+
+
+	newUpperLeftCorner.x = keypoint1x * cos(-rotAlpha) + keypoint1y * sin(-rotAlpha);
+	newUpperLeftCorner.y = (-keypoint1x) * sin(-rotAlpha) + keypoint1y * cos(-rotAlpha);
+
+	newUpperLeftCorner.x = newUpperLeftCorner.x + inputImage.cols / 2;
+	newUpperLeftCorner.y = newUpperLeftCorner.y + inputImage.rows / 2;
+	
+	circle(inputImage, newBottomRightCorner, 3, Scalar(255, 0, 0), 1);
+	circle(inputImage, newUpperLeftCorner, 3, Scalar(255, 0, 0), 1);
+	
 	//Extract the square ROI
-	squareRoi = inputImageCopy(Rect(keypoint1_1, keypoints.keypoint3));
+	squareRoi = inputImageCopy(Rect(newUpperLeftCorner, newBottomRightCorner));
 	
-
 	namedWindow("Original Image", CV_WINDOW_AUTOSIZE);
 	imshow("Original Image", inputImage);
 
@@ -216,13 +259,13 @@ Keypoints RoiExtraction::findKeypoints(const Mat &segmentedImage){
 
 		Point_with_distance keypoint1, keypoint2, keypoint3;
 		keypoint1 = *min_element(min_clusters[1].begin(), min_clusters[1].end(), [](const Point_with_distance& x, const Point_with_distance& y) {return x.distance < y.distance; });
-		circle(inputImage, keypoint1.point, 2, CV_RGB(0, 255, 0), -1);
+		circle(inputImage, keypoint1.point, 2, CV_RGB(255, 0, 0), -1);
 
 		keypoint2 = *min_element(min_clusters[2].begin(), min_clusters[2].end(), [](const Point_with_distance& x, const Point_with_distance& y) {return x.distance < y.distance; });
 		circle(inputImage, keypoint2.point, 2, CV_RGB(0, 255, 0), -1);
 
 		keypoint3 = *min_element(min_clusters[3].begin(), min_clusters[3].end(), [](const Point_with_distance& x, const Point_with_distance& y) {return x.distance < y.distance; });
-		circle(inputImage, keypoint3.point, 2, CV_RGB(0, 255, 0), -1);
+		circle(inputImage, keypoint3.point, 2, CV_RGB(0, 0, 255), -1);
 
 
 		keypoints.centerPoint = centerPoint;

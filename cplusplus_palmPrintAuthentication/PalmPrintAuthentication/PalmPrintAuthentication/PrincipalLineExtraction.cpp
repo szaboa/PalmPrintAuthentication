@@ -10,23 +10,40 @@ PrincipalLineExtraction::PrincipalLineExtraction(Mat roi) : roi(roi)
 	cvtColor(roi, this->roi, CV_BGR2GRAY);
 	resize(this->roi, this->roi, Size(128, 128));
 
-	//this->roi.at<uchar>(0, 10) = 0;
 	namedWindow("Before normalization", CV_WINDOW_AUTOSIZE);
 	imshow("Before normalization", this->roi);
 
-	// locate principal lines in four directions, then merge them
+	// Image normalization
+	normalizeImage(this->roi);
+
+	namedWindow("After normalization", CV_WINDOW_AUTOSIZE);
+	imshow("After normalization", this->roi);
+
+	// Locate principal lines in four directions, then merge them
 	locatePrincipalLines(this->roi);
 
 	waitKey(0);
 
 }
 
+void PrincipalLineExtraction::normalizeImage(Mat &img){
+	equalizeHist(img, img);
+	blur(img, img, Size(5, 5), Point(-1, -1));
+}
 void PrincipalLineExtraction::locatePrincipalLines(Mat &img){
 
 	// defining horizontal line detecors
 
 	// 1-D Gaussian function x first-order derivative of 1-D Gaussian function
 	double H1[5][9] = {
+		{ 0.0009, 0.0027, 0.0058, 0.0092, 0.0107, 0.0092, 0.0058, 0.0027, 0.0009 },
+		{ 0.0065, 0.0191, 0.0412, 0.0655, 0.0764, 0.0655, 0.0412, 0.0191, 0.0065 },
+		{ 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000 },
+		{ -0.0009, -0.0027, -0.0058, -0.0092, -0.0107, -0.0092, -0.0058, -0.0027, -0.0009 },
+		{ -0.0065, -0.0191, -0.0412, -0.0655, -0.0764, -0.0655, -0.0412, -0.0191, -0.0065 }
+	};
+
+	double H1_45[5][9] = {
 		{ 0.0009, 0.0027, 0.0058, 0.0092, 0.0107, 0.0092, 0.0058, 0.0027, 0.0009 },
 		{ 0.0065, 0.0191, 0.0412, 0.0655, 0.0764, 0.0655, 0.0412, 0.0191, 0.0065 },
 		{ 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000 },
@@ -73,17 +90,9 @@ void PrincipalLineExtraction::locatePrincipalLines(Mat &img){
 	}
 
 	//--- temp log
-	ofstream f1, f2, f3;
-	f1.open("original.txt");
-	//f2.open("h1.txt");
+	ofstream f2;
 	f2.open("der.txt");
-	cout << "Original Image: " << endl;
-	for (int i = 0; i < 15; ++i){
-		for (int j = 0; j < 15; ++j){
-			f1 << (int)img.at<uchar>(i, j) << " ";
-		}
-		f1 << endl;
-	}
+
 
 	int c = 1;
 	for (int i = 0; i < 128; ++i){
@@ -99,7 +108,8 @@ void PrincipalLineExtraction::locatePrincipalLines(Mat &img){
 
 	for (int i = 1; i < 126; ++i){
 		for (int j = 3; j < 124; ++j){
-			if (((I_der[i][j] * I_der[i][j - 1]) < 0 || I_der[i][j] == 0) && I_der2[i][j] > 6){
+			if (((I_der[i][j] * I_der[i][j - 3]) < 0 || (I_der[i][j] * I_der[i][j - 2]) < 0 ||
+				(I_der[i][j] * I_der[i][j - 1])  < 0 || I_der[i][j] == 0) && I_der2[i][j] > 10){
 				binaryImage.at<uchar>(i, j) = 255;
 			}
 			else{
@@ -108,7 +118,6 @@ void PrincipalLineExtraction::locatePrincipalLines(Mat &img){
 		}
 	}
 	
-	f1.close();
 	f2.close();
 	namedWindow("Lines", CV_WINDOW_AUTOSIZE);
 	imshow("Lines", binaryImage);

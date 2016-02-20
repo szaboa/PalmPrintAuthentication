@@ -26,6 +26,9 @@ private:
 	/* Input image, this is the output of the RoiExtraction phase*/
 	Mat roi;
 
+	/* Normalizes the image */
+	void normalizeImage(Mat &img);
+
 	/* Locate principal lines in four directions (0, 45, 90, 135), then merge them, 
 	  and apply morphological operations to correct these lines*/
 	void locatePrincipalLines(Mat &img);
