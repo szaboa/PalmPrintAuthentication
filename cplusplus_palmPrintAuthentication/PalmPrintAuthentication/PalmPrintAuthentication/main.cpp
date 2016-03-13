@@ -12,8 +12,10 @@ int main(int argc, char *argv[]){
 
 	const std::string TAG = "main.cpp";
 
+	std::cout << std::endl << CV_VERSION  << std::endl;
+	
 	// reading sample palmprint image
-	Mat image = imread("sample_images/database_img1.jpg"); 
+	Mat image = imread("sample_images/database_img3.jpg"); 
 
 	if (!image.data){
 		Logger::log(TAG, "Error reading input image");
@@ -25,7 +27,8 @@ int main(int argc, char *argv[]){
 	Logger::log(TAG, "Image resized to 640x480.");
 
 	RoiExtraction roiExtraction(image);
-
+	
 	PrincipalLineExtraction lineExtraction(roiExtraction.getSquareRoi());
+
 	return 0;
 }

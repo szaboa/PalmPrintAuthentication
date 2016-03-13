@@ -1,8 +1,10 @@
 #include "PrincipalLineExtraction.h"
 #include <fstream>
+#include <stack>
 
 using namespace std;
 using namespace cv;
+
 
 PrincipalLineExtraction::PrincipalLineExtraction(Mat roi) : roi(roi)
 {
@@ -30,8 +32,14 @@ PrincipalLineExtraction::PrincipalLineExtraction(Mat roi) : roi(roi)
 }
 
 void PrincipalLineExtraction::normalizeImage(Mat &img){
-	equalizeHist(img, img);
-	blur(img, img, Size(5, 5), Point(-1, -1));
+
+	/* Applying CLAHE */
+	Ptr<CLAHE> clahe = createCLAHE();
+	clahe->setClipLimit(4);	
+	clahe->apply(img, img);
+
+	/* Applying a low-pass filter */
+	blur(img, img, Size(3, 3), Point(-1, -1));
 }
 
 Mat PrincipalLineExtraction::locatePrincipalLineInGivenDirection(const Mat &img, std::vector<std::vector<double>> H1, std::vector<std::vector<double>> H2, int degree){
@@ -70,7 +78,7 @@ Mat PrincipalLineExtraction::locatePrincipalLineInGivenDirection(const Mat &img,
 	}
 
 	// Create binary image, this will contain the extracted principal lines in a given direction
-	Mat binaryImage(this->roi.size(), CV_8U);
+	Mat binaryImage(this->roi.size(), CV_8UC1, Scalar(0,0,0));
 	
 	// Locating changes in first-order derivatives in 0 direction
 	if (degree == 0){
@@ -150,7 +158,7 @@ Mat PrincipalLineExtraction::locatePrincipalLineInGivenDirection(const Mat &img,
 				/* If first-order derivative's sign has changed and the second-order derivative's value is greater
 				than the treshold, then setting the current pixel to 255, otherwise to 0 */
 				if ((derivChangeFound || I_der[j][i - j] == 0) && I_der2[j][i - j] > secondDerivTresholdValue){
-					binaryImage.at<uchar>(j, i-j) = 255;
+					binaryImage.at<uchar>(j, i - j) = 255;
 				}
 				else{
 					binaryImage.at<uchar>(j, i - j) = 0;
@@ -308,11 +316,177 @@ void PrincipalLineExtraction::locatePrincipalLines(){
 	Mat linesInDir45  = locatePrincipalLineInGivenDirection(this->roi, H1_45, H2_45, 45);
 	Mat linesInDir135 = locatePrincipalLineInGivenDirection(this->roi, H1_135, H2_135, 135);
 
-	// Merging the principal lines with an OR operation
-	Mat finalLines = linesInDir0 | linesInDir90 | linesInDir45 | linesInDir135;
-	
-	namedWindow("Lines", CV_WINDOW_AUTOSIZE);
+	// Merging the lines using OR operation
+	Mat finalLines = linesInDir45 | linesInDir90 | linesInDir0 | linesInDir135;
+
+	// Apply connected-component labeling to remove the irrelevant components
+	connectedComponentLabeling(finalLines);
+
+	// Show the final result
+	namedWindow("Lines", WINDOW_AUTOSIZE);
 	imshow("Lines", finalLines);
+	waitKey(0);
+}
+
+void PrincipalLineExtraction::connectedComponentLabeling(Mat &img){
+
+	// Defines the current label
+	int currentLabel = 0;
+
+	// A label matrix to track which pixel is already labeled
+	int labels[128][128] = { { 0 } };
+
+	// Using a stack to track the components (one component at time algorithm)
+	stack<Point> pixelStack;
+
+	// This vector will contain the separated components
+	vector<vector<Point>> components;
+
+	// travel the image row by row
+	for (int x = 0; x < img.rows; ++x){
+		for (int y = 0; y < img.cols; ++y){
+			if (isForeground(img, Point(x,y)) && labels[x][y] == 0){
+				currentLabel++;
+
+				// Creating the current component
+				vector<Point> currentComponent;
+				
+				// Labeling the current pixel
+				labels[x][y] = currentLabel;
+
+				// Pushing the current pixel to the stack
+				pixelStack.push(Point(x, y));
+
+				// Pushing the current pixel to the current component
+				currentComponent.push_back(Point(x, y));
+
+				while (!pixelStack.empty()){
+					Point currentPixel = pixelStack.top();
+					pixelStack.pop();
+
+					// Getting the neighbor pixels of the current pixel
+					vector<Point> neighborPoints = getNeighborPoints(currentPixel);
+
+					// Iterating over the neigbor pixels
+					for (Point neighborPoint : neighborPoints){
+
+						// Checking if the neighbor pixel is foreground and it is not labeled yet
+						if (isForeground(img, neighborPoint) && labels[neighborPoint.x][neighborPoint.y] == 0){
+
+							// Labeling the neighbor pixel
+							labels[neighborPoint.x][neighborPoint.y] = 1;
+
+							// Pushing the neighbor pixel to the current component
+							currentComponent.push_back(neighborPoint);
+
+							// Pushing the neighbor pixel to the stack
+							pixelStack.push(neighborPoint);
+						}
+					}
+
+					if (pixelStack.empty()) components.push_back(currentComponent);
+				}
+
+				
+			}
+		}
+	}
+
+	// Removing components that are smaller than @componentMinSize	
+	for (int i = 0; i < components.size(); ++i){
+		if (components[i].size() < componentMinSize){
+			for (Point p : components[i]){
+				img.at<uchar>(p.x, p.y) = 0;
+			}
+		}
+	}
+	
+	
+}
+
+void PrincipalLineExtraction::edgeLinking(Mat &img){
+	int currentLabel = 0;
+	int labels[128][128] = { { 0 } };
+	stack<Point> pixelStack;
+	vector<vector<Point>> components;
+
+	vector<Point> nonZeroPoints;
+	findNonZero(img, nonZeroPoints);
+
+	Mat forOtsu(1, nonZeroPoints.size(), CV_8UC1, Scalar(0, 0, 0));
+	for (int i = 0; i<nonZeroPoints.size(); ++i){
+		forOtsu.at<uchar>(0, i) = img.at<uchar>(nonZeroPoints[i]);
+	}
+	double upperLimit = threshold(forOtsu, forOtsu, 0, 255, THRESH_OTSU);
+
+	cout << "Otsu: " << upperLimit;
+	// marking strong edges
+	threshold(img, img, upperLimit, 255, THRESH_BINARY);
+
+	// travel the image row by row
+	for (int x = 0; x < img.rows; ++x){
+		for (int y = 0; y < img.cols; ++y){
+			if (isForeground(img, Point(x, y)) && labels[x][y] == 0){
+
+				labels[x][y] = 1;
+				pixelStack.push(Point(x, y));
+
+
+				while (!pixelStack.empty()){
+					Point currentPixel = pixelStack.top();
+					pixelStack.pop();
+					vector<Point> neighborPoints = getNeighborPoints(currentPixel);
+
+					for (Point neighborPoint : neighborPoints){
+						
+						if (img.at<uchar>(neighborPoint) > 3 && labels[neighborPoint.x][neighborPoint.y] == 0){
+							img.at<uchar>(neighborPoint) = 255;
+							labels[neighborPoint.x][neighborPoint.y] = 1;
+							pixelStack.push(neighborPoint);
+						}
+					}
+
+				}
+
+
+			}
+		}
+	}
+
+}
+
+vector<Point> PrincipalLineExtraction::getNeighborPoints(Point currentPixel){
+
+	// Defining direction points
+	vector<Point> directionPoints;
+
+	directionPoints.push_back(Point( 1,  0));
+	directionPoints.push_back(Point( 1, -1));
+	directionPoints.push_back(Point( 0, -1));
+	directionPoints.push_back(Point(-1, -1));
+
+	directionPoints.push_back(Point(-1, 0));
+	directionPoints.push_back(Point(-1, 1));
+	directionPoints.push_back(Point (0, 1));
+	directionPoints.push_back(Point (1, 1));
+
+	vector<Point> neigborPoints;
+	
+	for (Point x : directionPoints){
+		Point neigborPoint = currentPixel + x;
+
+		if (isInsideTheBoundary(neigborPoint.x, neigborPoint.y)){
+			neigborPoints.push_back(neigborPoint);
+		}
+	}
+
+	return neigborPoints;
+}
+
+bool PrincipalLineExtraction::isForeground(const Mat& img, Point p){
+	if (img.at<uchar>(p.x, p.y) == 255) return true;
+	
+	return false;
 }
 
 bool PrincipalLineExtraction::isInsideTheBoundary(int i, int j){
