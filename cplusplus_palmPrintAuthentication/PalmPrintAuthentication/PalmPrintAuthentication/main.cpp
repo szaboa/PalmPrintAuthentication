@@ -4,7 +4,10 @@
 #include "RoiExtraction.h"
 #include "PrincipalLineExtraction.h"
 #include "Logger.h"
+#include "Thinning.h"
+#include "ChainCode.h"
 #include <string>
+
 
 using namespace cv;
 
@@ -15,7 +18,7 @@ int main(int argc, char *argv[]){
 	std::cout << std::endl << CV_VERSION  << std::endl;
 	
 	// reading sample palmprint image
-	Mat image = imread("sample_images/database_img3.jpg"); 
+	Mat image = imread("sample_images/database_img7.jpg"); 
 
 	if (!image.data){
 		Logger::log(TAG, "Error reading input image");
@@ -29,6 +32,7 @@ int main(int argc, char *argv[]){
 	RoiExtraction roiExtraction(image);
 	
 	PrincipalLineExtraction lineExtraction(roiExtraction.getSquareRoi());
+	std::string chainCode = ChainCode::getChainCode(lineExtraction.getPrincipalLines(), lineExtraction.getLineComponents());
 
 	return 0;
 }

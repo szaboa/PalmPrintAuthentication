@@ -78,6 +78,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BoundaryTracking.cpp" />
+    <ClCompile Include="ChainCode.cpp" />
     <ClCompile Include="Histogram.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
@@ -86,9 +87,11 @@
     <ClCompile Include="RegionSegmentation.cpp" />
     <ClCompile Include="RoiExtraction.cpp" />
     <ClCompile Include="PixelValueTreshold.cpp" />
+    <ClCompile Include="Thinning.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoundaryTracking.h" />
+    <ClInclude Include="ChainCode.h" />
     <ClInclude Include="Histogram.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="MorphologicalOperation.h" />
@@ -96,6 +99,7 @@
     <ClInclude Include="RegionSegmentation.h" />
     <ClInclude Include="RoiExtraction.h" />
     <ClInclude Include="PixelValueTreshold.h" />
+    <ClInclude Include="Thinning.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

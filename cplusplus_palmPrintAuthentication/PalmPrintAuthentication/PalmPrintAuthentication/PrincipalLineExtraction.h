@@ -20,12 +20,21 @@ public:
 	/* Convert the given ROI to gray scale image and change its resolution to 128x128 */
 	PrincipalLineExtraction(Mat roi);
 
+	/* Returns the principal lines (@finalLines)*/
+	Mat getPrincipalLines();
+
+	/* Get the principal line components */
+	std::vector<std::vector<Point>> getLineComponents();
+
 	~PrincipalLineExtraction();
 
 private:
 
 	/* Input image, this is the output of the RoiExtraction phase*/
 	Mat roi;
+
+	/* This will be the output of the line extraction phase*/
+	Mat finalLines;
 
 	/* Defines the ROI's width and height in this phase*/
 	static const int roiWidth  = 128;
@@ -38,7 +47,10 @@ private:
 	int firstDerivChangeWidth = 4;
 
 	/* Defines the minimum size of a component (Connected-component labeling)*/
-	int componentMinSize = 20;
+	int componentMinSize = 15;
+
+	/* This will contain the components of the principal line */
+	std::vector<std::vector<Point>> mComponents;
 
 	/* Normalizes the image  (using Adaptive Histogram Equalization and a Low-pass Filter)*/
 	void normalizeImage(Mat &img);

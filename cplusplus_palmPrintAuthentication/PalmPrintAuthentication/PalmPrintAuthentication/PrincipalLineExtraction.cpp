@@ -1,7 +1,7 @@
 #include "PrincipalLineExtraction.h"
 #include <fstream>
 #include <stack>
-
+#include "Thinning.h"
 using namespace std;
 using namespace cv;
 
@@ -27,8 +27,6 @@ PrincipalLineExtraction::PrincipalLineExtraction(Mat roi) : roi(roi)
 
 	// Locate principal lines
 	locatePrincipalLines();
-
-	waitKey(0);
 }
 
 void PrincipalLineExtraction::normalizeImage(Mat &img){
@@ -317,7 +315,16 @@ void PrincipalLineExtraction::locatePrincipalLines(){
 	Mat linesInDir135 = locatePrincipalLineInGivenDirection(this->roi, H1_135, H2_135, 135);
 
 	// Merging the lines using OR operation
-	Mat finalLines = linesInDir45 | linesInDir90 | linesInDir0 | linesInDir135;
+	finalLines = linesInDir45 | linesInDir90 | linesInDir0 | linesInDir135;
+
+	Mat element = getStructuringElement(1, Size(2 * 1 + 1, 2 * 1 + 1), Point(1, 1));
+
+	/// Apply the specified morphology operation
+
+	morphologyEx(finalLines, finalLines, 1, element);
+
+	finalLines = Thinning::doThinning(finalLines);
+
 
 	// Apply connected-component labeling to remove the irrelevant components
 	connectedComponentLabeling(finalLines);
@@ -325,7 +332,7 @@ void PrincipalLineExtraction::locatePrincipalLines(){
 	// Show the final result
 	namedWindow("Lines", WINDOW_AUTOSIZE);
 	imshow("Lines", finalLines);
-	waitKey(0);
+	
 }
 
 void PrincipalLineExtraction::connectedComponentLabeling(Mat &img){
@@ -399,9 +406,11 @@ void PrincipalLineExtraction::connectedComponentLabeling(Mat &img){
 				img.at<uchar>(p.x, p.y) = 0;
 			}
 		}
+		else{
+			vector<Point> tComp = components[i];
+			mComponents.push_back(tComp);
+		}
 	}
-	
-	
 }
 
 void PrincipalLineExtraction::edgeLinking(Mat &img){
@@ -496,6 +505,14 @@ bool PrincipalLineExtraction::isInsideTheBoundary(int i, int j){
 	else{
 		return false;
 	}
+}
+
+Mat PrincipalLineExtraction::getPrincipalLines(){
+	return finalLines;
+}
+
+vector<vector<Point>> PrincipalLineExtraction::getLineComponents(){
+	return mComponents;
 }
 
 PrincipalLineExtraction::~PrincipalLineExtraction()
