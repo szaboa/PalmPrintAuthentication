@@ -16,7 +16,7 @@ private:
 
 public:
 	/*Applies dilate algorithm to @img */
-	static Mat dilate(const Mat &img);
+	static Mat dilate(const Mat &img, int erosionSize);
 
 	/*Applies erode algorithm to @img */
 	static Mat erode(const Mat &img);

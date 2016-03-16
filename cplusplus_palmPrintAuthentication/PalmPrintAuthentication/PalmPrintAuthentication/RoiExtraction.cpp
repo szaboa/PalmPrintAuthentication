@@ -38,13 +38,8 @@ RoiExtraction::RoiExtraction(Mat inputImage) : inputImage(inputImage)
 	Mat segmentedImage = applyRegionGrowing();
 	
 	// Apply dilatation to fill the black holes
-	segmentedImage = MorphologicalOperation::dilate(segmentedImage);
+	segmentedImage = MorphologicalOperation::dilate(segmentedImage, 2);
 
-	// Show the segmented image after dilatation
-	//namedWindow("After region growing and dilation", CV_WINDOW_AUTOSIZE);
-	//imshow("After region growing and dilation", segmentedImage);
-	
-	
 	Logger::log(TAG, "Finding keypoints..");
 	// Get keypoints from the segmented image
 	Keypoints struct_keypoints = findKeypoints(segmentedImage);
@@ -314,6 +309,7 @@ Mat RoiExtraction::cropCenterOfInputImage(){
 Mat RoiExtraction::getSquareRoi(){
 	return squareRoi;
 }
+
 RoiExtraction::~RoiExtraction()
 {
 }

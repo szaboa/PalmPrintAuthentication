@@ -42,6 +42,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>C:\Users\szabo\Documents\PalmPrintAuthentication\cplusplus_palmPrintAuthentication\PalmPrintAuthentication\PalmPrintAuthentication\sqlite;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\szabo\Documents\PalmPrintAuthentication\cplusplus_palmPrintAuthentication\PalmPrintAuthentication\PalmPrintAuthentication\json;C:\Users\szabo\Documents\PalmPrintAuthentication\cplusplus_palmPrintAuthentication\PalmPrintAuthentication\PalmPrintAuthentication\sqlite_wrapper\hdr;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -53,10 +55,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\szabo\Documents\PalmPrintAuthentication\cplusplus_palmPrintAuthentication\PalmPrintAuthentication\PalmPrintAuthentication\sqlite;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -78,8 +82,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BoundaryTracking.cpp" />
-    <ClCompile Include="ChainCode.cpp" />
+    <ClCompile Include="DbAdapter.cpp" />
+    <ClCompile Include="FeatureEncoder.cpp" />
     <ClCompile Include="Histogram.cpp" />
+    <ClCompile Include="json\json11.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MorphologicalOperation.cpp" />
@@ -91,8 +97,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoundaryTracking.h" />
-    <ClInclude Include="ChainCode.h" />
+    <ClInclude Include="DbAdapter.h" />
+    <ClInclude Include="FeatureEncoder.h" />
     <ClInclude Include="Histogram.h" />
+    <ClInclude Include="JsonPoint.h" />
+    <ClInclude Include="json\json11.hpp" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="MorphologicalOperation.h" />
     <ClInclude Include="PrincipalLineExtraction.h" />

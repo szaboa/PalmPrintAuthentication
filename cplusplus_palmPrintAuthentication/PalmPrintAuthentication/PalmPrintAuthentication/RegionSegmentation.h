@@ -18,11 +18,13 @@ private:
 
 public:
 
+	/* Currently not used */
 	static void applyRegionGrowingAlgorithmEucDistance(Mat img);
+
 	/*Applies region growing algorithm on @img, with (0,0) seed point */
 	static Mat applyRegionGrowingAlgorithm(Mat img);
 
-	/*Returns a vector of Point2i objects, that are neighbours with @point (8 direction)*/
+	/*Returns a vector of Point2i objects, that are neighbours with the given @point (8 direction)*/
 	static std::vector<Point> getNeighbourPoints(const Point &point);
 };
 

@@ -42,10 +42,16 @@
     <ClCompile Include="PrincipalLineExtraction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ChainCode.cpp">
+    <ClCompile Include="Thinning.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Thinning.cpp">
+    <ClCompile Include="DbAdapter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="json\json11.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FeatureEncoder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,10 +80,19 @@
     <ClInclude Include="PrincipalLineExtraction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ChainCode.h">
+    <ClInclude Include="Thinning.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Thinning.h">
+    <ClInclude Include="DbAdapter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="JsonPoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="json\json11.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FeatureEncoder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

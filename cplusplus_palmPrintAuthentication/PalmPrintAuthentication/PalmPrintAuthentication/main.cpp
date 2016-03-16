@@ -5,7 +5,7 @@
 #include "PrincipalLineExtraction.h"
 #include "Logger.h"
 #include "Thinning.h"
-#include "ChainCode.h"
+#include "FeatureEncoder.h"
 #include <string>
 
 
@@ -13,10 +13,8 @@ using namespace cv;
 
 int main(int argc, char *argv[]){
 
-	const std::string TAG = "main.cpp";
+	const std::string TAG = "[main]";
 
-	std::cout << std::endl << CV_VERSION  << std::endl;
-	
 	// reading sample palmprint image
 	Mat image = imread("sample_images/database_img7.jpg"); 
 
@@ -28,11 +26,13 @@ int main(int argc, char *argv[]){
 	Logger::log(TAG, "Image loaded successfuly.");
 	resize(image, image, Size(640, 480));
 	Logger::log(TAG, "Image resized to 640x480.");
-
 	RoiExtraction roiExtraction(image);
 	
 	PrincipalLineExtraction lineExtraction(roiExtraction.getSquareRoi());
-	std::string chainCode = ChainCode::getChainCode(lineExtraction.getPrincipalLines(), lineExtraction.getLineComponents());
+
+	FeatureEncoder encoder;
+	encoder.encodeAndSave(3, lineExtraction.getPrincipalLines(), lineExtraction.getLineComponents());
+	//std::string chainCode = ChainCode::getChainCode(lineExtraction.getPrincipalLines(), lineExtraction.getLineComponents());
 
 	return 0;
 }
