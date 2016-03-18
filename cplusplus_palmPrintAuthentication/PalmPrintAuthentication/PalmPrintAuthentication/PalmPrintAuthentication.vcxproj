@@ -82,6 +82,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BoundaryTracking.cpp" />
+    <ClCompile Include="ChamferMatching.cpp" />
     <ClCompile Include="DbAdapter.cpp" />
     <ClCompile Include="FeatureEncoder.cpp" />
     <ClCompile Include="Histogram.cpp" />
@@ -97,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoundaryTracking.h" />
+    <ClInclude Include="ChamferMatching.h" />
     <ClInclude Include="DbAdapter.h" />
     <ClInclude Include="FeatureEncoder.h" />
     <ClInclude Include="Histogram.h" />
