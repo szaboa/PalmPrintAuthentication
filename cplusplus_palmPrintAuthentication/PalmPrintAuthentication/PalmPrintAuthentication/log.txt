@@ -1,0 +1,403 @@
+[Reader] Read: 001_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 1 recorded in database
+[Reader] Read: 001_IMG__ (2).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 001_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 1 recorded in database
+[Reader] Read: 002_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 2 recorded in database
+[Reader] Read: 002_IMG__ (2).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 2 recorded in database
+[Reader] Read: 002_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 2 recorded in database
+[Reader] Read: 003_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 3 recorded in database
+[Reader] Read: 003_IMG__ (2).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 003_IMG__ (3).jpg
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 3 recorded in database
+[Reader] Read: 004_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 4 recorded in database
+[Reader] Read: 004_IMG__ (2).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 4 recorded in database
+[Reader] Read: 004_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 4 recorded in database
+[Reader] Read: 005_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 5 recorded in database
+[Reader] Read: 005_IMG__ (2).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 5 recorded in database
+[Reader] Read: 005_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 5 recorded in database
+[Reader] Read: 007_IMG__ (1).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 007_IMG__ (2).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 7 recorded in database
+[Reader] Read: 007_IMG__ (3).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 008_IMG__ (1).jpg
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 8 recorded in database
+[Reader] Read: 008_IMG__ (2).jpg
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 8 recorded in database
+[Reader] Read: 008_IMG__ (3).jpg
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 8 recorded in database
+[Reader] Read: 009_IMG__ (1).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 009_IMG__ (2).jpg
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 9 recorded in database
+[Reader] Read: 009_IMG__ (3).jpg
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 9 recorded in database
+[Reader] Read: 010_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 10 recorded in database
+[Reader] Read: 010_IMG__ (2).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 10 recorded in database
+[Reader] Read: 010_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 10 recorded in database
+[Reader] Read: 011_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 11 recorded in database
+[Reader] Read: 011_IMG__ (2).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 11 recorded in database
+[Reader] Read: 011_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 11 recorded in database
+[Reader] Read: 012_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 12 recorded in database
+[Reader] Read: 012_IMG__ (2).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 12 recorded in database
+[Reader] Read: 012_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 12 recorded in database
+[Reader] Read: 013_IMG__ (1).jpg
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 13 recorded in database
+[Reader] Read: 013_IMG__ (2).jpg
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 13 recorded in database
+[Reader] Read: 013_IMG__ (3).jpg
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 13 recorded in database
+[Reader] Read: 014_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 14 recorded in database
+[Reader] Read: 014_IMG__ (2).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 14 recorded in database
+[Reader] Read: 014_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 14 recorded in database
+[Reader] Read: 015_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 15 recorded in database
+[Reader] Read: 015_IMG__ (2).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 015_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 15 recorded in database
+[Reader] Read: 017_IMG__ (1).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 017_IMG__ (2).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 17 recorded in database
+[Reader] Read: 017_IMG__ (3).jpg
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 17 recorded in database
+[Reader] Read: 018_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 18 recorded in database
+[Reader] Read: 018_IMG__ (2).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 018_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 18 recorded in database
+[Reader] Read: 019_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 19 recorded in database
+[Reader] Read: 019_IMG__ (2).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 19 recorded in database
+[Reader] Read: 019_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 19 recorded in database
+[Reader] Read: 020_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 20 recorded in database
+[Reader] Read: 020_IMG__ (2).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 20 recorded in database
+[Reader] Read: 020_IMG__ (3).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 021_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 21 recorded in database
+[Reader] Read: 021_IMG__ (2).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 21 recorded in database
+[Reader] Read: 021_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 21 recorded in database
+[Reader] Read: 022_IMG__ (1).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 022_IMG__ (2).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 022_IMG__ (3).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 023_IMG__ (1).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 023_IMG__ (2).jpg
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 23 recorded in database
+[Reader] Read: 023_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 23 recorded in database
+[Reader] Read: 024_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 24 recorded in database
+[Reader] Read: 024_IMG__ (2).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 24 recorded in database
+[Reader] Read: 024_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 24 recorded in database
+[Reader] Read: 025_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 25 recorded in database
+[Reader] Read: 025_IMG__ (2).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 25 recorded in database
+[Reader] Read: 025_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 25 recorded in database
+[Reader] Read: 026_IMG__ (1).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 026_IMG__ (2).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 026_IMG__ (3).jpg
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 26 recorded in database
+[Reader] Read: 027_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 27 recorded in database
+[Reader] Read: 027_IMG__ (2).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 27 recorded in database
+[Reader] Read: 027_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 27 recorded in database
+[Reader] Read: 028_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 28 recorded in database
+[Reader] Read: 028_IMG__ (2).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 28 recorded in database
+[Reader] Read: 028_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 28 recorded in database
+[Reader] Read: 029_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 29 recorded in database
+[Reader] Read: 029_IMG__ (2).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 29 recorded in database
+[Reader] Read: 029_IMG__ (3).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 030_IMG__ (1).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 030_IMG__ (2).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 030_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 30 recorded in database
+[Reader] Read: 031_IMG__ (1).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 031_IMG__ (2).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 031_IMG__ (3).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 032_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 32 recorded in database
+[Reader] Read: 032_IMG__ (2).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 32 recorded in database
+[Reader] Read: 032_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 32 recorded in database
+[Reader] Read: 033_IMG__ (1).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 033_IMG__ (2).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 033_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 33 recorded in database
+[Reader] Read: 034_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 34 recorded in database
+[Reader] Read: 034_IMG__ (2).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 34 recorded in database
+[Reader] Read: 034_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 34 recorded in database
+[Reader] Read: 035_IMG__ (1).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 035_IMG__ (2).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 035_IMG__ (3).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 036_IMG__ (1).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 036_IMG__ (2).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 36 recorded in database
+[Reader] Read: 036_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 36 recorded in database
+[Reader] Read: 037_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 37 recorded in database
+[Reader] Read: 037_IMG__ (2).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 37 recorded in database
+[Reader] Read: 037_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 37 recorded in database
+[Reader] Read: 038_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 38 recorded in database
+[Reader] Read: 038_IMG__ (2).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 38 recorded in database
+[Reader] Read: 038_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 38 recorded in database
+[Reader] Read: 039_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 39 recorded in database
+[Reader] Read: 039_IMG__ (2).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 39 recorded in database
+[Reader] Read: 039_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 39 recorded in database
+[Reader] Read: 040_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 40 recorded in database
+[Reader] Read: 040_IMG__ (2).jpg
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 40 recorded in database
+[Reader] Read: 040_IMG__ (3).jpg
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 40 recorded in database
+[Reader] Read: 041_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 41 recorded in database
+[Reader] Read: 041_IMG__ (2).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 41 recorded in database
+[Reader] Read: 041_IMG__ (3).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 41 recorded in database
+[Reader] Read: 042_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 42 recorded in database
+[Reader] Read: 042_IMG__ (2).jpg
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 42 recorded in database
+[Reader] Read: 042_IMG__ (3).jpg
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 42 recorded in database
+[Reader] Read: 043_IMG__ (1).JPG
+[RoiExtraction] KeyPoints found
+[DbAdapter] User id: 43 recorded in database
+[Reader] Read: 043_IMG__ (2).JPG
+[Reader] Read: 043_IMG__ (2).JPG
+[Reader] Read: 043_IMG__ (2).JPG
+[Reader] Read: 043_IMG__ (2).JPG
+[Reader] Read: 043_IMG__ (2).JPG
+[Reader] Read: 043_IMG__ (2).JPG
+[Reader] Read: 043_IMG__ (2).JPG
+[Reader] Read: 043_IMG__ (2).JPG
+[Reader] Read: 043_IMG__ (2).JPG
+[Reader] Read: 043_IMG__ (2).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 043_IMG__ (2).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 043_IMG__ (2).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 001_IMG__ (1).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 043_IMG__ (2).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 001_IMG__ (1).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 043_IMG__ (2).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 001_IMG__ (1).JPG
+[Reader] Read: 001_IMG__ (1).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 043_IMG__ (2).JPG
+[Reader] Read: 001_IMG__ (1).JPG
+[Reader] Read: 001_IMG__ (1).JPG
+[Reader] Read: 043_IMG__ (2).JPG
+[Reader] Read: 043_IMG__ (2).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 001_IMG__ (1).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 001_IMG__ (2).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 001_IMG__ (3).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 001_IMG__ (4).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 001_IMG__ (5).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 001_IMG__ (6).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 001_IMG__ (7).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 001_IMG__ (8).jpg
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 002_IMG__ (1).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 002_IMG__ (2).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 002_IMG__ (3).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 002_IMG__ (4).jpg
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 002_IMG__ (5).jpg
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 002_IMG__ (6).jpg
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 002_IMG__ (7).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 002_IMG__ (8).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 043_IMG__ (2).JPG
+[RoiExtraction] Keypoints not found.
+[Reader] Read: 001_IMG__ (1).JPG

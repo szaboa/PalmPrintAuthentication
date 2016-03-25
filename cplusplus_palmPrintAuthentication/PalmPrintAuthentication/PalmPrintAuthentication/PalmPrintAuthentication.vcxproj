@@ -55,12 +55,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\szabo\Documents\PalmPrintAuthentication\cplusplus_palmPrintAuthentication\PalmPrintAuthentication\PalmPrintAuthentication\sqlite;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\szabo\Documents\PalmPrintAuthentication\cplusplus_palmPrintAuthentication\PalmPrintAuthentication\PalmPrintAuthentication;C:\Users\szabo\Documents\boost_1_60_0\;C:\Users\szabo\Documents\PalmPrintAuthentication\cplusplus_palmPrintAuthentication\PalmPrintAuthentication\PalmPrintAuthentication\sqlite;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\szabo\Documents\boost_1_60_0\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -81,36 +82,47 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BoundaryTracking.cpp" />
-    <ClCompile Include="ChamferMatching.cpp" />
-    <ClCompile Include="DbAdapter.cpp" />
-    <ClCompile Include="FeatureEncoder.cpp" />
-    <ClCompile Include="Histogram.cpp" />
     <ClCompile Include="json\json11.cpp" />
-    <ClCompile Include="Logger.cpp" />
+    <ClCompile Include="logger\Logger.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MorphologicalOperation.cpp" />
-    <ClCompile Include="PrincipalLineExtraction.cpp" />
-    <ClCompile Include="RegionSegmentation.cpp" />
-    <ClCompile Include="RoiExtraction.cpp" />
-    <ClCompile Include="PixelValueTreshold.cpp" />
-    <ClCompile Include="Thinning.cpp" />
+    <ClCompile Include="module_DatabaseAdapter\DbAdapter.cpp" />
+    <ClCompile Include="module_FeatureExtraction\PrincipalLineExtraction.cpp" />
+    <ClCompile Include="module_FeatureExtraction\PrincipalLineFeature.cpp" />
+    <ClCompile Include="module_PalmImageReader\PalmReaderEnrollment.cpp" />
+    <ClCompile Include="module_PalmImageReader\PalmReaderMatching.cpp" />
+    <ClCompile Include="module_Preprocessing\Preprocessing.cpp" />
+    <ClCompile Include="module_RoiExtraction\OtsuTresholding.cpp" />
+    <ClCompile Include="module_RoiExtraction\RegionGrowing.cpp" />
+    <ClCompile Include="module_RoiExtraction\SquareRoiExtraction.cpp" />
+    <ClCompile Include="utility\BoundaryTracking.cpp" />
+    <ClCompile Include="utility\Histogram.cpp" />
+    <ClCompile Include="utility\MorphologicalOperation.cpp" />
+    <ClCompile Include="utility\Thinning.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BoundaryTracking.h" />
-    <ClInclude Include="ChamferMatching.h" />
-    <ClInclude Include="DbAdapter.h" />
-    <ClInclude Include="FeatureEncoder.h" />
-    <ClInclude Include="Histogram.h" />
-    <ClInclude Include="JsonPoint.h" />
     <ClInclude Include="json\json11.hpp" />
-    <ClInclude Include="Logger.h" />
-    <ClInclude Include="MorphologicalOperation.h" />
-    <ClInclude Include="PrincipalLineExtraction.h" />
-    <ClInclude Include="RegionSegmentation.h" />
-    <ClInclude Include="RoiExtraction.h" />
-    <ClInclude Include="PixelValueTreshold.h" />
-    <ClInclude Include="Thinning.h" />
+    <ClInclude Include="logger\Logger.h" />
+    <ClInclude Include="module_DatabaseAdapter\DbAdapter.h" />
+    <ClInclude Include="module_DatabaseAdapter\JsonPoint.h" />
+    <ClInclude Include="module_FeatureExtraction\IFeature.h" />
+    <ClInclude Include="module_FeatureExtraction\IFeatureExtraction.h" />
+    <ClInclude Include="module_FeatureExtraction\PrincipalLineExtraction.h" />
+    <ClInclude Include="module_FeatureExtraction\PrincipalLineFeature.h" />
+    <ClInclude Include="module_PalmImageReader\IPalmReader.h" />
+    <ClInclude Include="module_PalmImageReader\PalmReaderEnrollment.h" />
+    <ClInclude Include="module_PalmImageReader\PalmReaderMatching.h" />
+    <ClInclude Include="module_Preprocessing\IPreprocessing.h" />
+    <ClInclude Include="module_Preprocessing\Preprocessing.h" />
+    <ClInclude Include="module_RoiExtraction\IRegionSegmentation.h" />
+    <ClInclude Include="module_RoiExtraction\IRoiExtraction.h" />
+    <ClInclude Include="module_RoiExtraction\OtsuTresholding.h" />
+    <ClInclude Include="module_RoiExtraction\RegionGrowing.h" />
+    <ClInclude Include="module_RoiExtraction\SquareRoiExtraction.h" />
+    <ClInclude Include="utility\BoundaryTracking.h" />
+    <ClInclude Include="utility\Histogram.h" />
+    <ClInclude Include="utility\MorphologicalOperation.h" />
+    <ClInclude Include="utility\PPAException.h" />
+    <ClInclude Include="utility\Thinning.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
