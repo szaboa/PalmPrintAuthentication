@@ -27,3 +27,12 @@ Mat MorphologicalOperation::erode(const Mat &img, int size){
 
 	return dst;
 }
+
+Mat MorphologicalOperation::closing(const Mat &img, int size){
+	Mat element = getStructuringElement(2, Size(2 * size + 1, 2 * size + 1), Point(size, size));
+	Mat dst;
+	/// Apply the specified morphology operation
+	morphologyEx(img, dst, 1, element);
+
+	return dst;
+}

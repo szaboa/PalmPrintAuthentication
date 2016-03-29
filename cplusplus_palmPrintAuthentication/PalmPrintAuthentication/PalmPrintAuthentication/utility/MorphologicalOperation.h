@@ -20,5 +20,7 @@ public:
 
 	/*Applies erode algorithm to @img */
 	static Mat erode(const Mat &img, int size);
+
+	static Mat closing(const Mat&img, int size);
 };
 

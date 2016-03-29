@@ -10,7 +10,7 @@ public:
 	PrincipalLineFeature(cv::Mat img);
 
 	void save(int userId) override;
-
+	Mat getImg();
 	~PrincipalLineFeature();
 
 private:

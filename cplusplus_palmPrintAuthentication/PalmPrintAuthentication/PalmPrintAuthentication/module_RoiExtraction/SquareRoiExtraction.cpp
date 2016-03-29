@@ -7,6 +7,7 @@
 #include <math.h>
 #include <utility\PPAException.h>
 #include <logger\Logger.h>
+#include <fstream>
 
 using namespace cv;
 using namespace std;
@@ -73,10 +74,14 @@ void SquareRoiExtraction::calcAndDrawSquareRoi(const Keypoints &keypoints){
 	Point keypoint1_1, keypoint3_1;
 	double dist = sqrt(pow(keypoints.keypoint1.x - keypoints.keypoint3.x, 2) + pow(keypoints.keypoint1.y - keypoints.keypoint3.y, 2));
 	keypoint1_1.x = keypoints.keypoint1.x + dist;
-	keypoint1_1.y = perpendicular_slope*(keypoint1_1.x - keypoints.keypoint1.x) + keypoints.keypoint1.y;
-
 	keypoint3_1.x = keypoints.keypoint3.x + dist;
+
+
+	keypoint1_1.y = perpendicular_slope*(keypoint1_1.x - keypoints.keypoint1.x) + keypoints.keypoint1.y;
 	keypoint3_1.y = perpendicular_slope*(keypoint3_1.x - keypoints.keypoint3.x) + keypoints.keypoint3.y;
+	
+	
+	
 
 
 	// Drawing the square ROI
@@ -92,6 +97,7 @@ void SquareRoiExtraction::calcAndDrawSquareRoi(const Keypoints &keypoints){
 		rotAlpha = tan((double)(keypoints.keypoint3.x - keypoints.keypoint1.x) / (double)(keypoints.keypoint3.y - keypoints.keypoint1.y));
 	}
 
+	
 	// Rotating the input image
 	Point2f centerPoint(inputImage.cols / 2.0F, inputImage.rows / 2.0F);
 
@@ -126,41 +132,63 @@ void SquareRoiExtraction::calcAndDrawSquareRoi(const Keypoints &keypoints){
 
 	circle(inputImage, newBottomRightCorner, 3, Scalar(255, 0, 0), 1);
 	circle(inputImage, newUpperLeftCorner, 3, Scalar(255, 0, 0), 1);
-
+	
 	//Extract the square ROI
 	squareRoi = inputImageCopy(Rect(newUpperLeftCorner, newBottomRightCorner));
+	//namedWindow("asd", CV_WINDOW_AUTOSIZE);
+	//imshow("asd", inputImage);
+	//waitKey(0);
 
 }
 
 Keypoints SquareRoiExtraction::findKeypoints(const Mat &segmentedImage){
 
-	// Get boundary points, by applying boundary tracking alogirthm
-	vector<Point> boundaryVector = BoundaryTracking::getBoundary(segmentedImage);
+	Mat leftSide = segmentedImage(Rect(0,0,segmentedImage.cols-150,segmentedImage.rows));
 
+	// Get boundary points, by applying boundary tracking alogirthm
+	vector<Point> boundaryVector = BoundaryTracking::getBoundary(leftSide);
+	
+	bool TEST = false;
+	if (TEST){
+		Mat temp(leftSide.size(), CV_8UC3);
+		temp.setTo(Scalar(0));
+		for (Point p : boundaryVector){
+			circle(temp, p, 1, Scalar(255, 255, 255));
+		}
+
+
+		namedWindow("temp", CV_WINDOW_AUTOSIZE);
+		imshow("temp", temp);
+		waitKey(0);
+	}
+	/*
+	
+	*/
 
 	// Find start and end points (vertically) at left side of the image
 	Point startPoint, endPoint;
 
 	bool foundStart = false;
-	for (int i = 0; i < segmentedImage.rows; ++i){
+	for (int i = 0; i < leftSide.rows; ++i){
 		if (foundStart){
-			if (segmentedImage.at<uchar>(i, segmentedImage.cols - 1) == 0){
-				startPoint.x = segmentedImage.cols - 1;
+			if (leftSide.at<uchar>(i, leftSide.cols - 1) == 0){
+				startPoint.x = leftSide.cols - 1;
 				startPoint.y = i;
 				break;
 			}
 		}
 		else{
-			if (segmentedImage.at<uchar>(i, segmentedImage.cols - 1) == 255){
+			if (leftSide.at<uchar>(i, leftSide.cols - 1) == 255){
 				foundStart = true;
-				endPoint.x = segmentedImage.cols - 1;
+				endPoint.x = leftSide.cols - 1;
 				endPoint.y = i;
 			}
 		}
 	}
 
-	// Find the center point (vertically) at left side of the image
-	Point centerPoint(inputImage.cols / 2 + 200, (startPoint.y + endPoint.y) / 2);
+
+	// Find the center point (vertically) at right side of the image
+	Point centerPoint(leftSide.cols, (startPoint.y + endPoint.y) / 2);
 	circle(inputImage, centerPoint, 2, CV_RGB(0, 255, 0), -1);
 
 	// Calculate dinstances between the center points and every boundary point 
@@ -183,30 +211,40 @@ Keypoints SquareRoiExtraction::findKeypoints(const Mat &segmentedImage){
 
 	double sum = 0.0;
 	double kernel_size = 5;
-
+	//ofstream f;
+	//f.open("boundary.txt", ios::out);
+	
 	for (int index = 2; index < distancesFromCenterPoint.size() - 2; index++){
 		sum = distancesFromCenterPoint.at(index - 2).distance + distancesFromCenterPoint.at(index - 1).distance + distancesFromCenterPoint.at(index).distance + distancesFromCenterPoint.at(index + 1).distance + distancesFromCenterPoint.at(index + 2).distance;
 		filtered_distances.at(index).distance = sum / kernel_size;
+		//f << filtered_distances.at(index).distance << endl;
 	}
+	
 
 
 	// Searcing for local minimums, with a predefined stepsize,
 	// Check if the stepsize'th previous point is bigger than the current points and the stepsize'th next point is also bigger than the current point
 	// If the previous condition is true, then the current point will be stored as a local minimum
 
-	int stepsize = 5;
+	int stepsize = 50;
 	vector<Point_with_distance> minimums;
-	for (int i = 50; i < filtered_distances.size() - 50; ++i){
+
+	if (filtered_distances.size() < 500) throw PPAException("Boundary not found.");
+
+	for (int i = stepsize; i < filtered_distances.size() - stepsize; ++i){
 		if (filtered_distances.at(i - stepsize).distance > filtered_distances.at(i).distance && filtered_distances.at(i + stepsize).distance > filtered_distances.at(i).distance)
 		{
 			Point_with_distance temp;
 			temp.point = filtered_distances.at(i).point;
 			temp.distance = filtered_distances.at(i).distance;
+			
 			minimums.push_back(temp);
 		}
 	}
 
 
+
+	//f.close();
 	// Creating three clusters, these will contain local minimum points around the keypoints (valleys between fingers)
 	// Iterating through the local minimums, if the distance is higher than 10 pixels between the next and current point, then the next point will be classified into a new cluster,
 	// otherwise, it will be classified into the current cluster

@@ -56,6 +56,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Users\szabo\Documents\PalmPrintAuthentication\cplusplus_palmPrintAuthentication\PalmPrintAuthentication\PalmPrintAuthentication;C:\Users\szabo\Documents\boost_1_60_0\;C:\Users\szabo\Documents\PalmPrintAuthentication\cplusplus_palmPrintAuthentication\PalmPrintAuthentication\PalmPrintAuthentication\sqlite;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -88,6 +89,7 @@
     <ClCompile Include="module_DatabaseAdapter\DbAdapter.cpp" />
     <ClCompile Include="module_FeatureExtraction\PrincipalLineExtraction.cpp" />
     <ClCompile Include="module_FeatureExtraction\PrincipalLineFeature.cpp" />
+    <ClCompile Include="module_Matcher\PrincipalLineMatcher.cpp" />
     <ClCompile Include="module_PalmImageReader\PalmReaderEnrollment.cpp" />
     <ClCompile Include="module_PalmImageReader\PalmReaderMatching.cpp" />
     <ClCompile Include="module_Preprocessing\Preprocessing.cpp" />
@@ -108,6 +110,8 @@
     <ClInclude Include="module_FeatureExtraction\IFeatureExtraction.h" />
     <ClInclude Include="module_FeatureExtraction\PrincipalLineExtraction.h" />
     <ClInclude Include="module_FeatureExtraction\PrincipalLineFeature.h" />
+    <ClInclude Include="module_Matcher\IMatcher.h" />
+    <ClInclude Include="module_Matcher\PrincipalLineMatcher.h" />
     <ClInclude Include="module_PalmImageReader\IPalmReader.h" />
     <ClInclude Include="module_PalmImageReader\PalmReaderEnrollment.h" />
     <ClInclude Include="module_PalmImageReader\PalmReaderMatching.h" />

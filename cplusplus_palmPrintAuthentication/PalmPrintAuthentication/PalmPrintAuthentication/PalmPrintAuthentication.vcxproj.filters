@@ -33,6 +33,9 @@
     <Filter Include="json">
       <UniqueIdentifier>{63b17f5d-a413-4389-8688-a9defef938ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="module_Matcher">
+      <UniqueIdentifier>{0a4d5cc0-7d3c-49b4-a2d7-a817781e8857}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -82,6 +85,9 @@
     </ClCompile>
     <ClCompile Include="module_RoiExtraction\OtsuTresholding.cpp">
       <Filter>module_RoiExtraction</Filter>
+    </ClCompile>
+    <ClCompile Include="module_Matcher\PrincipalLineMatcher.cpp">
+      <Filter>module_Matcher</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +159,12 @@
     </ClInclude>
     <ClInclude Include="module_RoiExtraction\OtsuTresholding.h">
       <Filter>module_RoiExtraction</Filter>
+    </ClInclude>
+    <ClInclude Include="module_Matcher\IMatcher.h">
+      <Filter>module_Matcher</Filter>
+    </ClInclude>
+    <ClInclude Include="module_Matcher\PrincipalLineMatcher.h">
+      <Filter>module_Matcher</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
