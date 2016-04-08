@@ -66,7 +66,7 @@ vector < pair<int, vector<Point>>>  DbAdapter::getFeatures(){
 
 DbAdapter::~DbAdapter()
 {
-	if (db != NULL){
-		delete db;
-	}
+
+	delete db;
+
 }

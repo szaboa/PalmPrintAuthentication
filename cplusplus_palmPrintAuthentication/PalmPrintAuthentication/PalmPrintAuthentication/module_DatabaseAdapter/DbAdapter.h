@@ -28,6 +28,6 @@ private:
 
 	const std::string dbName = "database/lines.db";
 
-	database* db;
+	database* db = nullptr;
 };
 

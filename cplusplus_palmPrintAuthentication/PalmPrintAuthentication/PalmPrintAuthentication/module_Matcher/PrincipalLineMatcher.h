@@ -18,7 +18,7 @@ public:
 	~PrincipalLineMatcher();
 private:
 
-	DbAdapter *dbAdapter;
+	DbAdapter *dbAdapter = nullptr;
 
 	Mat doDistanceTransformation(Mat img);
 

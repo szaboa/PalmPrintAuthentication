@@ -89,6 +89,9 @@
     <ClCompile Include="module_Matcher\PrincipalLineMatcher.cpp">
       <Filter>module_Matcher</Filter>
     </ClCompile>
+    <ClCompile Include="module_FeatureExtraction\TextureExtraction.cpp">
+      <Filter>module_FeatureExtraction</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utility\PPAException.h">
@@ -165,6 +168,9 @@
     </ClInclude>
     <ClInclude Include="module_Matcher\PrincipalLineMatcher.h">
       <Filter>module_Matcher</Filter>
+    </ClInclude>
+    <ClInclude Include="module_FeatureExtraction\TextureExtraction.h">
+      <Filter>module_FeatureExtraction</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

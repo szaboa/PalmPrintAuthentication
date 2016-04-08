@@ -15,6 +15,6 @@ public:
 
 private:
 	cv::Mat img;
-	DbAdapter *dbAdapter;
+	DbAdapter *dbAdapter = nullptr;
 };
 

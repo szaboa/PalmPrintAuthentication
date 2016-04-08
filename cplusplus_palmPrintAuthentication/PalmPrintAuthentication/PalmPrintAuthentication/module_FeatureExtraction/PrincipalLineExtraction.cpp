@@ -4,6 +4,8 @@
 #include <fstream>
 #include <stack>
 #include <utility\Thinning.h>
+#include <omp.h>
+#include <chrono>
 
 using namespace std;
 using namespace cv;
@@ -21,9 +23,17 @@ IFeature* PrincipalLineExtraction::doFeatureExtraction(Mat roi){
 	// Image normalization (using Histogram Equalization and a Low-pass Filter)
 	Mat normalizedRoi = normalizeImage(roiAfterPreprocessing);
 	
-
+	namedWindow("test", CV_WINDOW_AUTOSIZE);
+	imshow("test", normalizedRoi);
+	waitKey(0);
+//	auto start = std::chrono::system_clock::now();
 	// Locate principal lines
 	finalLines = locatePrincipalLines(normalizedRoi);
+//	auto enddd = std::chrono::system_clock::now();
+//	auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(enddd - start);
+//	cout << "LOCATE-----: " << elapsed.count() << " ms" << endl;
+
+	
 
 	IFeature* principalLineFeature = new PrincipalLineFeature(finalLines);
 
@@ -77,17 +87,19 @@ Mat PrincipalLineExtraction::locatePrincipalLineInGivenDirection(const Mat &img,
 	}
 
 	// Calculate first- and second-order derivatives
+
 	for (int i = H1_rows / 2; i < roiHeight - (H1_rows / 2); ++i){
 		for (int j = H1_cols / 2; j < roiWidth - (H1_cols / 2); ++j){
 
 			for (int _i = -(H1_rows / 2); _i <= (H1_rows / 2); ++_i){
 				for (int _j = -(H1_cols / 2); _j <= +(H1_cols / 2); ++_j){
-					I_der[i][j]  += static_cast<int>(img.at<uchar>(i + _i, j + _j)) * H1[_i + (H1_rows / 2)][_j + (H1_cols / 2)];
-					I_der2[i][j] += static_cast<int>(img.at<uchar>(i + _i, j + _j)) * H2[_i + (H1_rows / 2)][_j + (H1_cols / 2)];
+					I_der[i][j]  += (int)(img.at<uchar>(i + _i, j + _j)) * H1[_i + (H1_rows / 2)][_j + (H1_cols / 2)];
+					I_der2[i][j] += (int)(img.at<uchar>(i + _i, j + _j)) * H2[_i + (H1_rows / 2)][_j + (H1_cols / 2)];
 				}
 			}
 		}
 	}
+	
 
 	// Create binary image, this will contain the extracted principal lines in a given direction
 	Mat binaryImage(img.size(), CV_8UC1, Scalar(0,0,0));
@@ -323,10 +335,24 @@ Mat PrincipalLineExtraction::locatePrincipalLines(Mat img){
 	};
 
 	// Locating principal lines in four directions
-	Mat linesInDir0   = locatePrincipalLineInGivenDirection(img, H1_0, H2_0, 0);
-	Mat linesInDir90 = locatePrincipalLineInGivenDirection(img, H1_90, H2_90, 90);
-	Mat linesInDir45 = locatePrincipalLineInGivenDirection(img, H1_45, H2_45, 45);
-	Mat linesInDir135 = locatePrincipalLineInGivenDirection(img, H1_135, H2_135, 135);
+	Mat linesInDir0, linesInDir90, linesInDir45, linesInDir135;
+	#pragma omp parallel sections
+	{
+		#pragma omp section
+			linesInDir0 = locatePrincipalLineInGivenDirection(img, H1_0, H2_0, 0);
+		
+		#pragma omp section
+			linesInDir90 = locatePrincipalLineInGivenDirection(img, H1_90, H2_90, 90);
+		
+		#pragma omp section
+			linesInDir45 = locatePrincipalLineInGivenDirection(img, H1_45, H2_45, 45);
+		
+		#pragma omp section
+			linesInDir135 = locatePrincipalLineInGivenDirection(img, H1_135, H2_135, 135);
+		
+	}
+
+
 
 	// Merging the lines using OR operation
 	Mat lines = linesInDir45 | linesInDir90 | linesInDir0 | linesInDir135;

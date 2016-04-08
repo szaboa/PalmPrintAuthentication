@@ -16,21 +16,30 @@
 #include <module_FeatureExtraction\PrincipalLineFeature.h>
 #include <module_Matcher\IMatcher.h>
 #include <module_Matcher\PrincipalLineMatcher.h>
+#include <module_FeatureExtraction\TextureExtraction.h>
 #include <utility\PPAException.h>
 #include <logger\Logger.h>
 #include <fstream>
+#include <chrono>
+
 
 
 
 using namespace cv;
-#define REGISTER_PALM false
+#define REGISTER_PALM true
 
+std::chrono::system_clock::time_point start;
+std::chrono::system_clock::time_point enddd;
 
-
-bool isBlack(Mat &img, int i, int j){
-	return (img.at<Vec3b>(i, j)[0] <= 10 || img.at<Vec3b>(i, j)[1] <= 10 || img.at<Vec3b>(i, j)[2] <= 10);
+void startTimer(){
+	start = std::chrono::system_clock::now();
 }
 
+void endTimer(std::string s){
+	enddd = std::chrono::system_clock::now();
+	auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(enddd - start);
+	cout << s << " took: " << elapsed.count() << " ms" << endl;
+}
 
 int main(int argc, char *argv[]){
 	
@@ -38,31 +47,39 @@ int main(int argc, char *argv[]){
 
 
 	PalmReaderEnrollment* reader = new PalmReaderEnrollment();
-	reader->init("database_test");
+	reader->init("_train_data");
 	
 	while (reader->hasNextImage()){
 		int userId = reader->readUserId();
-		Mat palmImage = reader->readPalmImage();
 		
 
+		Mat palmImage = reader->readPalmImage();
+		
+	
 		IPreprocessing* preprocessor = new Preprocessing();
 		Mat preprocessedImage = preprocessor->doPreprocessing(palmImage);
 
+	
 		IRegionSegmentation* regionSegmentation = new OtsuTresholding();
 		IRoiExtraction* roiExtractor = new SquareRoiExtraction(regionSegmentation);
-		
+
 		IFeature* principalLineFeature = nullptr;
 		
-		IFeatureExtraction* featureExtraction = new PrincipalLineExtraction();
+		IFeatureExtraction* featureExtraction = new TextureExtraction();
 		IMatcher* chamferMatcher = new PrincipalLineMatcher();
 
 		try{
+
 			roiExtractor->doExtraction(preprocessedImage);
 
-			principalLineFeature = featureExtraction->doFeatureExtraction(roiExtractor->getRoi());
+			//principalLineFeature = featureExtraction->doFeatureExtraction(roiExtractor->getRoi());
+			featureExtraction->doFeatureExtraction(roiExtractor->getRoi());
+			/*
 
 			if (REGISTER_PALM){
+
 				principalLineFeature->save(userId);
+
 			}
 			else{
 				PrincipalLineFeature *pf = dynamic_cast<PrincipalLineFeature*> (principalLineFeature);
@@ -74,6 +91,8 @@ int main(int argc, char *argv[]){
 					score++;
 				}
 			}
+			*/
+
 			
 		}
 		catch (PPAException &e){

@@ -18,11 +18,11 @@ OtsuTresholding::OtsuTresholding()
 
 
 Mat OtsuTresholding::doPreprocessing(const cv::Mat &inputImage){
+
+	
 	Mat original = inputImage.clone();
 	Mat ycbcr;
 	cvtColor(original, ycbcr, CV_RGB2YCrCb);
-	
-	
 
 	
 	return ycbcr;
@@ -30,18 +30,22 @@ Mat OtsuTresholding::doPreprocessing(const cv::Mat &inputImage){
 
 Mat OtsuTresholding::doRegionSegmentation(const cv::Mat &preprocessedImage){
 
+	
 
-	matrix<double> invC(2, 2);
-	invC(0, 0) = 0.0479;
-	invC(0, 1) = 0.0259;
-	invC(1, 0) = 0.0259;
-	invC(1, 1) = 0.0212;
 
-	matrix<double> m(2, 1);
-	m(0, 0) = 113.9454;
-	m(1, 0) = 157.5052;
+	double c11 = 0.0479;
+	double c12 = 0.0259;
+	double c21 = 0.0259;
+	double c22 = 0.0212;
 
-	matrix<double> x(2, 1);
+	double k1 = 0.0;
+	double k2 = 0.0;
+	double x1, x2;
+	double m1 = 113.9454;
+	double m2 = 157.5052;
+	double f1, f2;
+
+
 
 	Mat thresholded(preprocessedImage.size(), CV_8UC1);
 	thresholded.setTo(Scalar(0));
@@ -51,21 +55,21 @@ Mat OtsuTresholding::doRegionSegmentation(const cv::Mat &preprocessedImage){
 	for (int i = 0; i < preprocessedImage.rows; ++i){
 		for (int j = 0; j < preprocessedImage.cols; ++j){
 
-			x(0, 0) = (int)preprocessedImage.at<Vec3b>(i, j)[1];
-			x(1, 0) = (int)preprocessedImage.at<Vec3b>(i, j)[2];
+			x1 = (int)preprocessedImage.at<Vec3b>(i, j)[1];
+			x2 = (int)preprocessedImage.at<Vec3b>(i, j)[2];
 
-			//cout << x(0, 0) << " " << x(1, 0) << endl;
+				f1 = -0.5*(x1 - m1);
+				f2 = -0.5*(x2 - m2);
+				k1 = f1*c11 + f2*c21;
+				k2 = f1*c12 + f2*c22;
 
-			matrix<double> transpose = trans(x - m);
-			matrix<double> scalarTranspose = -0.5 * transpose;
-			matrix<double> firstP = prod(scalarTranspose, invC);
-			matrix<double> secondP = prod(firstP, (x - m));
+				p = exp(k1*(x1 - m1) + k2*(x2 - m2));
+		
 
-			p = exp(secondP(0, 0));
-
-			if (p > 0.15){
-				thresholded.at<uchar>(i, j) = 255;
-			}
+				if (p > 0.15){
+					thresholded.at<uchar>(i, j) = 255;
+				}
+			
 
 		}
 	}
