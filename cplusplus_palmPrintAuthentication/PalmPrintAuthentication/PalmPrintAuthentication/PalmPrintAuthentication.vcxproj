@@ -91,7 +91,9 @@
     <ClCompile Include="module_FeatureExtraction\PrincipalLineExtraction.cpp" />
     <ClCompile Include="module_FeatureExtraction\PrincipalLineFeature.cpp" />
     <ClCompile Include="module_FeatureExtraction\TextureExtraction.cpp" />
+    <ClCompile Include="module_FeatureExtraction\TextureFeature.cpp" />
     <ClCompile Include="module_Matcher\PrincipalLineMatcher.cpp" />
+    <ClCompile Include="module_Matcher\TextureMatcher.cpp" />
     <ClCompile Include="module_PalmImageReader\PalmReaderEnrollment.cpp" />
     <ClCompile Include="module_PalmImageReader\PalmReaderMatching.cpp" />
     <ClCompile Include="module_Preprocessing\Preprocessing.cpp" />
@@ -113,8 +115,10 @@
     <ClInclude Include="module_FeatureExtraction\PrincipalLineExtraction.h" />
     <ClInclude Include="module_FeatureExtraction\PrincipalLineFeature.h" />
     <ClInclude Include="module_FeatureExtraction\TextureExtraction.h" />
+    <ClInclude Include="module_FeatureExtraction\TextureFeature.h" />
     <ClInclude Include="module_Matcher\IMatcher.h" />
     <ClInclude Include="module_Matcher\PrincipalLineMatcher.h" />
+    <ClInclude Include="module_Matcher\TextureMatcher.h" />
     <ClInclude Include="module_PalmImageReader\IPalmReader.h" />
     <ClInclude Include="module_PalmImageReader\PalmReaderEnrollment.h" />
     <ClInclude Include="module_PalmImageReader\PalmReaderMatching.h" />

@@ -1,5 +1,5 @@
 #include <module_Matcher\PrincipalLineMatcher.h>
-
+#include <module_FeatureExtraction\PrincipalLineFeature.h>
 
 PrincipalLineMatcher::PrincipalLineMatcher()
 {
@@ -44,9 +44,10 @@ Mat PrincipalLineMatcher::doDistanceTransformation(Mat img){
 	return invImg;
 }
 
-int PrincipalLineMatcher::doMatching(Mat img){
+int PrincipalLineMatcher::doMatching(IFeature* f){
 
-	Mat imgDT = doDistanceTransformation(img);
+	PrincipalLineFeature *pf = dynamic_cast<PrincipalLineFeature*> (f);
+	Mat imgDT = doDistanceTransformation(pf->getImg());
 
 	dbAdapter = new DbAdapter();
 	//imwrite("dt.jpg", dtImage);

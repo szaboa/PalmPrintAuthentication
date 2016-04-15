@@ -17,6 +17,8 @@
 #include <module_Matcher\IMatcher.h>
 #include <module_Matcher\PrincipalLineMatcher.h>
 #include <module_FeatureExtraction\TextureExtraction.h>
+#include <module_FeatureExtraction\TextureFeature.h>
+#include <module_Matcher\TextureMatcher.h>
 #include <utility\PPAException.h>
 #include <logger\Logger.h>
 #include <fstream>
@@ -26,7 +28,7 @@
 
 
 using namespace cv;
-#define REGISTER_PALM true
+#define REGISTER_PALM false
 
 std::chrono::system_clock::time_point start;
 std::chrono::system_clock::time_point enddd;
@@ -47,8 +49,9 @@ int main(int argc, char *argv[]){
 
 
 	PalmReaderEnrollment* reader = new PalmReaderEnrollment();
-	reader->init("_train_data");
-	
+	reader->init("_test_data");
+	int tempId = -1;
+	int q = 0;
 	while (reader->hasNextImage()){
 		int userId = reader->readUserId();
 		
@@ -63,35 +66,36 @@ int main(int argc, char *argv[]){
 		IRegionSegmentation* regionSegmentation = new OtsuTresholding();
 		IRoiExtraction* roiExtractor = new SquareRoiExtraction(regionSegmentation);
 
-		IFeature* principalLineFeature = nullptr;
+		IFeature* textureFeature = nullptr;
 		
 		IFeatureExtraction* featureExtraction = new TextureExtraction();
 		IMatcher* chamferMatcher = new PrincipalLineMatcher();
+		IMatcher* hammmingMatcher = new TextureMatcher();
 
 		try{
 
 			roiExtractor->doExtraction(preprocessedImage);
-
 			//principalLineFeature = featureExtraction->doFeatureExtraction(roiExtractor->getRoi());
-			featureExtraction->doFeatureExtraction(roiExtractor->getRoi());
-			/*
+			textureFeature = featureExtraction->doFeatureExtraction(roiExtractor->getRoi());
 
 			if (REGISTER_PALM){
 
-				principalLineFeature->save(userId);
+				//principalLineFeature->save(userId);
+				textureFeature->save(userId);
 
 			}
 			else{
-				PrincipalLineFeature *pf = dynamic_cast<PrincipalLineFeature*> (principalLineFeature);
 				
-
-				int matchedId = chamferMatcher->doMatching(pf->getImg());
+				
+				int matchedId = hammmingMatcher->doMatching(textureFeature);
+				//int matchedId = chamferMatcher->doMatching(principalLineFeature);
 
 				if (matchedId == userId){
 					score++;
 				}
+				Logger::log("SCORE", to_string(score));
 			}
-			*/
+			
 
 			
 		}
@@ -103,12 +107,12 @@ int main(int argc, char *argv[]){
 		delete preprocessor;
 		delete regionSegmentation;
 		delete roiExtractor;
-		delete principalLineFeature;
+		delete textureFeature;
 		delete featureExtraction;	
 	
 	}
 
-	cout << endl << "SCORE : " << score << endl;
+	
 	
 	delete reader;
 

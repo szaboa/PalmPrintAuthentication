@@ -3,8 +3,9 @@
 #include <sqlite3.h>
 #include <sqlite_modern_cpp.h>
 #include <string>
-#include "opencv2/highgui/highgui.hpp"
-#include "opencv2/imgproc/imgproc.hpp"
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <json\json11.hpp>
 #include <vector>
 #include <tuple>
 
@@ -18,8 +19,10 @@ class DbAdapter
 public:
 	DbAdapter();
 
-	void insertFeature(int userId, std::string jsonData);
+	void insertLineFeature(int userId, std::string jsonData);
+	void insertTextureFeature(int userId, std::string jsonData);
 	vector <pair<int, vector<Point>> >  getFeatures();
+	vector <pair<int, json11::Json>> getTextureFeatures();
 	
 	~DbAdapter();
 

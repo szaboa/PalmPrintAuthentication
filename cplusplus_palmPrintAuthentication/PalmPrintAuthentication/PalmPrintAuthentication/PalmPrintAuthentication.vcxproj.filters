@@ -92,6 +92,12 @@
     <ClCompile Include="module_FeatureExtraction\TextureExtraction.cpp">
       <Filter>module_FeatureExtraction</Filter>
     </ClCompile>
+    <ClCompile Include="module_FeatureExtraction\TextureFeature.cpp">
+      <Filter>module_FeatureExtraction</Filter>
+    </ClCompile>
+    <ClCompile Include="module_Matcher\TextureMatcher.cpp">
+      <Filter>module_Matcher</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utility\PPAException.h">
@@ -171,6 +177,12 @@
     </ClInclude>
     <ClInclude Include="module_FeatureExtraction\TextureExtraction.h">
       <Filter>module_FeatureExtraction</Filter>
+    </ClInclude>
+    <ClInclude Include="module_FeatureExtraction\TextureFeature.h">
+      <Filter>module_FeatureExtraction</Filter>
+    </ClInclude>
+    <ClInclude Include="module_Matcher\TextureMatcher.h">
+      <Filter>module_Matcher</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

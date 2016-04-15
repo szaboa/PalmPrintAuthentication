@@ -1,11 +1,10 @@
 #pragma once
-#include "opencv2/highgui/highgui.hpp"
-#include "opencv2/imgproc/imgproc.hpp"
+#include <module_FeatureExtraction\IFeature.h>
 
 class IMatcher
 {
 public:
-	virtual int doMatching(cv::Mat img) = 0;
+	virtual int doMatching(IFeature* f) = 0;
 
 	virtual ~IMatcher(){};
 };

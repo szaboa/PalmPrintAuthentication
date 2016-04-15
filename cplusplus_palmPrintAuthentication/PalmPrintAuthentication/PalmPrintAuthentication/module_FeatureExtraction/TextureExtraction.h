@@ -17,5 +17,7 @@ public:
 	IFeature* doFeatureExtraction(Mat roi) override;
 
 	~TextureExtraction();
+	
+
 };
 

@@ -33,8 +33,6 @@ void SquareRoiExtraction::doExtraction(const cv::Mat &inputImg){
 	
 	Mat segmentedImage = regionSegmentation->doRegionSegmentation(preprocessedImage);
 
-
-
 	try{
 		Keypoints struct_keypoints = findKeypoints(segmentedImage);
 		// Calculate, draw and set the square ROI, based on the keypoints
@@ -135,9 +133,7 @@ void SquareRoiExtraction::calcAndDrawSquareRoi(const Keypoints &keypoints){
 	
 	//Extract the square ROI
 	squareRoi = inputImageCopy(Rect(newUpperLeftCorner, newBottomRightCorner));
-	//namedWindow("asd", CV_WINDOW_AUTOSIZE);
-	//imshow("asd", inputImage);
-	//waitKey(0);
+
 
 }
 

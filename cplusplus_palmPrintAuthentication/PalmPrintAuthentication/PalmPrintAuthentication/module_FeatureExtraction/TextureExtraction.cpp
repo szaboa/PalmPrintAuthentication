@@ -1,6 +1,8 @@
 #include <module_FeatureExtraction\TextureExtraction.h>
+#include <module_FeatureExtraction\TextureFeature.h>
 #include <iostream>
 #include <math.h>
+#include <fstream>
 
 using namespace std;
 
@@ -31,11 +33,11 @@ pair<Mat,Mat> TextureExtraction::create2dGaborFitler(int kSize, double theta, do
 		}
 	}
 
-
-	// tuned zero DC
-	double d = sum(reMat)[0] / ((2 * kSize) ^ 2);
+	
+	// tuned zero 
+	double d = sum(reMat)[0] / (pow((2 * kSize + 1),2));
 	reMat = reMat - d;
-
+	
 	return make_pair(reMat, imMat);
 }
 
@@ -48,19 +50,18 @@ IFeature* TextureExtraction::doFeatureExtraction(Mat roi){
 
 	resize(grayscale, grayscale, Size(128, 128));
 
-	auto filters = create2dGaborFitler(35, 45, 0.0916, 5.6179);
+	auto filters = create2dGaborFitler(35, 90, 0.0916, 5.6179);
 	
+	filter2D(grayscale, filtReMat, -1, filters.first,  Point(-1, -1), 0, BORDER_DEFAULT);
 	filter2D(grayscale, filtImMat, -1, filters.second, Point(-1, -1), 0, BORDER_DEFAULT);
 	
-
+	threshold(filtReMat, filtReMat, 0, 255, CV_THRESH_BINARY);
 	threshold(filtImMat, filtImMat, 0, 255, CV_THRESH_BINARY);
 
-	namedWindow("2D gabor filter", WINDOW_AUTOSIZE);
-	imshow("2D gabor filter", filtImMat);
 
-	waitKey(0);
+	IFeature* textureFeature = new TextureFeature(filtReMat, filtImMat);
 
-	return nullptr;
+	return textureFeature;
 }
 
 TextureExtraction::~TextureExtraction()
