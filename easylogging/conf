@@ -1,0 +1,12 @@
+* GLOBAL:
+   FORMAT               =  "%datetime %msg"
+   FILENAME             =  "/home/szabo/Documents/PPA/PPA/PPAlog.log"
+   ENABLED              =  true
+   TO_FILE              =  true
+   TO_STANDARD_OUTPUT   =  true
+   MILLISECONDS_WIDTH   =  6
+   PERFORMANCE_TRACKING =  true
+   MAX_LOG_FILE_SIZE    =  20971520 ## 20MB - Comment starts with two hashes (##)
+   LOG_FLUSH_THRESHOLD  =  10000 ## Flush after every 100 logs
+* DEBUG:
+   FORMAT               = "%datetime{%d/%M} %func %msg"
