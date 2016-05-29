@@ -130,7 +130,7 @@ void SquareRoiExtraction::calcAndDrawSquareRoi(const Keypoints &keypoints){
 	circle(inputImage, newBottomRightCorner, 3, Scalar(255, 0, 0), 1);
 	circle(inputImage, newUpperLeftCorner, 3, Scalar(255, 0, 0), 1);
 	
-	//Extract the square ROI
+    //Extract the square ROI
 	squareRoi = inputImageCopy(Rect(newUpperLeftCorner, newBottomRightCorner));
 
 
@@ -143,7 +143,7 @@ Keypoints SquareRoiExtraction::findKeypoints(const Mat &segmentedImage){
 	// Get boundary points, by applying boundary tracking alogirthm
 	vector<Point> boundaryVector = BoundaryTracking::getBoundary(leftSide);
 	
-	bool TEST = false;
+    bool TEST = false;
 	if (TEST){
 		Mat temp(leftSide.size(), CV_8UC3);
 		temp.setTo(Scalar(0));
@@ -206,13 +206,13 @@ Keypoints SquareRoiExtraction::findKeypoints(const Mat &segmentedImage){
 
 	double sum = 0.0;
 	double kernel_size = 5;
-	//ofstream f;
-	//f.open("boundary.txt", ios::out);
+    ofstream f;
+    f.open("boundary.txt", ios::out);
 	
 	for (int index = 2; index < distancesFromCenterPoint.size() - 2; index++){
 		sum = distancesFromCenterPoint.at(index - 2).distance + distancesFromCenterPoint.at(index - 1).distance + distancesFromCenterPoint.at(index).distance + distancesFromCenterPoint.at(index + 1).distance + distancesFromCenterPoint.at(index + 2).distance;
 		filtered_distances.at(index).distance = sum / kernel_size;
-		//f << filtered_distances.at(index).distance << endl;
+        f << filtered_distances.at(index).distance << endl;
 	}
 	
 
@@ -239,7 +239,9 @@ Keypoints SquareRoiExtraction::findKeypoints(const Mat &segmentedImage){
 
 
 
-	//f.close();
+    f.close();
+
+
 	// Creating three clusters, these will contain local minimum points around the keypoints (valleys between fingers)
 	// Iterating through the local minimums, if the distance is higher than 10 pixels between the next and current point, then the next point will be classified into a new cluster,
 	// otherwise, it will be classified into the current cluster

@@ -1,5 +1,6 @@
 #include <module_Matcher/TextureMatcher.h>
 #include <module_FeatureExtraction/TextureFeature.h>
+#include <module_FeatureExtraction/IFeature.h>
 #include <json/json11.hpp>
 #include <iostream>
 #include <vector>
@@ -36,7 +37,7 @@ Mat TextureMatcher::decode(vector<int> values){
 	return img;
 }
 
-int TextureMatcher::doMatching(IFeature* f){
+pair<double,int> TextureMatcher::doMatching(IFeature* f){
 
 	dbAdapter = new DbAdapter();
 
@@ -46,7 +47,7 @@ int TextureMatcher::doMatching(IFeature* f){
 	searchReMat = tf->getRealComponent();
 	searchImMat = tf->getImaginaryComponent();
 
-	Mat reMat, imMat;
+    Mat reMat, imMat, matchedReMat, matchedImMat;
 
 	vector<int> reVec;
 	vector<int> imVec;
@@ -106,18 +107,28 @@ int TextureMatcher::doMatching(IFeature* f){
                 if (d < minScore){
                     minScore = d;
 					minUserId = userId;
+                    matchedReMat = reMat;
+                    matchedImMat = imMat;
 				}
 			}
 		}
 	}
 
+    matchedFeature = new TextureFeature(matchedReMat,matchedImMat);
+
     LOG(INFO) << "Min distancce: " << minScore;
 
-	return minUserId;
+    return make_pair(minScore,minUserId);
 }
+
+IFeature* TextureMatcher::getMatchedFeature(){
+    return matchedFeature;
+}
+
 
 
 TextureMatcher::~TextureMatcher()
 {
 	delete dbAdapter;
+    delete matchedFeature;
 }

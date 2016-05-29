@@ -28,9 +28,10 @@ void PrincipalLineFeature::save(int userId){
 	dbAdapter->insertLineFeature(userId, Json(jsonPoints).dump());
 }
 
-Mat PrincipalLineFeature::getImg(){
+Mat PrincipalLineFeature::getFeature(){
 	return img;
 }
+
 PrincipalLineFeature::~PrincipalLineFeature()
 {
 	delete dbAdapter;

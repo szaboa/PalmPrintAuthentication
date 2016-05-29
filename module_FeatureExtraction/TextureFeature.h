@@ -11,6 +11,7 @@ class TextureFeature : public IFeature
 public:
 	TextureFeature(cv::Mat realMat, cv::Mat imaginaryMat);
 	void save(int userId) override;
+    Mat getFeature() override;
 	Mat getRealComponent();
 	Mat getImaginaryComponent();
 	~TextureFeature();

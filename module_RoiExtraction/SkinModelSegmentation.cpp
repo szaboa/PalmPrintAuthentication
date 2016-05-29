@@ -5,7 +5,8 @@
 #include <math.h>
 #include <iostream>
 #include <vector>
-#include<omp.h>
+#include <omp.h>
+#include "easylogging++.h"
 
 using namespace cv;
 using namespace boost::numeric::ublas;
@@ -47,7 +48,7 @@ Mat SkinModelSegmentation::doRegionSegmentation(const cv::Mat &preprocessedImage
 
 
 
-	Mat thresholded(preprocessedImage.size(), CV_8UC1);
+    Mat thresholded(preprocessedImage.size(), CV_8UC1);
 	thresholded.setTo(Scalar(0));
 
 	double p = 0;
@@ -64,12 +65,11 @@ Mat SkinModelSegmentation::doRegionSegmentation(const cv::Mat &preprocessedImage
 				k2 = f1*c12 + f2*c22;
 
 				p = exp(k1*(x1 - m1) + k2*(x2 - m2));
-		
 
-				if (p > 0.15){
+
+                if (p > 0.15){
 					thresholded.at<uchar>(i, j) = 255;
 				}
-			
 
 		}
 	}

@@ -5,6 +5,7 @@
 #include <QString>
 #include "EnrollmentThread.h"
 #include "AuthenticationThread.h"
+#include "SingleVerificationThread.h"
 #include <QProgressDialog>
 
 namespace Ui {
@@ -34,23 +35,39 @@ private slots:
 
     void displayAuthMatchScore(double score);
 
+    void displayRoi(cv::Mat roi);
+
+    void displayFeature(cv::Mat feature);
+
+    void displayMatchedFeature(double matchedDistance, int matchedId, cv::Mat matchedFeature);
+
+    void displayQueryImageId(int userId);
+
     QString getEnrollmentFolder();
     QString getAuthFolder();
+    QString getSingleVerificationPath();
 
     void on_selectAuthFolderButton_clicked();
 
     void on_startAuthButton_clicked();
 
+    void on_pushButton_clicked();
+
+    void on_startVerificationButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     QString enrollmentFolder = "/home/szabo/Documents/PPA/PPA/_train_data";
     QString authFolder = "/home/szabo/Documents/PPA/PPA/_test_data";
+    QString singleVerificationPath;
+
     AuthenticationThread* authThread = nullptr;
     EnrollmentThread* enrollmentThread = nullptr;
-
+    SingleVerificationThread* singleVerificationThread = nullptr;
     QProgressDialog* enrollmentProgressDialog = nullptr;
     QProgressDialog* authProgressDialog = nullptr;
 
+    int getSelectedMethod();
     void initLogger();
 };
 

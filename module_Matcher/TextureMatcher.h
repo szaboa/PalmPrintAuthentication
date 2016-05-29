@@ -11,12 +11,16 @@ class TextureMatcher:public IMatcher
 public:
 	TextureMatcher();
 	
-	int doMatching(IFeature* f) override;
-	
+    std::pair<double,int> doMatching(IFeature* f) override;
+    IFeature* getMatchedFeature() override;
+
 	~TextureMatcher();
 
 private:
 	DbAdapter* dbAdapter = nullptr;
+
 	cv::Mat decode(std::vector<int> values);
+
+    IFeature* matchedFeature = nullptr;
 };
 

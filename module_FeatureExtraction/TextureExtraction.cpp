@@ -50,14 +50,13 @@ IFeature* TextureExtraction::doFeatureExtraction(Mat roi){
 
 	resize(grayscale, grayscale, Size(128, 128));
 
-	auto filters = create2dGaborFitler(35, 90, 0.0916, 5.6179);
+    auto filters = create2dGaborFitler(35, 90, 0.0916, 5.6179);
 	
 	filter2D(grayscale, filtReMat, -1, filters.first,  Point(-1, -1), 0, BORDER_DEFAULT);
 	filter2D(grayscale, filtImMat, -1, filters.second, Point(-1, -1), 0, BORDER_DEFAULT);
 	
 	threshold(filtReMat, filtReMat, 0, 255, CV_THRESH_BINARY);
 	threshold(filtImMat, filtImMat, 0, 255, CV_THRESH_BINARY);
-
 
 	IFeature* textureFeature = new TextureFeature(filtReMat, filtImMat);
 

@@ -26,6 +26,7 @@
 #include <utility/PPAException.h>
 #include <utility/QtUtils.h>
 #include <easylogging++.h>
+#include <fstream>
 
 using namespace cv;
 
@@ -42,7 +43,9 @@ void EnrollmentThread::run(){
     int percentage = 0;
     PalmReaderEnrollment* reader = new PalmReaderEnrollment();
     reader->init(path.toStdString());
+
     while (reader->hasNextImage()){
+
             int userId = reader->readUserId();
             Mat palmImage = reader->readPalmImage();
 
@@ -73,8 +76,11 @@ void EnrollmentThread::run(){
                 LOG(INFO) << "User " << userId << " Exception: " << e.what();
             }
 
+
             emit enrollPercentageComplete((percentage*100/reader->getNumberOfImages())+1);
             percentage++;
+
+
     }
 
     int totalTime = timer.elapsed();

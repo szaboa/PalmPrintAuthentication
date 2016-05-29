@@ -16,7 +16,9 @@ class PrincipalLineMatcher : public IMatcher
 public:
 	PrincipalLineMatcher();
 
-	int doMatching(IFeature *f) override; 
+    std::pair<double,int> doMatching(IFeature *f) override;
+
+    IFeature* getMatchedFeature() override;
 
 	~PrincipalLineMatcher();
 private:
@@ -24,6 +26,8 @@ private:
 	DbAdapter *dbAdapter = nullptr;
 
 	Mat doDistanceTransformation(Mat img);
+
+    IFeature* matchedFeature = nullptr;
 
 	
 };

@@ -2,11 +2,18 @@
 #include "ui_mainwindow.h"
 #include <QFileDialog>
 #include <QDebug>
+#include <QPixmap>
+#include <QSize>
 #include <QMessageBox>
+#include <QImage>
 #include "EnrollmentThread.h"
 #include <utility/QtUtils.h>
 #include <QProgressDialog>
 #include <easylogging++.h>
+
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+
 
 INITIALIZE_EASYLOGGINGPP
 
@@ -16,8 +23,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    qRegisterMetaType<cv::Mat>("cv::Mat");
     ui->selectedEnrollmentFolderLabel->setText(enrollmentFolder);
     ui->selectedAuthenticationFolderLabel->setText(authFolder);
+
+
     initLogger();
 }
 
@@ -57,21 +67,17 @@ QString MainWindow::getAuthFolder(){
     return authFolder;
 }
 
+QString MainWindow::getSingleVerificationPath(){
+    return singleVerificationPath;
+}
+
 void MainWindow::on_startEnrollmentButton_clicked()
 {
-
-    int method = -1;
-    if(this->ui->radioBtnLine->isChecked()){
-        method = QtUtils::LINE_METHOD;
-    }else if(this->ui->radioBtnTexture->isChecked()){
-        method = QtUtils::TEXTURE_METHOD;
-    }
-
     QString selectedFolder = getEnrollmentFolder();
     if(selectedFolder.isEmpty()){
         QtUtils::showInfoMessage("You need to select a folder, before starting the enrollment phase.");
     }else{
-        enrollmentThread = new EnrollmentThread(selectedFolder, method);
+        enrollmentThread = new EnrollmentThread(selectedFolder, getSelectedMethod());
         enrollmentThread->start();
 
         LOG(INFO) << "Start EnrollmentThread";
@@ -106,21 +112,47 @@ void MainWindow::displayAuthMatchScore(double score){
     ui->label_auMatchRate->setText(QString::number(score) + "%");
 }
 
-void MainWindow::on_startAuthButton_clicked()
-{
+void MainWindow::displayFeature(cv::Mat featureMat){
+    QImage image = QtUtils::matToQImage(featureMat);
+    image = image.scaledToWidth(ui->labelFeatures->width(), Qt::SmoothTransformation);
+    ui->labelFeatures->setPixmap(QPixmap::fromImage(image));
+}
 
+void MainWindow::displayRoi(cv::Mat roiMat){
+    QImage image = QtUtils::matToQImage(roiMat);
+    image = image.scaledToWidth(ui->labelRoi->width(), Qt::SmoothTransformation);
+    ui->labelRoi->setPixmap(QPixmap::fromImage(image));
+}
+
+void MainWindow::displayMatchedFeature(double matchedDistance, int matchedId, cv::Mat matchedFeature){
+    QImage image = QtUtils::matToQImage(matchedFeature);
+    image = image.scaledToWidth(ui->labelMatchedFeature->width(), Qt::SmoothTransformation);
+    ui->labelMatchedFeature->setPixmap(QPixmap::fromImage(image));
+    ui->labelMatchedId->setText("Matched User Id: " + QString::number(matchedId));
+    ui->labelDistance->setText("Distance: " + QString::number(matchedDistance));
+}
+
+void MainWindow::displayQueryImageId(int userId){
+    ui->labelQueryImageId->setText("User Id: "  + QString::number(userId));
+}
+
+int MainWindow::getSelectedMethod(){
     int method = -1;
     if(this->ui->radioBtnLine->isChecked()){
-        method = QtUtils::LINE_METHOD;
+        return QtUtils::LINE_METHOD;
     }else if(this->ui->radioBtnTexture->isChecked()){
-        method = QtUtils::TEXTURE_METHOD;
+        return QtUtils::TEXTURE_METHOD;
     }
+}
+
+void MainWindow::on_startAuthButton_clicked()
+{
 
     QString selectedFolder = getAuthFolder();
     if(selectedFolder.isEmpty()){
         QtUtils::showInfoMessage("You need to select a folder, before starting the authentication phase.");
     }else{
-        authThread = new AuthenticationThread(selectedFolder, method);
+        authThread = new AuthenticationThread(selectedFolder, getSelectedMethod());
         authThread->start();
 
         LOG(INFO) << "Start EnrollmentThread";
@@ -131,5 +163,38 @@ void MainWindow::on_startAuthButton_clicked()
         connect(authThread, SIGNAL(authTimeComplete(int,int)),this,SLOT(displayAuthTimeMeasurments(int,int)));
         connect(authThread, SIGNAL(authMatchComplete(double)),this,SLOT(displayAuthMatchScore(double)));
 
+
+    }
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    singleVerificationPath = QFileDialog::getOpenFileName(this,tr("Choose"),"",tr("Images (*.png *.jpg *.jpeg *.JPG)"));
+    if(!singleVerificationPath.isEmpty()){
+        QImage inputImage;
+        bool isValid = inputImage.load(singleVerificationPath);
+
+        if(isValid){
+            inputImage = inputImage.scaledToWidth(ui->label_input_image->width(), Qt::SmoothTransformation);
+            ui->label_input_image->setPixmap(QPixmap::fromImage(inputImage));
+        }else{
+            QtUtils::showInfoMessage("Error: corrupted file.");
+            singleVerificationPath = "";
+        }
+    }
+}
+
+void MainWindow::on_startVerificationButton_clicked()
+{
+
+    if(getSingleVerificationPath().isEmpty()){
+        QtUtils::showInfoMessage("You need to choose an input image.");
+    }else{
+        singleVerificationThread = new SingleVerificationThread(getSingleVerificationPath(), getSelectedMethod());
+        singleVerificationThread->start();
+        connect(singleVerificationThread,SIGNAL(sendExtractedRoi(cv::Mat)),this, SLOT(displayRoi(cv::Mat)));
+        connect(singleVerificationThread,SIGNAL(sendExtractedFeature(cv::Mat)),this, SLOT(displayFeature(cv::Mat)));
+        connect(singleVerificationThread,SIGNAL(sendMatchedFeature(double,int,cv::Mat)),this, SLOT(displayMatchedFeature(double,int,cv::Mat)));
+        connect(singleVerificationThread,SIGNAL(sendQueryImageId(int)),this, SLOT(displayQueryImageId(int)));
     }
 }

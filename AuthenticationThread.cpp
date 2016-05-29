@@ -74,13 +74,13 @@ void AuthenticationThread::run(){
             try{
                 roiExtractor->doExtraction(preprocessedImage);
                 feature = featureExtraction->doFeatureExtraction(roiExtractor->getRoi());
-                int matchedId = matcher->doMatching(feature);
+                pair<double,int> matchedResult = matcher->doMatching(feature);
 
-                if (matchedId == userId){
+                if (matchedResult.second == userId){
                     score++;
                 }
 
-                LOG(INFO) << "User " << userId << " matched to id: " << matchedId;
+                LOG(INFO) << "User " << userId << " matched to id: " << matchedResult.second;
             }catch (PPAException &e){
                 LOG(INFO) << "User " << userId << " Exception: " << e.what();
             }

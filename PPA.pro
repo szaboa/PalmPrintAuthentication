@@ -39,7 +39,8 @@ SOURCES += main.cpp\
     module_RoiExtraction/SkinModelSegmentation.cpp \
     module_Matcher/PrincipalLineMatcher.cpp \
     module_Matcher/TextureMatcher.cpp \
-    AuthenticationThread.cpp
+    AuthenticationThread.cpp \
+    SingleVerificationThread.cpp
 
 HEADERS  += mainwindow.h \
     module_PalmImageReader/IPalmReader.h \
@@ -80,7 +81,8 @@ HEADERS  += mainwindow.h \
     sqlite/hdr/sqlite_modern_cpp/utility/function_traits.h \
     sqlite/hdr/sqlite_modern_cpp.h \
     sqlite/sqlite3.h \
-    AuthenticationThread.h
+    AuthenticationThread.h \
+    SingleVerificationThread.h
 
 FORMS    += mainwindow.ui
 

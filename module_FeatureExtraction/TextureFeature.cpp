@@ -74,6 +74,10 @@ Mat TextureFeature::getImaginaryComponent(){
 	return imMat;
 }
 
+Mat TextureFeature::getFeature(){
+    return reMat;
+}
+
 TextureFeature::~TextureFeature()
 {
 	delete dbAdapter;

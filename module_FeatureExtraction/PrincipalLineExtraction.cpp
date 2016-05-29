@@ -1,11 +1,10 @@
 #include <module_FeatureExtraction/PrincipalLineExtraction.h>
 #include <module_FeatureExtraction/PrincipalLineFeature.h>
-
-#include <fstream>
-#include <stack>
 #include <utility/Thinning.h>
+#include <fstream>
 #include <omp.h>
 #include <chrono>
+#include <stack>
 
 using namespace std;
 using namespace cv;
@@ -17,12 +16,9 @@ PrincipalLineExtraction::PrincipalLineExtraction(){
 
 IFeature* PrincipalLineExtraction::doFeatureExtraction(Mat roi){
 	
-	Mat roiAfterPreprocessing = preprocessing(roi);
-
-
+    Mat roiAfterPreprocessing = preprocessing(roi);
 	// Image normalization (using Histogram Equalization and a Low-pass Filter)
 	Mat normalizedRoi = normalizeImage(roiAfterPreprocessing);
-	
 
 //	auto start = std::chrono::system_clock::now();
 	// Locate principal lines
@@ -354,16 +350,13 @@ Mat PrincipalLineExtraction::locatePrincipalLines(Mat img){
 
 	// Merging the lines using OR operation
 	Mat lines = linesInDir45 | linesInDir90 | linesInDir0 | linesInDir135;
-
 	Mat element = getStructuringElement(1, Size(2 * 1 + 1, 2 * 1 + 1), Point(1, 1));
 
 	/// Apply the specified morphology operation
 
 	morphologyEx(lines, lines, 1, element);
 
-	lines = Thinning::doThinning(lines);
-
-
+    lines = Thinning::doThinning(lines);
 	// Apply connected-component labeling to remove the irrelevant components
 	lines = filterWithConnectedComponentLabeling(lines, componentMinSize);
 
