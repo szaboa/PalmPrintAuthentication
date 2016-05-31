@@ -7,12 +7,18 @@
 #include "opencv2/imgproc/imgproc.hpp"
 
 using namespace cv;
-
+/**
+ * @brief The QtUtils class is a utility function collection related to Qt
+ */
 class QtUtils
 {
 public:
     QtUtils();
 
+    /**
+     * @brief Shows an info dialog with the given message
+     * @param message Info message
+     */
     static void showInfoMessage(QString message){
         QMessageBox msgBox;
         msgBox.setIcon(QMessageBox::Information);
@@ -20,6 +26,11 @@ public:
         msgBox.exec();
     }
 
+    /**
+     * @brief Converts cv::Mat object to QImage
+     * @param mat cv::Mat object
+     * @return QImage object
+     */
     static QImage matToQImage(const Mat& mat)
     {
         // 8-bits unsigned, NO. OF CHANNELS=1

@@ -1,5 +1,6 @@
 #include "BoundaryTracking.h"
 #include <iostream>
+#include <utility/PPAException.h>
 
 using namespace std;
 using namespace cv;
@@ -15,9 +16,9 @@ int BoundaryTracking::getNeighborhoodSearchIndex(int dir){
 }
 
 Point BoundaryTracking::getNextBoundaryPoint(const Mat &img, int &dir, Point currentPoint){
-	// init directionPoints
-	vector<Point> directionPoints;
 
+    // init directionPoints
+	vector<Point> directionPoints;
 
 	directionPoints.push_back(Point(1, 0));
 	directionPoints.push_back(Point(1, -1));
@@ -54,7 +55,7 @@ vector<Point> BoundaryTracking::getBoundary(const Mat &img){
 	vector<Point> boundaryVector;
 	
 
-	Point startingPoint;
+    Point startingPoint (-1,-1);
 	Size size = img.size();
 	
 	for (int y = 0; y < size.height; ++y){
@@ -64,6 +65,11 @@ vector<Point> BoundaryTracking::getBoundary(const Mat &img){
 			break;
 		}	
 	}
+
+    // Check if the startingPoint was found
+    if(startingPoint.x == -1 && startingPoint.y == -1){
+         throw PPAException("Boundary starting point not found");
+    }
 
 	boundaryVector.push_back(startingPoint); 
 	Point currentPoint = startingPoint;

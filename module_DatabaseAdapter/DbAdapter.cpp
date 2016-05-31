@@ -3,7 +3,7 @@
 #include <iostream>
 #include <json/json11.hpp>
 #include <module_DatabaseAdapter/JsonPoint.h>
-#include <QDebug>
+#include "easylogging++.h"
 
 using namespace sqlite;
 using namespace json11;
@@ -12,6 +12,7 @@ DbAdapter::DbAdapter(){
 	try{
 		db = new database(dbName);
 		
+        // Creating table for the line features
 		*db <<
 			"create table if not exists palm_lines ("
 			"   _id integer primary key autoincrement not null,"
@@ -20,6 +21,7 @@ DbAdapter::DbAdapter(){
 			");";
 
 
+         // Creating table for the texture features
 		*db <<
             "create table if not exists palm_textures ("
 			"   _id integer primary key autoincrement not null,"
@@ -29,7 +31,7 @@ DbAdapter::DbAdapter(){
 
 	}
 	catch (std::exception& e) {
-        qDebug() << e.what();
+        LOG(INFO) << e.what();
 	}
 }
 
@@ -41,7 +43,7 @@ void DbAdapter::insertTextureFeature(int userId, std::string jsonData){
 			<< jsonData;
 	}
 	catch (std::exception& e) {
-        qDebug() << e.what();
+        LOG(INFO) << e.what();
 	}
 
 }
@@ -54,7 +56,7 @@ void DbAdapter::insertLineFeature(int userId, std::string jsonData){
 			 << jsonData;
 	}
 	catch (std::exception& e) {
-        qDebug() << e.what();
+        LOG(INFO) << e.what();
 	}
 	
 }
@@ -68,7 +70,7 @@ vector < pair<int, vector<Point>>>  DbAdapter::getLineFeatures(){
 			Json features = Json::parse(featureData, error);
 
 			if (features.is_null()) {
-                //Logger::loTAG, error);
+                LOG(INFO) << "Line feature is null";
 			}
 			else{
 
@@ -86,7 +88,7 @@ vector < pair<int, vector<Point>>>  DbAdapter::getLineFeatures(){
 		};
 	}
 	catch (std::exception& e) {
-        qDebug() << e.what();
+        LOG(INFO) << e.what();
 	}
 
 	return records;
@@ -104,7 +106,7 @@ vector <pair<int, Json>> DbAdapter::getTextureFeatures(){
 			Json feature = Json::parse(featureData, error);
 
 			if (feature.is_null()) {
-                //Logger::log(TAG, error);
+                LOG(INFO) << "Texture feature is null";
 			}
 			else{
 				records.push_back(make_pair(userId, feature));
@@ -112,7 +114,7 @@ vector <pair<int, Json>> DbAdapter::getTextureFeatures(){
 		};
 	}
 	catch (std::exception& e) {
-        qDebug() << e.what();
+        LOG(INFO) << e.what();
 	}
 
 	return records;
@@ -120,7 +122,5 @@ vector <pair<int, Json>> DbAdapter::getTextureFeatures(){
 
 DbAdapter::~DbAdapter()
 {
-
 	delete db;
-
 }

@@ -52,10 +52,13 @@ pair<double,int> TextureMatcher::doMatching(IFeature* f){
 	vector<int> reVec;
 	vector<int> imVec;
 
-	double minScore = 9999;
+    double minScore = INT_MAX;
 	int minUserId;
 
+    // Get the stored features
 	vector<pair<int,Json>> records = dbAdapter->getTextureFeatures();
+
+    // Iterate through the stored features and calculate the distance
 	for (auto it = records.begin(); it < records.end(); ++it){
 		
 
@@ -65,8 +68,7 @@ pair<double,int> TextureMatcher::doMatching(IFeature* f){
 		Json::array imaginaryPart = data["imaginaryPart"].array_items();
 
 		for (auto i = realPart.begin(); i < realPart.end(); ++i){
-			reVec.push_back(i->int_value());
-			// << i->int_value() << " ";
+            reVec.push_back(i->int_value());
 		}
 
 		for (auto i = imaginaryPart.begin(); i < imaginaryPart.end(); ++i){
@@ -80,12 +82,11 @@ pair<double,int> TextureMatcher::doMatching(IFeature* f){
 		reVec.clear();
 		imVec.clear();
 
-		int S = 2;
+        // Calculate translation invariant Hamming distance
+
+        int S = 2;
 		int T = 2;
 
-
-		
-		// calc hamming distance
 		int sum = 0;
 		for (int s = -2; s < S; ++s){
 			for (int t = -2; t < T; ++t){
@@ -102,7 +103,6 @@ pair<double,int> TextureMatcher::doMatching(IFeature* f){
 				}
 
                 double d = sum / pow(2 * searchImMat.rows, 2);
-                //LOG(INFO) << "Distance: " << d;
 
                 if (d < minScore){
                     minScore = d;
@@ -115,8 +115,6 @@ pair<double,int> TextureMatcher::doMatching(IFeature* f){
 	}
 
     matchedFeature = new TextureFeature(matchedReMat,matchedImMat);
-
-    LOG(INFO) << "Min distancce: " << minScore;
 
     return make_pair(minScore,minUserId);
 }

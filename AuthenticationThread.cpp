@@ -1,33 +1,30 @@
+#include "AuthenticationThread.h"
+
 #include <QDebug>
 #include <QTime>
 
-#include "AuthenticationThread.h"
-
 #include <module_PalmImageReader/IPalmReader.h>
-#include <module_PalmImageReader/PalmReaderEnrollment.h>
-#include <module_Preprocessing/IPreprocessing.h>
-#include <module_Preprocessing/Preprocessing.h>
-#include <module_RoiExtraction/IRegionSegmentation.h>
-#include <module_RoiExtraction/IRoiExtraction.h>
-#include <module_RoiExtraction/SkinModelSegmentation.h>
-#include <module_RoiExtraction/RegionGrowing.h>
-#include <module_RoiExtraction/SquareRoiExtraction.h>
+#include <module_PalmImageReader/MultPalmReader.h>
+#include <module_Preprocessing/IPreprocessor.h>
+#include <module_Preprocessing/Preprocessor.h>
+#include <module_RoiExtraction/IRoiExtractor.h>
+#include <module_RoiExtraction/SquareRoiExtractor.h>
 #include <module_FeatureExtraction/IFeature.h>
-#include <module_FeatureExtraction/IFeatureExtraction.h>
-#include <module_FeatureExtraction/PrincipalLineExtraction.h>
+#include <module_FeatureExtraction/IFeatureExtractor.h>
+#include <module_FeatureExtraction/PrincipalLineExtractor.h>
 #include <module_FeatureExtraction/PrincipalLineFeature.h>
-#include <module_FeatureExtraction/TextureExtraction.h>
+#include <module_FeatureExtraction/TextureExtractor.h>
 #include <module_FeatureExtraction/TextureFeature.h>
 #include <module_Matcher/IMatcher.h>
 #include <module_Matcher/PrincipalLineMatcher.h>
 #include <module_Matcher/TextureMatcher.h>
-#include <opencv2/highgui/highgui.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
-
-
 #include <utility/PPAException.h>
 #include <utility/QtUtils.h>
 #include <easylogging++.h>
+
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+
 
 AuthenticationThread::AuthenticationThread(QString path, int method)
 {
@@ -35,66 +32,81 @@ AuthenticationThread::AuthenticationThread(QString path, int method)
     this->method = method;
 }
 
-void AuthenticationThread::run(){
-    QTime timer;
-    timer.start();
+void AuthenticationThread::terminateThread(){
+    isCanceled = true;
+}
 
-    int score = 0;
-    int percentage = 1;
-    PalmReaderEnrollment* reader = new PalmReaderEnrollment();
+void AuthenticationThread::run(){
+
+    // Timer to measure how much the authentification phase takes
+    QTime authTimer;
+    authTimer.start();
+
+    int matchingScore = 0;
+    int progressPercentage = 1;
+
+    MultPalmReader* reader = new MultPalmReader();
 
     reader->init(path.toStdString());
 
-    while (reader->hasNextImage()){
+    while (reader->hasNextImage() && !isCanceled){
+
+            // Reading image and user id
             int userId = reader->readUserId();
             Mat palmImage = reader->readPalmImage();
 
-            IPreprocessing* preprocessor = new Preprocessing();
-            Mat preprocessedImage = preprocessor->doPreprocessing(palmImage);
+            IPreprocessor* preprocessor = new Preprocessor();
+            IRoiExtractor* roiExtractor = new SquareRoiExtractor(palmImage,preprocessor);
 
-            IRegionSegmentation* regionSegmentation = new SkinModelSegmentation();
-            IRoiExtraction* roiExtractor = new SquareRoiExtraction(regionSegmentation);
-            IFeature* feature = nullptr;
-            IFeatureExtraction* featureExtraction = nullptr;
             IMatcher* matcher  = nullptr;
+            IFeature* feature = nullptr;
+            IFeatureExtractor* featureExtraction = nullptr;
 
             if(method == QtUtils::LINE_METHOD){
-                featureExtraction = new PrincipalLineExtraction();
+                featureExtraction = new PrincipalLineExtractor();
                 matcher = new PrincipalLineMatcher();
             }
 
             if(method == QtUtils::TEXTURE_METHOD){
-                featureExtraction = new TextureExtraction();
+                featureExtraction = new TextureExtractor();
                 matcher = new TextureMatcher();
             }
 
-
-            LOG(INFO) << "Start matching phase for user id: " << userId;
-
             try{
-                roiExtractor->doExtraction(preprocessedImage);
-                feature = featureExtraction->doFeatureExtraction(roiExtractor->getRoi());
+                // Segmenting the hand and extracting the ROI
+                Mat roi = roiExtractor->doExtraction();
+
+                // Extracting features from the ROI
+                feature = featureExtraction->doFeatureExtraction(roi);
+
+                // Matching the extracted feature (1:N)
                 pair<double,int> matchedResult = matcher->doMatching(feature);
 
+                // Check if the match was correct
                 if (matchedResult.second == userId){
-                    score++;
+                    matchingScore++;
                 }
 
                 LOG(INFO) << "User " << userId << " matched to id: " << matchedResult.second;
             }catch (PPAException &e){
-                LOG(INFO) << "User " << userId << " Exception: " << e.what();
+                LOG(INFO) << "Error during authentication: user " << userId << " Exception: " << e.what();
             }
 
-            emit authPercentageComplete((percentage*100/reader->getNumberOfImages()));
-            percentage++;
+            // Sending progress updates to the UI
+            emit authPercentageComplete((progressPercentage*100/reader->getNumberOfImages()));
+            progressPercentage++;
     }
 
-    double matchPercantage = (score*100)/(reader->getNumberOfImages());
-    LOG(INFO) << "SCORE: " << matchPercantage;
-    //gDebug() << matchPercantage;
-    int totalTime = timer.elapsed();
+    // Sending the correctly matched samples percentage to the UI
+    double matchingScorePercantage = (matchingScore*100)/(reader->getNumberOfImages());
+
+    // Getting total time
+    int totalTime = authTimer.elapsed();
+
+    // Calculating  avarage time per single match
     int avgTime = totalTime/(reader->getNumberOfImages());
 
-    emit authMatchComplete(matchPercantage);
+    // Sending time information to the UI
+    emit authMatchComplete(matchingScorePercantage);
     emit authTimeComplete(totalTime, avgTime);
 }

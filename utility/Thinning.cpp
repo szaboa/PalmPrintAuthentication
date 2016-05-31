@@ -2,6 +2,7 @@
 
 Mat Thinning::doThinning(Mat img){
 
+    // Fast thinning algorithm implmented from https://github.com/bsdnoobz/zhang-suen-thinning
 	img /= 255;
 	Mat prev = Mat::zeros(img.size(), CV_8UC1);
 	Mat diff;

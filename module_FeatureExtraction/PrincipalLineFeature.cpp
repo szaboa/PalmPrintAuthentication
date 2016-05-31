@@ -20,15 +20,12 @@ void PrincipalLineFeature::save(int userId){
 
 			}
 		}
-	}
-
-	//cout << Json(jsonPoints).dump();
-	//std::string json_str = my_json.dump();
+    }
 
 	dbAdapter->insertLineFeature(userId, Json(jsonPoints).dump());
 }
 
-Mat PrincipalLineFeature::getFeature(){
+Mat PrincipalLineFeature::getImageRepresentation(){
 	return img;
 }
 

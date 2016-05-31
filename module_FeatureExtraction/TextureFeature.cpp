@@ -15,12 +15,10 @@ unsigned char TextureFeature::bitsToByte(string bits){
 	unsigned char byte = 0;
 
 	for (int i = 0; i < 8; ++i){
-		
 		byte <<= 1;
 		if (bits[i] == '1'){
 			byte |= 1;
 		}
-		
 	}
 
 	return byte;
@@ -29,6 +27,7 @@ unsigned char TextureFeature::bitsToByte(string bits){
 void TextureFeature::save(int userId){
 	Json::array realPart, imaginaryPart;
 
+    // Encode real and imaginary part into byte series (8 pixel to byte)
 	for (int x = 0; x < reMat.rows; ++x){
 		for (int y = 0; y < reMat.cols; y += 8){
 			string si, sr;
@@ -46,10 +45,8 @@ void TextureFeature::save(int userId){
 				else{
 					si.append("0");
 				}
-
-
-
 			}
+
 			imaginaryPart.push_back((int)bitsToByte(si));
 			realPart.push_back((int)bitsToByte(sr));
 			si = ""; sr = "";
@@ -74,7 +71,7 @@ Mat TextureFeature::getImaginaryComponent(){
 	return imMat;
 }
 
-Mat TextureFeature::getFeature(){
+Mat TextureFeature::getImageRepresentation(){
     return reMat;
 }
 
