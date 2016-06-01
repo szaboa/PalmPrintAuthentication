@@ -1,6 +1,0 @@
-digraph "utility" {
-  compound=true
-  node [ fontsize="10", fontname="Helvetica"];
-  edge [ labelfontsize="10", labelfontname="Helvetica"];
-  dir_64e73385a8b7738563c26ce10415b58d [shape=box, label="utility", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_64e73385a8b7738563c26ce10415b58d.html"];
-}

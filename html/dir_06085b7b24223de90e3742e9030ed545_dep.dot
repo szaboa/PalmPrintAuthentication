@@ -1,6 +1,0 @@
-digraph "generated_files" {
-  compound=true
-  node [ fontsize="10", fontname="Helvetica"];
-  edge [ labelfontsize="10", labelfontname="Helvetica"];
-  dir_06085b7b24223de90e3742e9030ed545 [shape=box, label="generated_files", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_06085b7b24223de90e3742e9030ed545.html"];
-}
