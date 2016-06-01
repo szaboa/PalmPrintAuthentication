@@ -8,7 +8,7 @@ The algorithm takes a hand image as input and extracts the palm area (ROI). On t
 I have achieved approx. 66% correct match rate with the line-based method, and 92% rate with texture-based features (43200 comparision). More information later.
 
 ##Database
-A public [database](http://www.coep.org.in/resources/coeppalmprintdatabase) is used for the experiments, from College of Engineering. 
+A public [database](http://www.coep.org.in/resources/coeppalmprintdatabase) is used for the experiments, from College of Engineering, Pune. 
 
 ##License
 This project is licensed under the MIT License - see the [License.md](/License.md) file for details
