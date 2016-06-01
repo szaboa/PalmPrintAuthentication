@@ -1,0 +1,9 @@
+digraph "sqlite/hdr/sqlite_modern_cpp/extensions" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_4e100a0f8de30c253f3e6f323a7257b7 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="sqlite_modern_cpp" fontname="Helvetica", fontsize="10", URL="dir_4e100a0f8de30c253f3e6f323a7257b7.html"]
+  dir_b224efba488a423bf663ba398199d1e5 [shape=box, label="extensions", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_b224efba488a423bf663ba398199d1e5.html"];
+  }
+}

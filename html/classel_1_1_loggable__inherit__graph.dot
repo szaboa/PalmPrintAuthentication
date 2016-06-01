@@ -1,0 +1,14 @@
+digraph "el::Loggable"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="el::Loggable",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="el::base::LogFormat",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1base_1_1_log_format.html",tooltip="Represents log format containing flags and date format. This is used internally to start initial log..."];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="el::base::PerformanceTracker",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1base_1_1_performance_tracker.html",tooltip="Represents performanceTracker block of code that conditionally adds performance status to log either ..."];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="el::Configuration",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1_configuration.html",tooltip="Represents single configuration that has representing level, configuration type and a string based va..."];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="el::Logger",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1_logger.html",tooltip="Represents a logger holding ID and configurations we need to write logs. "];
+}

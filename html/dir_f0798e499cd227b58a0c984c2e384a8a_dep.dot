@@ -1,0 +1,9 @@
+digraph "doc/html/search" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_ca96b112edf0a196872e1ec0b84dd303 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="html" fontname="Helvetica", fontsize="10", URL="dir_ca96b112edf0a196872e1ec0b84dd303.html"]
+  dir_f0798e499cd227b58a0c984c2e384a8a [shape=box, label="search", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_f0798e499cd227b58a0c984c2e384a8a.html"];
+  }
+}

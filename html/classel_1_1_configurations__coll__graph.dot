@@ -1,0 +1,13 @@
+digraph "el::Configurations"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="el::Configurations",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="el::base::utils::Registry\lWithPred\< Configuration,\l Configuration::Predicate \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1base_1_1utils_1_1_registry_with_pred.html"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="el::base::utils::Abstract\lRegistry\< Configuration,\l std::vector\< Configuration * \> \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1base_1_1utils_1_1_abstract_registry.html"];
+  Node4 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="el::base::threading\l::ThreadSafe",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1base_1_1threading_1_1_thread_safe.html",tooltip="Base of thread safe class, this class is inheritable-only. "];
+}

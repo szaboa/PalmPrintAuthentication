@@ -1,0 +1,31 @@
+digraph "el::base::NoCopy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="el::base::NoCopy",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="firebrick4",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="el::base::debug::CrashHandler",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1base_1_1debug_1_1_crash_handler.html",tooltip="Handles unexpected crashes. "];
+  Node1 -> Node3 [dir="back",color="firebrick4",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="el::base::debug::StackTrace",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1base_1_1debug_1_1_stack_trace.html"];
+  Node1 -> Node4 [dir="back",color="firebrick4",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="el::base::LogDispatcher",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1base_1_1_log_dispatcher.html",tooltip="Dispatches log messages. "];
+  Node1 -> Node5 [dir="back",color="firebrick4",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="el::base::NullWriter",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1base_1_1_null_writer.html",tooltip="Writes nothing - Used when certain log is disabled. "];
+  Node1 -> Node6 [dir="back",color="firebrick4",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="el::base::Storage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1base_1_1_storage.html",tooltip="Easylogging++ management storage. "];
+  Node1 -> Node7 [dir="back",color="firebrick4",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="el::base::threading\l::internal::NoMutex",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1base_1_1threading_1_1internal_1_1_no_mutex.html",tooltip="Mutex wrapper used when multi-threading is disabled. "];
+  Node1 -> Node8 [dir="back",color="firebrick4",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="el::base::threading\l::internal::NoScopedLock\l\< Mutex \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1base_1_1threading_1_1internal_1_1_no_scoped_lock.html",tooltip="Lock guard wrapper used when multi-threading is disabled. "];
+  Node1 -> Node9 [dir="back",color="firebrick4",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="el::base::VRegistry",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1base_1_1_v_registry.html",tooltip="Represents registries for verbose logging. "];
+  Node1 -> Node10 [dir="back",color="firebrick4",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="el::base::Writer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1base_1_1_writer.html",tooltip="Main entry point of each logging. "];
+  Node10 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="el::base::PErrorWriter",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1base_1_1_p_error_writer.html"];
+  Node1 -> Node12 [dir="back",color="firebrick4",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="el::LogBuilder",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1_log_builder.html"];
+  Node12 -> Node13 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="el::base::DefaultLogBuilder",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1base_1_1_default_log_builder.html"];
+}

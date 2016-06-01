@@ -41,15 +41,18 @@ pair<Mat,Mat> TextureExtractor::create2dGaborFitler(int kSize, double theta, dou
 	return make_pair(reMat, imMat);
 }
 
+Mat TextureExtractor::preprocessing(Mat roi){
+    Mat grayscale(roi.size(),CV_8UC1);
+    cvtColor(roi, grayscale, CV_RGB2GRAY);
+
+    resize(grayscale, grayscale, Size(128, 128));
+    return grayscale;
+}
+
 IFeature* TextureExtractor::doFeatureExtraction(Mat roi){
 
 	Mat reMat, imMat, filtReMat, filtImMat;
-
-	Mat grayscale(roi.size(),CV_8UC1);
-	cvtColor(roi, grayscale, CV_RGB2GRAY);
-
-	resize(grayscale, grayscale, Size(128, 128));
-
+    Mat grayscale = preprocessing(roi);
     // Creating 2D Gabor filter
     auto filters = create2dGaborFitler(35, 90, 0.0916, 5.6179);
 	

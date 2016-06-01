@@ -1,0 +1,6 @@
+digraph "easylogging" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  dir_db5fcf6b32ae2f71079f60c74688e44a [shape=box, label="easylogging", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_db5fcf6b32ae2f71079f60c74688e44a.html"];
+}

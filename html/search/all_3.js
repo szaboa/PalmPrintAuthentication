@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['database',['database',['../classsqlite_1_1database.html',1,'sqlite']]],
+  ['database_5fbinder',['database_binder',['../classsqlite_1_1database__binder.html',1,'sqlite']]],
+  ['datetime',['DateTime',['../classel_1_1base_1_1utils_1_1_date_time.html',1,'el::base::utils']]],
+  ['dbadapter',['DbAdapter',['../class_db_adapter.html',1,'DbAdapter'],['../class_db_adapter.html#a0c986d385f785f72a822176e17820e3b',1,'DbAdapter::DbAdapter()']]],
+  ['debug',['Debug',['../namespaceel.html#ab0ac6091262344c52dd2d3ad099e8e36aa603905470e2a5b8c13e96b579ef0dba',1,'el']]],
+  ['defaultconfigurations',['defaultConfigurations',['../classel_1_1_loggers.html#a96f2336fafdc3ef2c4df01a73ae5ffb7',1,'el::Loggers']]],
+  ['defaultlogbuilder',['DefaultLogBuilder',['../classel_1_1base_1_1_default_log_builder.html',1,'el::base']]],
+  ['defaultlogdispatchcallback',['DefaultLogDispatchCallback',['../classel_1_1base_1_1_default_log_dispatch_callback.html',1,'el::base']]],
+  ['defaultperformancetrackingcallback',['DefaultPerformanceTrackingCallback',['../classel_1_1base_1_1_default_performance_tracking_callback.html',1,'el::base']]],
+  ['defaulttypedconfigurations',['defaultTypedConfigurations',['../classel_1_1_loggers.html#af296007c3eb3b71602ec80ff59875b46',1,'el::Loggers']]],
+  ['disableapplicationabortonfatallog',['DisableApplicationAbortOnFatalLog',['../namespaceel.html#a2784aacd04cb7816ac1c0b20fcbf83cba8dd9782f8a19cf7a41e4ec38d1c6a4ae',1,'el']]],
+  ['disableperformancetrackingcheckpointcomparison',['DisablePerformanceTrackingCheckpointComparison',['../namespaceel.html#a2784aacd04cb7816ac1c0b20fcbf83cba18ea5964e8caa7c476dd5eee8e4f74a0',1,'el']]],
+  ['disablevmodules',['DisableVModules',['../namespaceel.html#a2784aacd04cb7816ac1c0b20fcbf83cba22cae5066e8e0623cb90e20a18abb631',1,'el']]],
+  ['disablevmodulesextensions',['DisableVModulesExtensions',['../namespaceel.html#a2784aacd04cb7816ac1c0b20fcbf83cba18a8e65b84ca0cc82451b5e155d7aeb4',1,'el']]],
+  ['dispatchaction',['DispatchAction',['../namespaceel_1_1base.html#a3aa2563d38e47388ba242a1694fc2839',1,'el::base']]],
+  ['distance',['distance',['../struct_point__with__distance.html#ac939f22ebcfd8c761677941cc9e7ff7f',1,'Point_with_distance']]],
+  ['doextraction',['doExtraction',['../class_i_roi_extractor.html#a25fa4ecaa4e149c577b1a74dd028ef5f',1,'IRoiExtractor::doExtraction()'],['../class_square_roi_extractor.html#a7bbfcbad153d1a938971ed280b7730e2',1,'SquareRoiExtractor::doExtraction()']]],
+  ['dofeatureextraction',['doFeatureExtraction',['../class_i_feature_extractor.html#aeb560ebd2be3283cb0d37f14a649c820',1,'IFeatureExtractor::doFeatureExtraction()'],['../class_principal_line_extractor.html#a440f314ce7d0dda700d2fd913e707efa',1,'PrincipalLineExtractor::doFeatureExtraction()'],['../class_texture_extractor.html#ae00866d97604dff5a3c2f05cf21a76d1',1,'TextureExtractor::doFeatureExtraction()']]],
+  ['domatching',['doMatching',['../class_i_matcher.html#ac3db2bb079595c772f3f934b4f8e6b02',1,'IMatcher::doMatching()'],['../class_principal_line_matcher.html#a39e5a9677c7132a55ba983a353b37795',1,'PrincipalLineMatcher::doMatching()'],['../class_texture_matcher.html#a6d183fbdb1c9c0c58dff325457180b4f',1,'TextureMatcher::doMatching()']]],
+  ['dopreprocessing',['doPreprocessing',['../class_i_preprocessor.html#aa298e99080bd6b1764f094d95ad14747',1,'IPreprocessor::doPreprocessing()'],['../class_preprocessor.html#aa0cedcbc1df878d22cbaf37177e49711',1,'Preprocessor::doPreprocessing()']]],
+  ['dothinning',['doThinning',['../class_thinning.html#a6e309f4e2cb294a190076dd12a4acc21',1,'Thinning']]]
+];

@@ -1,0 +1,9 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="IRoiExtractor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_i_roi_extractor.html",tooltip="The IRoiExtractor class is an interface for doing ROI extraction from a segmented image..."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="SquareRoiExtractor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_square_roi_extractor.html",tooltip="The SquareRoiExtractor class is an implementation of the IRoiExtractor, extracts square-shaped area f..."];
+}

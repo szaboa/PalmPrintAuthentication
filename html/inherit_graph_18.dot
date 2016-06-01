@@ -1,0 +1,7 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="el::SysLogInitializer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1_sys_log_initializer.html",tooltip="Initializes syslog with process ID, options and facility. calls closelog() on d&#39;tor. "];
+}

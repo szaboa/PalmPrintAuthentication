@@ -1,0 +1,7 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="el::Configuration::\lPredicate",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1_configuration_1_1_predicate.html",tooltip="Used to find configuration from configuration (pointers) repository. Avoid using it. "];
+}

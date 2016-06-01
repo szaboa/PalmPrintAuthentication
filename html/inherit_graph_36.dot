@@ -1,0 +1,7 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Point_with_distance",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct_point__with__distance.html",tooltip="Struct for holding a boundary point and it&#39;s distance from center point. "];
+}

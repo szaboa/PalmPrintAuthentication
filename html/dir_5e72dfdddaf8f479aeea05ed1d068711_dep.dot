@@ -1,0 +1,6 @@
+digraph "module_DatabaseAdapter" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  dir_5e72dfdddaf8f479aeea05ed1d068711 [shape=box, label="module_DatabaseAdapter", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_5e72dfdddaf8f479aeea05ed1d068711.html"];
+}

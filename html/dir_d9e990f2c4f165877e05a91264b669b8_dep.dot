@@ -1,0 +1,10 @@
+digraph "sqlite" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_d9e990f2c4f165877e05a91264b669b8 {
+    graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_d9e990f2c4f165877e05a91264b669b8.html"];
+    dir_d9e990f2c4f165877e05a91264b669b8 [shape=plaintext label="sqlite"];
+    dir_7216a7103600b989451fce53d34cf39a [shape=box label="hdr" color="red" fillcolor="white" style="filled" URL="dir_7216a7103600b989451fce53d34cf39a.html"];
+  }
+}

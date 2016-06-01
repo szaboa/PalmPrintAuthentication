@@ -1,0 +1,7 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="sqlite::utility::function\l_traits\< ReturnType(ClassType\l::*)(Arguments...) \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structsqlite_1_1utility_1_1function__traits_3_01_return_type_07_class_type_1_1_5_08_07_arguments_8_8_8_08_01_4.html"];
+}

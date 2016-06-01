@@ -1,0 +1,6 @@
+digraph "module_RoiExtraction" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  dir_ae850bba118658e51d24c0e77f0d65e2 [shape=box, label="module_RoiExtraction", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_ae850bba118658e51d24c0e77f0d65e2.html"];
+}

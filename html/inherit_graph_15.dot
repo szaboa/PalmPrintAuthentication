@@ -1,0 +1,7 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="el::Loggers::ScopedRemoveFlag",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1_loggers_1_1_scoped_remove_flag.html",tooltip="Removes flag and add it when scope goes out. "];
+}

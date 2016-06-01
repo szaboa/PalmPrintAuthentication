@@ -2,6 +2,8 @@
 #include <module_FeatureExtraction/PrincipalLineFeature.h>
 #include <easylogging++.h>
 #include <utility>
+#include <utility/PPAException.h>
+
 PrincipalLineMatcher::PrincipalLineMatcher()
 {
 
@@ -51,6 +53,10 @@ pair<double,int> PrincipalLineMatcher::doMatching(IFeature* f){
     Mat distanceTransImg = doDistanceTransformation(f->getImageRepresentation());
 
     vector<pair<int, vector<Point>>> storedFeatures = dbAdapter->getLineFeatures();
+
+    if(storedFeatures.size() == 0){
+        throw PPAException("Error: database is empty");
+    }
 
     double min = INT_MAX;
 	int min_id = 0;

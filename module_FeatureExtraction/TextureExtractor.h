@@ -37,6 +37,12 @@ private:
      */
     std::pair<Mat,Mat> create2dGaborFitler(int kSize, double theta, double u, double sigma);
 	
+    /**
+     * @brief Preprocessing of the ROI (resizes and converts to grayscale)
+     * @param ROI
+     * @return 128x128 grayscale image
+     */
+    Mat preprocessing(Mat roi);
 
 };
 

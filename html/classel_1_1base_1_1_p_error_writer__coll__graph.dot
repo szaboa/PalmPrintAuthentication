@@ -1,0 +1,18 @@
+digraph "el::base::PErrorWriter"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="el::base::PErrorWriter",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="el::base::Writer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1base_1_1_writer.html",tooltip="Main entry point of each logging. "];
+  Node3 -> Node2 [dir="back",color="firebrick4",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="el::base::NoCopy",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1base_1_1_no_copy.html",tooltip="Internal helper class that prevent copy constructor for class. "];
+  Node4 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" m_messageBuilder" ,fontname="Helvetica"];
+  Node4 [label="el::base::MessageBuilder",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1base_1_1_message_builder.html"];
+  Node5 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" m_logger" ,fontname="Helvetica"];
+  Node5 [label="el::Logger",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1_logger.html",tooltip="Represents a logger holding ID and configurations we need to write logs. "];
+  Node6 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="el::base::threading\l::ThreadSafe",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1base_1_1threading_1_1_thread_safe.html",tooltip="Base of thread safe class, this class is inheritable-only. "];
+  Node7 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="el::Loggable",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classel_1_1_loggable.html",tooltip="Base of Easylogging++ friendly class. "];
+}
