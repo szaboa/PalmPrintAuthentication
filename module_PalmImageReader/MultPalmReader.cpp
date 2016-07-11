@@ -2,7 +2,8 @@
 #include <boost/filesystem.hpp>
 #include <utility/PPAException.h>
 #include <string>
-
+#include <QDebug>
+#include <algorithm>
 using namespace std;
 using namespace boost::filesystem;
 
@@ -16,6 +17,8 @@ void MultPalmReader::init(std::string dirPath) {
 	for (auto i = directory_iterator(path); i != directory_iterator(); ++i){
 		imageNames.push_back(i->path().filename().string());
 	}
+
+    sort(imageNames.begin(), imageNames.end());
 }
 
 cv::Mat MultPalmReader::readPalmImage() {

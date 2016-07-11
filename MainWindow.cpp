@@ -70,14 +70,12 @@ void MainWindow::initAuthTab()
 {
     ui->labelAuthAvgTimeValue->setText("0");
     ui->labelAuthMatchRateValue->setText("0");
-    ui->labelAuthNrOfRecordsValue->setText("0");
     ui->labelAuthTotalTimeValue->setText("0");
 }
 
 void MainWindow::initEnrollmentTab()
 {
     ui->labelEnrollAvgTimeValue->setText("0");
-    ui->labelEnrollNrOfRecordsValue->setText("0");
     ui->labelEnrollTotalTimeValue->setText("0");
 }
 
@@ -136,6 +134,20 @@ void MainWindow::displayMatchedFeature(double matchedDistance, int matchedId, cv
     ui->imgMatchedFeature->setPixmap(QPixmap::fromImage(image));
     ui->labelMatchedId->setText("Matched User Id: " + QString::number(matchedId));
     ui->labelDistance->setText("Distance: " + QString::number(matchedDistance));
+
+    if(getSelectedMethod() == QtUtils::LINE_METHOD){
+        if(matchedDistance < 0.011){
+            this->ui->labelDecision->setText("<font color='green'>ACCEPT</font>");
+        }else{
+            this->ui->labelDecision->setText("<font color='red'>REJECT</font>");
+        }
+    }else if(getSelectedMethod() == QtUtils::TEXTURE_METHOD){
+        if(matchedDistance < 0.137){
+            this->ui->labelDecision->setText("<font color='green'>ACCEPT</font>");
+        }else{
+            this->ui->labelDecision->setText("<font color='red'>REJECT</font>");
+        }
+    }
 }
 
 void MainWindow::displayQueryImageId(int userId)
@@ -212,7 +224,7 @@ void MainWindow::on_buttonStartAuthFolder_clicked()
 
 void MainWindow::on_buttonSelectQueryImage_clicked()
 {
-    singleVerificationPath = QFileDialog::getOpenFileName(this,tr("Choose"),"",tr("Images (*.png *.jpg *.jpeg *.JPG)"));
+    singleVerificationPath = QFileDialog::getOpenFileName(this,tr("Choose"),"/home/szabo/Documents/PPA/PPA",tr("Images (*.png *.jpg *.jpeg *.JPG)"));
     if(!singleVerificationPath.isEmpty())
     {
         QImage inputImage;

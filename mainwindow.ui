@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>834</width>
+    <width>721</width>
     <height>443</height>
    </rect>
   </property>
@@ -19,7 +19,7 @@
      <rect>
       <x>10</x>
       <y>80</y>
-      <width>811</width>
+      <width>701</width>
       <height>331</height>
      </rect>
     </property>
@@ -28,7 +28,7 @@
     </property>
     <widget class="QWidget" name="tabSingleVerification">
      <attribute name="title">
-      <string>SingleVerification</string>
+      <string>Identification_1</string>
      </attribute>
      <widget class="QPushButton" name="buttonSelectQueryImage">
       <property name="geometry">
@@ -62,14 +62,14 @@
      <widget class="QPushButton" name="buttonStartVerification">
       <property name="geometry">
        <rect>
-        <x>677</x>
+        <x>560</x>
         <y>260</y>
         <width>121</width>
         <height>27</height>
        </rect>
       </property>
       <property name="text">
-       <string>Start Verification</string>
+       <string>Start Identification</string>
       </property>
      </widget>
      <widget class="QLabel" name="imgRoi">
@@ -188,7 +188,7 @@
      <widget class="QLabel" name="labelMatchedId">
       <property name="geometry">
        <rect>
-        <x>550</x>
+        <x>530</x>
         <y>20</y>
         <width>171</width>
         <height>17</height>
@@ -209,6 +209,24 @@
       </property>
       <property name="text">
        <string>Distance: 0</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelDecision">
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>220</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>13</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
       </property>
      </widget>
     </widget>
@@ -251,7 +269,7 @@
         <widget class="QPushButton" name="buttonSelectEnrollmentFolder">
          <property name="geometry">
           <rect>
-           <x>680</x>
+           <x>550</x>
            <y>40</y>
            <width>99</width>
            <height>21</height>
@@ -264,8 +282,8 @@
         <widget class="QPushButton" name="buttonStartEnrollment">
          <property name="geometry">
           <rect>
-           <x>680</x>
-           <y>190</y>
+           <x>550</x>
+           <y>200</y>
            <width>99</width>
            <height>21</height>
           </rect>
@@ -279,25 +297,12 @@
           <rect>
            <x>140</x>
            <y>40</y>
-           <width>521</width>
+           <width>401</width>
            <height>20</height>
           </rect>
          </property>
          <property name="text">
           <string/>
-         </property>
-        </widget>
-        <widget class="QLabel" name="labelEnrollNrOfRecords">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>70</y>
-           <width>111</width>
-           <height>17</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Nr. of records:</string>
          </property>
         </widget>
         <widget class="QLabel" name="labelEnrollTotalTime">
@@ -324,19 +329,6 @@
          </property>
          <property name="text">
           <string>Avg. time:</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="labelEnrollNrOfRecordsValue">
-         <property name="geometry">
-          <rect>
-           <x>140</x>
-           <y>70</y>
-           <width>111</width>
-           <height>17</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>0</string>
          </property>
         </widget>
         <widget class="QLabel" name="labelEnrollTotalTimeValue">
@@ -371,7 +363,7 @@
     </widget>
     <widget class="QWidget" name="tabVerification">
      <attribute name="title">
-      <string>Verification</string>
+      <string>Identification_N</string>
      </attribute>
      <layout class="QGridLayout" name="gridLayout_3">
       <item row="0" column="0">
@@ -385,7 +377,7 @@
          </font>
         </property>
         <property name="title">
-         <string>Authentication</string>
+         <string>Identification</string>
         </property>
         <widget class="QLabel" name="labelAuthDatabasePath">
          <property name="geometry">
@@ -398,19 +390,6 @@
          </property>
          <property name="text">
           <string>Database:</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="labelAuthNrOfRecords">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>70</y>
-           <width>111</width>
-           <height>17</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Nr. of records:</string>
          </property>
         </widget>
         <widget class="QLabel" name="labelAuthTotalTime">
@@ -452,19 +431,6 @@
           <string/>
          </property>
         </widget>
-        <widget class="QLabel" name="labelAuthNrOfRecordsValue">
-         <property name="geometry">
-          <rect>
-           <x>140</x>
-           <y>70</y>
-           <width>131</width>
-           <height>17</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>0</string>
-         </property>
-        </widget>
         <widget class="QLabel" name="labelAuthTotalTimeValue">
          <property name="geometry">
           <rect>
@@ -494,7 +460,7 @@
         <widget class="QPushButton" name="buttonSelectAuthFolder">
          <property name="geometry">
           <rect>
-           <x>680</x>
+           <x>550</x>
            <y>40</y>
            <width>99</width>
            <height>21</height>
@@ -507,8 +473,8 @@
         <widget class="QPushButton" name="buttonStartAuthFolder">
          <property name="geometry">
           <rect>
-           <x>680</x>
-           <y>190</y>
+           <x>550</x>
+           <y>200</y>
            <width>99</width>
            <height>21</height>
           </rect>
@@ -601,8 +567,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>834</width>
-     <height>25</height>
+     <width>721</width>
+     <height>24</height>
     </rect>
    </property>
    <property name="defaultUp">

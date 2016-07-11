@@ -42,6 +42,7 @@ signals:
      */
     void sendExtractedRoi(cv::Mat roi);
 
+
     /**
      * @brief Signal to pass the extracted feature from the palm area
      * @param Extracted feature from the palm area

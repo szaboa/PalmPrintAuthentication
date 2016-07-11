@@ -81,3 +81,419 @@
 2016-06-01 20:01:50,982632 Error during authentication: user 19 Exception: Error: database is empty
 2016-06-01 20:01:51,041138 Error during authentication: user 146 Exception: Error: database is empty
 2016-06-01 20:01:51,629850 Error during authentication: user 41 Exception: Error: database is empty
+2016-06-01 20:08:37,198758 Keypoints not found.
+2016-06-01 20:08:37,198826 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-01 20:09:12,377501 Keypoints not found.
+2016-06-01 20:09:12,377691 Error during enrollment: user 92 Exception: Keypoints not found.
+2016-06-01 20:09:31,374124 Keypoints not found.
+2016-06-01 20:09:31,374695 Error during enrollment: user 48 Exception: Keypoints not found.
+2016-06-01 20:09:32,870111 Keypoints not found.
+2016-06-01 20:09:32,870248 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-01 20:14:01,667177 Keypoints not found.
+2016-06-01 20:14:01,667324 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-01 20:14:34,090678 Keypoints not found.
+2016-06-01 20:14:34,092421 Error during enrollment: user 92 Exception: Keypoints not found.
+2016-06-01 20:14:53,982753 Keypoints not found.
+2016-06-01 20:14:53,982991 Error during enrollment: user 48 Exception: Keypoints not found.
+2016-06-01 20:14:57,003871 Keypoints not found.
+2016-06-01 20:14:57,004621 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-07 18:29:58,250891 Keypoints not found.
+2016-06-07 18:29:58,251058 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-07 18:30:29,539668 Keypoints not found.
+2016-06-07 18:30:29,539854 Error during enrollment: user 92 Exception: Keypoints not found.
+2016-06-07 18:30:54,998958 Keypoints not found.
+2016-06-07 18:30:54,999209 Error during enrollment: user 48 Exception: Keypoints not found.
+2016-06-07 18:30:56,300652 Keypoints not found.
+2016-06-07 18:30:56,300788 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-07 18:34:18,033824 Error during single verification: user 65 Exception: Error: database is empty
+2016-06-07 18:34:49,289015 Error during single verification: user 27 Exception: Error: database is empty
+2016-06-07 18:35:11,491031 Error during single verification: user 27 Exception: Error: database is empty
+2016-06-07 18:50:38,344308 Error during single verification: user 122 Exception: Error: database is empty
+2016-06-07 18:53:02,846302 Keypoints not found.
+2016-06-07 18:53:02,846471 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-07 18:53:29,697472 Keypoints not found.
+2016-06-07 18:53:29,697602 Error during enrollment: user 92 Exception: Keypoints not found.
+2016-06-07 18:53:45,605181 Keypoints not found.
+2016-06-07 18:53:45,605317 Error during enrollment: user 48 Exception: Keypoints not found.
+2016-06-07 18:53:46,936797 Keypoints not found.
+2016-06-07 18:53:46,936939 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-09 11:39:22,219005 User 88 matched to id: 88
+2016-06-09 11:39:22,403037 User 97 matched to id: 94
+2016-06-09 11:39:22,608637 User 12 matched to id: 12
+2016-06-09 11:39:22,786650 User 138 matched to id: 76
+2016-06-09 11:39:22,970037 User 68 matched to id: 68
+2016-06-09 11:39:23,150513 User 46 matched to id: 46
+2016-06-09 11:39:23,326583 User 48 matched to id: 2
+2016-06-09 11:39:23,550585 User 118 matched to id: 31
+2016-06-09 11:39:23,731127 User 33 matched to id: 33
+2016-06-09 11:39:23,903867 User 122 matched to id: 154
+2016-06-09 11:39:24,075968 User 144 matched to id: 144
+2016-06-09 11:39:24,252664 User 64 matched to id: 64
+2016-06-09 11:39:24,444910 User 76 matched to id: 76
+2016-06-09 11:39:24,637405 User 105 matched to id: 105
+2016-06-09 11:39:24,820337 User 30 matched to id: 30
+2016-06-09 11:39:25,019239 User 21 matched to id: 21
+2016-06-09 11:39:25,218796 User 3 matched to id: 154
+2016-06-09 11:39:25,415225 User 62 matched to id: 62
+2016-06-09 11:39:25,612463 User 13 matched to id: 13
+2016-06-09 11:39:25,802812 User 26 matched to id: 104
+2016-06-09 11:39:25,975371 User 104 matched to id: 31
+2016-06-09 11:39:26,169416 User 89 matched to id: 89
+2016-06-09 11:39:26,365240 User 42 matched to id: 42
+2016-06-09 11:39:26,562717 User 87 matched to id: 87
+2016-06-09 11:39:26,763869 User 80 matched to id: 157
+2016-06-09 11:39:26,937778 User 90 matched to id: 90
+2016-06-09 11:39:27,146920 User 117 matched to id: 117
+2016-06-09 11:39:27,335393 User 139 matched to id: 154
+2016-06-09 11:39:27,515325 User 32 matched to id: 32
+2016-06-09 11:39:27,725390 User 9 matched to id: 152
+2016-06-09 11:39:27,941877 User 25 matched to id: 25
+2016-06-09 11:39:28,137201 User 53 matched to id: 138
+2016-06-09 11:39:28,334774 User 18 matched to id: 18
+2016-06-09 11:39:28,527361 User 7 matched to id: 90
+2016-06-09 11:39:28,707781 User 8 matched to id: 8
+2016-06-09 11:39:28,903286 User 57 matched to id: 57
+2016-06-09 11:39:29,102286 User 155 matched to id: 155
+2016-06-09 11:39:29,302931 User 85 matched to id: 85
+2016-06-09 11:39:29,497037 User 75 matched to id: 75
+2016-06-09 11:39:29,682047 User 40 matched to id: 40
+2016-06-09 11:39:29,877044 User 19 matched to id: 19
+2016-06-09 11:39:30,044510 User 146 matched to id: 146
+2016-06-09 11:39:30,215665 User 41 matched to id: 41
+2016-06-09 11:39:30,456101 User 20 matched to id: 20
+2016-06-09 11:39:30,641325 User 96 matched to id: 96
+2016-06-09 11:39:30,813380 User 109 matched to id: 29
+2016-06-09 11:39:30,988346 User 131 matched to id: 152
+2016-06-09 11:39:31,158835 User 116 matched to id: 116
+2016-06-09 11:39:31,343047 User 24 matched to id: 24
+2016-06-09 11:39:31,549979 User 37 matched to id: 37
+2016-06-09 11:39:31,750519 User 152 matched to id: 152
+2016-06-09 11:39:31,954619 User 27 matched to id: 27
+2016-06-09 11:39:32,143293 User 156 matched to id: 158
+2016-06-09 11:39:32,349876 User 34 matched to id: 2
+2016-06-09 11:39:32,540440 User 136 matched to id: 88
+2016-06-09 11:39:32,868346 User 67 matched to id: 67
+2016-06-09 11:39:33,045673 User 81 matched to id: 143
+2016-06-09 11:39:33,243609 User 66 matched to id: 85
+2016-06-09 11:39:33,432810 User 153 matched to id: 153
+2016-06-09 11:39:33,605159 User 70 matched to id: 70
+2016-06-09 11:39:33,806222 User 51 matched to id: 51
+2016-06-09 11:39:34,005054 User 5 matched to id: 5
+2016-06-09 11:39:34,185337 User 39 matched to id: 39
+2016-06-09 11:39:34,379695 User 134 matched to id: 134
+2016-06-09 11:39:34,577955 User 56 matched to id: 56
+2016-06-09 11:39:34,770825 User 119 matched to id: 119
+2016-06-09 11:39:35,019697 User 108 matched to id: 154
+2016-06-09 11:39:35,196247 User 36 matched to id: 36
+2016-06-09 11:39:35,387277 User 73 matched to id: 165
+2016-06-09 11:39:35,582218 User 65 matched to id: 65
+2016-06-09 11:39:35,771510 User 120 matched to id: 120
+2016-06-09 11:39:35,965320 User 124 matched to id: 124
+2016-06-09 11:39:36,190701 User 110 matched to id: 165
+2016-06-09 11:39:36,378719 User 143 matched to id: 143
+2016-06-09 11:39:36,609040 User 45 matched to id: 33
+2016-06-09 11:39:36,784157 User 17 matched to id: 89
+2016-06-09 11:39:36,981520 User 29 matched to id: 29
+2016-06-09 11:39:37,163723 User 49 matched to id: 49
+2016-06-09 11:39:37,352325 User 82 matched to id: 82
+2016-06-09 11:39:37,819227 User 137 matched to id: 137
+2016-06-09 11:39:37,999015 User 154 matched to id: 154
+2016-06-09 11:39:38,194145 User 43 matched to id: 104
+2016-06-09 11:39:38,377959 User 61 matched to id: 61
+2016-06-09 11:39:38,557171 User 163 matched to id: 163
+2016-06-09 11:39:38,728231 User 165 matched to id: 90
+2016-06-09 11:39:38,930000 User 55 matched to id: 55
+2016-06-09 11:39:39,120848 User 59 matched to id: 59
+2016-06-09 11:39:39,307931 User 140 matched to id: 140
+2016-06-09 11:39:39,476142 User 147 matched to id: 147
+2016-06-09 11:39:39,672608 User 74 matched to id: 99
+2016-06-09 11:39:39,873826 User 77 matched to id: 77
+2016-06-09 11:39:40,072171 User 35 matched to id: 35
+2016-06-09 11:39:40,268549 User 4 matched to id: 154
+2016-06-09 11:39:40,454842 User 31 matched to id: 31
+2016-06-09 11:39:40,632468 User 100 matched to id: 99
+2016-06-09 11:39:40,809539 User 158 matched to id: 156
+2016-06-09 11:39:40,996470 User 14 matched to id: 14
+2016-06-09 11:39:41,170395 User 167 matched to id: 11
+2016-06-09 11:39:41,353627 User 1 matched to id: 1
+2016-06-09 11:39:41,587346 User 11 matched to id: 11
+2016-06-09 11:39:41,766221 User 15 matched to id: 90
+2016-06-09 11:39:41,953475 User 2 matched to id: 2
+2016-06-09 11:39:42,121808 User 102 matched to id: 61
+2016-06-09 11:39:42,299608 User 28 matched to id: 88
+2016-06-09 11:39:42,533677 User 99 matched to id: 140
+2016-06-09 11:39:42,725542 User 50 matched to id: 50
+2016-06-09 11:39:42,901980 User 157 matched to id: 155
+2016-06-09 11:39:43,082075 User 71 matched to id: 71
+2016-06-09 11:39:43,257996 User 142 matched to id: 142
+2016-06-09 11:39:43,440335 User 54 matched to id: 54
+2016-06-09 11:39:43,623607 User 91 matched to id: 91
+2016-06-09 11:39:43,804071 User 92 matched to id: 92
+2016-06-09 11:39:44,006090 User 22 matched to id: 22
+2016-06-09 11:39:44,204323 User 127 matched to id: 57
+2016-06-09 11:39:44,400647 User 83 matched to id: 90
+2016-06-09 11:39:44,584950 User 60 matched to id: 60
+2016-06-09 11:39:44,761742 User 123 matched to id: 123
+2016-06-09 11:39:44,941992 User 94 matched to id: 94
+2016-06-09 11:39:45,228888 User 44 matched to id: 44
+2016-06-09 11:39:45,568606 User 69 matched to id: 90
+2016-06-09 11:52:14,062664 Keypoints not found.
+2016-06-09 11:52:14,066893 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-09 11:52:56,511174 Keypoints not found.
+2016-06-09 11:52:56,511349 Error during enrollment: user 92 Exception: Keypoints not found.
+2016-06-09 11:53:40,912610 Keypoints not found.
+2016-06-09 11:53:40,912817 Error during enrollment: user 48 Exception: Keypoints not found.
+2016-06-09 11:53:44,594348 Keypoints not found.
+2016-06-09 11:53:44,594588 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-09 12:42:16,839694 User 1 matched to id: 1
+2016-06-09 12:42:16,895940 User 1 matched to id: 1
+2016-06-09 12:42:16,954419 User 1 matched to id: 1
+2016-06-09 12:42:17,009785 User 1 matched to id: 1
+2016-06-09 14:08:38,548421 Error during authentication: user 51 Exception: Error: database is empty
+2016-06-09 14:08:38,608386 Error during authentication: user 51 Exception: Error: database is empty
+2016-06-09 14:08:38,650993 Error during authentication: user 51 Exception: Error: database is empty
+2016-06-09 14:08:38,702207 Error during authentication: user 51 Exception: Error: database is empty
+2016-06-09 14:08:38,756757 Error during authentication: user 53 Exception: Error: database is empty
+2016-06-09 14:08:38,799842 Error during authentication: user 53 Exception: Error: database is empty
+2016-06-09 14:08:38,843825 Error during authentication: user 53 Exception: Error: database is empty
+2016-06-09 14:08:38,886813 Error during authentication: user 53 Exception: Error: database is empty
+2016-06-09 14:08:38,930675 Error during authentication: user 54 Exception: Error: database is empty
+2016-06-09 14:08:38,982881 Error during authentication: user 54 Exception: Error: database is empty
+2016-06-09 14:08:39,026200 Error during authentication: user 54 Exception: Error: database is empty
+2016-06-09 14:08:39,070846 Error during authentication: user 54 Exception: Error: database is empty
+2016-06-09 14:08:39,122104 Error during authentication: user 55 Exception: Error: database is empty
+2016-06-09 14:08:39,165428 Error during authentication: user 55 Exception: Error: database is empty
+2016-06-09 14:08:39,212819 Error during authentication: user 55 Exception: Error: database is empty
+2016-06-09 14:08:39,257255 Error during authentication: user 55 Exception: Error: database is empty
+2016-06-09 14:08:39,302062 Error during authentication: user 56 Exception: Error: database is empty
+2016-06-09 14:08:39,353278 Error during authentication: user 56 Exception: Error: database is empty
+2016-06-09 14:08:39,398211 Error during authentication: user 56 Exception: Error: database is empty
+2016-06-09 14:08:39,443373 Error during authentication: user 56 Exception: Error: database is empty
+2016-06-09 14:08:39,488154 Error during authentication: user 57 Exception: Error: database is empty
+2016-06-09 14:08:39,532088 Error during authentication: user 57 Exception: Error: database is empty
+2016-06-09 14:08:39,574642 Error during authentication: user 57 Exception: Error: database is empty
+2016-06-09 14:08:39,617438 Error during authentication: user 57 Exception: Error: database is empty
+2016-06-09 14:08:39,663212 Error during authentication: user 59 Exception: Error: database is empty
+2016-06-09 14:08:39,707468 Error during authentication: user 59 Exception: Error: database is empty
+2016-06-09 14:08:39,754148 Error during authentication: user 59 Exception: Error: database is empty
+2016-06-09 14:08:39,805396 Error during authentication: user 59 Exception: Error: database is empty
+2016-06-09 14:08:39,856868 Error during authentication: user 60 Exception: Error: database is empty
+2016-06-09 14:08:39,899267 Error during authentication: user 60 Exception: Error: database is empty
+2016-06-09 14:08:39,943686 Error during authentication: user 60 Exception: Error: database is empty
+2016-06-09 14:08:39,985853 Error during authentication: user 60 Exception: Error: database is empty
+2016-06-09 14:08:40,028889 Error during authentication: user 61 Exception: Error: database is empty
+2016-06-09 14:08:40,073961 Error during authentication: user 61 Exception: Error: database is empty
+2016-06-09 14:08:40,118501 Error during authentication: user 61 Exception: Error: database is empty
+2016-06-09 14:08:40,163267 Error during authentication: user 61 Exception: Error: database is empty
+2016-06-09 14:08:40,210039 Error during authentication: user 62 Exception: Error: database is empty
+2016-06-09 14:08:40,252831 Error during authentication: user 62 Exception: Error: database is empty
+2016-06-09 14:08:40,295333 Error during authentication: user 62 Exception: Error: database is empty
+2016-06-09 14:08:40,340553 Error during authentication: user 62 Exception: Error: database is empty
+2016-06-09 14:08:40,384529 Error during authentication: user 64 Exception: Error: database is empty
+2016-06-09 14:08:40,429658 Error during authentication: user 64 Exception: Error: database is empty
+2016-06-09 14:08:40,474491 Error during authentication: user 64 Exception: Error: database is empty
+2016-06-09 14:08:40,518065 Error during authentication: user 64 Exception: Error: database is empty
+2016-06-09 14:08:40,562493 Error during authentication: user 65 Exception: Error: database is empty
+2016-06-09 14:08:40,606167 Error during authentication: user 65 Exception: Error: database is empty
+2016-06-09 14:08:40,664371 Error during authentication: user 65 Exception: Error: database is empty
+2016-06-09 14:08:40,711191 Error during authentication: user 65 Exception: Error: database is empty
+2016-06-09 14:08:40,765171 Error during authentication: user 66 Exception: Error: database is empty
+2016-06-09 14:08:40,809264 Error during authentication: user 66 Exception: Error: database is empty
+2016-06-09 14:08:40,853885 Error during authentication: user 66 Exception: Error: database is empty
+2016-06-09 14:08:40,898890 Error during authentication: user 66 Exception: Error: database is empty
+2016-06-09 14:08:40,943499 Error during authentication: user 67 Exception: Error: database is empty
+2016-06-09 14:08:40,985809 Error during authentication: user 67 Exception: Error: database is empty
+2016-06-09 14:08:41,029408 Error during authentication: user 67 Exception: Error: database is empty
+2016-06-09 14:08:41,081165 Error during authentication: user 67 Exception: Error: database is empty
+2016-06-09 14:08:41,126036 Error during authentication: user 68 Exception: Error: database is empty
+2016-06-09 14:08:41,171572 Error during authentication: user 68 Exception: Error: database is empty
+2016-06-09 14:08:41,213852 Error during authentication: user 68 Exception: Error: database is empty
+2016-06-09 14:08:41,255483 Error during authentication: user 68 Exception: Error: database is empty
+2016-06-09 14:08:41,300315 Error during authentication: user 69 Exception: Error: database is empty
+2016-06-09 14:08:41,343686 Error during authentication: user 69 Exception: Error: database is empty
+2016-06-09 14:08:41,393826 Error during authentication: user 69 Exception: Error: database is empty
+2016-06-09 14:08:41,437102 Error during authentication: user 69 Exception: Error: database is empty
+2016-06-09 14:08:41,495451 Error during authentication: user 70 Exception: Error: database is empty
+2016-06-09 14:08:41,538635 Error during authentication: user 70 Exception: Error: database is empty
+2016-06-09 14:08:41,581723 Error during authentication: user 70 Exception: Error: database is empty
+2016-06-09 14:08:41,624321 Error during authentication: user 70 Exception: Error: database is empty
+2016-06-09 14:08:41,667049 Error during authentication: user 71 Exception: Error: database is empty
+2016-06-09 14:08:41,709873 Error during authentication: user 71 Exception: Error: database is empty
+2016-06-09 14:08:41,752451 Error during authentication: user 71 Exception: Error: database is empty
+2016-06-09 14:08:41,796559 Error during authentication: user 71 Exception: Error: database is empty
+2016-06-09 14:08:41,840852 Error during authentication: user 73 Exception: Error: database is empty
+2016-06-09 14:08:41,883388 Error during authentication: user 73 Exception: Error: database is empty
+2016-06-09 14:08:41,938515 Error during authentication: user 73 Exception: Error: database is empty
+2016-06-09 14:08:41,991332 Error during authentication: user 73 Exception: Error: database is empty
+2016-06-09 14:08:42,033640 Error during authentication: user 74 Exception: Error: database is empty
+2016-06-09 14:08:42,075357 Error during authentication: user 74 Exception: Error: database is empty
+2016-06-09 14:08:42,131794 Error during authentication: user 74 Exception: Error: database is empty
+2016-06-09 14:08:42,174747 Error during authentication: user 74 Exception: Error: database is empty
+2016-06-09 14:08:42,234070 Error during authentication: user 75 Exception: Error: database is empty
+2016-06-09 14:08:42,278654 Error during authentication: user 75 Exception: Error: database is empty
+2016-06-09 14:08:42,355651 Error during authentication: user 75 Exception: Error: database is empty
+2016-06-09 14:08:42,401945 Error during authentication: user 75 Exception: Error: database is empty
+2016-06-09 14:08:42,445380 Error during authentication: user 76 Exception: Error: database is empty
+2016-06-09 14:08:42,493101 Error during authentication: user 76 Exception: Error: database is empty
+2016-06-09 14:08:42,536326 Error during authentication: user 76 Exception: Error: database is empty
+2016-06-09 14:08:42,580020 Error during authentication: user 76 Exception: Error: database is empty
+2016-06-09 14:08:42,623416 Error during authentication: user 77 Exception: Error: database is empty
+2016-06-09 14:08:42,666959 Error during authentication: user 77 Exception: Error: database is empty
+2016-06-09 14:08:42,710195 Error during authentication: user 77 Exception: Error: database is empty
+2016-06-09 14:08:42,755330 Error during authentication: user 77 Exception: Error: database is empty
+2016-06-09 14:08:42,802008 Error during authentication: user 80 Exception: Error: database is empty
+2016-06-09 14:08:42,854077 Error during authentication: user 80 Exception: Error: database is empty
+2016-06-09 14:08:42,899906 Error during authentication: user 80 Exception: Error: database is empty
+2016-06-09 14:08:42,942533 Error during authentication: user 80 Exception: Error: database is empty
+2016-06-09 14:08:42,986269 Error during authentication: user 81 Exception: Error: database is empty
+2016-06-09 14:08:43,038930 Error during authentication: user 81 Exception: Error: database is empty
+2016-06-09 14:08:43,082576 Error during authentication: user 81 Exception: Error: database is empty
+2016-06-09 14:08:43,125151 Error during authentication: user 81 Exception: Error: database is empty
+2016-06-09 14:08:43,171297 Error during authentication: user 82 Exception: Error: database is empty
+2016-06-09 14:08:43,228337 Error during authentication: user 82 Exception: Error: database is empty
+2016-06-09 14:08:43,276571 Error during authentication: user 82 Exception: Error: database is empty
+2016-06-09 14:08:43,321268 Error during authentication: user 82 Exception: Error: database is empty
+2016-06-09 14:08:43,365756 Error during authentication: user 83 Exception: Error: database is empty
+2016-06-09 14:08:43,408767 Error during authentication: user 83 Exception: Error: database is empty
+2016-06-09 14:08:43,453121 Error during authentication: user 83 Exception: Error: database is empty
+2016-06-09 14:08:43,497258 Error during authentication: user 83 Exception: Error: database is empty
+2016-06-09 14:08:43,545498 Error during authentication: user 85 Exception: Error: database is empty
+2016-06-09 14:08:43,597774 Error during authentication: user 85 Exception: Error: database is empty
+2016-06-09 14:08:43,640060 Error during authentication: user 85 Exception: Error: database is empty
+2016-06-09 14:08:43,695422 Error during authentication: user 85 Exception: Error: database is empty
+2016-06-09 14:08:43,745200 Error during authentication: user 87 Exception: Error: database is empty
+2016-06-09 14:08:43,795696 Error during authentication: user 87 Exception: Error: database is empty
+2016-06-09 14:08:43,837682 Error during authentication: user 87 Exception: Error: database is empty
+2016-06-09 14:08:43,880016 Error during authentication: user 87 Exception: Error: database is empty
+2016-06-09 14:08:43,932683 Error during authentication: user 88 Exception: Error: database is empty
+2016-06-09 14:08:43,977293 Error during authentication: user 88 Exception: Error: database is empty
+2016-06-09 14:08:44,022325 Error during authentication: user 88 Exception: Error: database is empty
+2016-06-09 14:08:44,065713 Error during authentication: user 88 Exception: Error: database is empty
+2016-06-09 14:08:44,114213 Error during authentication: user 89 Exception: Error: database is empty
+2016-06-09 14:08:44,168989 Error during authentication: user 89 Exception: Error: database is empty
+2016-06-09 14:08:44,215178 Error during authentication: user 89 Exception: Error: database is empty
+2016-06-09 14:08:44,260971 Error during authentication: user 89 Exception: Error: database is empty
+2016-06-09 14:08:44,306907 Error during authentication: user 90 Exception: Error: database is empty
+2016-06-09 14:08:44,350346 Error during authentication: user 90 Exception: Error: database is empty
+2016-06-09 14:08:44,396806 Error during authentication: user 90 Exception: Error: database is empty
+2016-06-09 14:08:44,448306 Error during authentication: user 90 Exception: Error: database is empty
+2016-06-09 14:08:44,493366 Error during authentication: user 91 Exception: Error: database is empty
+2016-06-09 14:08:44,535367 Error during authentication: user 91 Exception: Error: database is empty
+2016-06-09 14:08:44,578307 Error during authentication: user 91 Exception: Error: database is empty
+2016-06-09 14:08:44,634755 Error during authentication: user 91 Exception: Error: database is empty
+2016-06-09 14:08:44,683416 Error during authentication: user 94 Exception: Error: database is empty
+2016-06-09 14:08:44,722380 Error during authentication: user 94 Exception: Error: database is empty
+2016-06-09 14:08:44,761118 Error during authentication: user 94 Exception: Error: database is empty
+2016-06-09 14:08:44,802249 Error during authentication: user 94 Exception: Error: database is empty
+2016-06-09 14:08:44,851027 Error during authentication: user 96 Exception: Error: database is empty
+2016-06-09 14:08:44,906575 Error during authentication: user 96 Exception: Error: database is empty
+2016-06-09 14:08:44,960752 Error during authentication: user 96 Exception: Error: database is empty
+2016-06-09 14:08:45,004832 Error during authentication: user 96 Exception: Error: database is empty
+2016-06-09 14:08:45,044132 Error during authentication: user 97 Exception: Error: database is empty
+2016-06-09 14:08:45,089436 Error during authentication: user 97 Exception: Error: database is empty
+2016-06-09 14:08:45,127252 Error during authentication: user 97 Exception: Error: database is empty
+2016-06-09 14:08:45,165837 Error during authentication: user 97 Exception: Error: database is empty
+2016-06-09 14:08:45,205042 Error during authentication: user 99 Exception: Error: database is empty
+2016-06-09 14:08:45,243563 Error during authentication: user 99 Exception: Error: database is empty
+2016-06-09 14:08:45,282269 Error during authentication: user 99 Exception: Error: database is empty
+2016-06-09 14:08:45,319720 Error during authentication: user 99 Exception: Error: database is empty
+2016-06-09 14:08:45,357215 Error during authentication: user 100 Exception: Error: database is empty
+2016-06-09 14:08:45,394075 Error during authentication: user 100 Exception: Error: database is empty
+2016-06-09 14:08:45,431020 Error during authentication: user 100 Exception: Error: database is empty
+2016-06-09 14:08:45,468063 Error during authentication: user 100 Exception: Error: database is empty
+2016-06-09 14:08:45,506565 Error during authentication: user 102 Exception: Error: database is empty
+2016-06-09 14:08:45,544596 Error during authentication: user 102 Exception: Error: database is empty
+2016-06-09 14:08:45,587167 Error during authentication: user 102 Exception: Error: database is empty
+2016-06-09 14:08:45,626546 Error during authentication: user 102 Exception: Error: database is empty
+2016-06-09 14:08:45,672361 Error during authentication: user 104 Exception: Error: database is empty
+2016-06-09 14:08:45,723097 Error during authentication: user 104 Exception: Error: database is empty
+2016-06-09 14:08:45,820733 Error during authentication: user 104 Exception: Error: database is empty
+2016-06-09 14:08:45,857977 Error during authentication: user 104 Exception: Error: database is empty
+2016-06-09 14:08:45,898789 Error during authentication: user 105 Exception: Error: database is empty
+2016-06-09 14:08:45,937001 Error during authentication: user 105 Exception: Error: database is empty
+2016-06-09 14:08:45,978350 Error during authentication: user 105 Exception: Error: database is empty
+2016-06-09 14:12:20,194578 unable to open database file
+2016-06-09 14:12:20,202999 CRASH HANDLED; Application has crashed due to [SIGSEGV] signal
+2016-06-09 16:07:57,457461 Keypoints not found.
+2016-06-09 16:07:57,457620 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-14 10:26:07,256659 Keypoints not found.
+2016-06-14 10:26:07,256855 Error during enrollment: user 48 Exception: Keypoints not found.
+2016-06-14 10:26:29,717896 Keypoints not found.
+2016-06-14 10:26:29,718042 Error during enrollment: user 92 Exception: Keypoints not found.
+2016-06-14 10:26:36,608770 Keypoints not found.
+2016-06-14 10:26:36,608925 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-14 10:26:36,829083 Keypoints not found.
+2016-06-14 10:26:36,829219 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-14 10:27:53,103374 Keypoints not found.
+2016-06-14 10:27:53,103516 Error during enrollment: user 48 Exception: Keypoints not found.
+2016-06-14 10:28:17,030435 Keypoints not found.
+2016-06-14 10:28:17,030580 Error during enrollment: user 92 Exception: Keypoints not found.
+2016-06-14 10:28:29,891343 Keypoints not found.
+2016-06-14 10:28:29,891496 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-14 10:28:30,617934 Keypoints not found.
+2016-06-14 10:28:30,618127 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-17 15:10:58,908393 Keypoints not found.
+2016-06-17 15:10:58,908547 Error during enrollment: user 48 Exception: Keypoints not found.
+2016-06-17 15:11:23,511357 Keypoints not found.
+2016-06-17 15:11:23,511543 Error during enrollment: user 92 Exception: Keypoints not found.
+2016-06-17 15:11:30,826374 Keypoints not found.
+2016-06-17 15:11:30,826597 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-17 15:11:31,212771 Keypoints not found.
+2016-06-17 15:11:31,212911 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-17 15:23:46,930765 Keypoints not found.
+2016-06-17 15:23:46,930927 Error during enrollment: user 48 Exception: Keypoints not found.
+2016-06-17 15:24:09,307777 Keypoints not found.
+2016-06-17 15:24:09,307929 Error during enrollment: user 92 Exception: Keypoints not found.
+2016-06-17 15:24:16,385481 Keypoints not found.
+2016-06-17 15:24:16,385619 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-17 15:24:16,620986 Keypoints not found.
+2016-06-17 15:24:16,621133 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-17 15:26:18,623476 Keypoints not found.
+2016-06-17 15:26:18,623646 Error during enrollment: user 48 Exception: Keypoints not found.
+2016-06-17 15:26:53,803023 Keypoints not found.
+2016-06-17 15:26:53,803175 Error during enrollment: user 92 Exception: Keypoints not found.
+2016-06-17 15:27:03,921025 Keypoints not found.
+2016-06-17 15:27:03,921202 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-17 15:27:04,360890 Keypoints not found.
+2016-06-17 15:27:04,361123 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-18 11:08:28,404561 Error during single verification: user 165 Exception: Error: database is empty
+2016-06-18 11:14:39,132404 Error during single verification: user 165 Exception: Error: database is empty
+2016-06-18 11:14:56,930120 Error during single verification: user 157 Exception: Error: database is empty
+2016-06-18 11:15:31,333544 Error during single verification: user 163 Exception: Error: database is empty
+2016-06-18 11:19:07,455032 Error during single verification: user 163 Exception: Error: database is empty
+2016-06-18 11:19:47,554776 Error during single verification: user 156 Exception: Error: database is empty
+2016-06-18 11:24:52,212693 Error during single verification: user 165 Exception: Error: database is empty
+2016-06-18 11:27:02,302027 Error during single verification: user 163 Exception: Error: database is empty
+2016-06-19 16:38:27,334805 Keypoints not found.
+2016-06-19 16:38:27,334985 Error during enrollment: user 48 Exception: Keypoints not found.
+2016-06-19 16:38:50,736413 Keypoints not found.
+2016-06-19 16:38:50,736537 Error during enrollment: user 92 Exception: Keypoints not found.
+2016-06-19 16:38:57,378260 Keypoints not found.
+2016-06-19 16:38:57,378392 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-19 16:38:57,622985 Keypoints not found.
+2016-06-19 16:38:57,623116 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-19 16:40:33,833377 Keypoints not found.
+2016-06-19 16:40:33,833534 Error during enrollment: user 48 Exception: Keypoints not found.
+2016-06-19 16:40:57,575122 Keypoints not found.
+2016-06-19 16:40:57,575295 Error during enrollment: user 92 Exception: Keypoints not found.
+2016-06-19 16:41:03,863374 Keypoints not found.
+2016-06-19 16:41:03,863525 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-19 16:41:04,085511 Keypoints not found.
+2016-06-19 16:41:04,085647 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-25 12:30:23,462512 Error during single verification: user 127 Exception: Error: database is empty
+2016-06-25 12:31:01,263304 Keypoints not found.
+2016-06-25 12:31:01,263431 Error during enrollment: user 48 Exception: Keypoints not found.
+2016-06-25 12:31:24,273663 Keypoints not found.
+2016-06-25 12:31:24,273797 Error during enrollment: user 92 Exception: Keypoints not found.
+2016-06-25 12:31:30,379300 Keypoints not found.
+2016-06-25 12:31:30,379537 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-25 12:31:30,618681 Keypoints not found.
+2016-06-25 12:31:30,618827 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-25 12:45:26,070332 Keypoints not found.
+2016-06-25 12:45:26,070505 Error during enrollment: user 48 Exception: Keypoints not found.
+2016-06-25 12:45:49,535841 Keypoints not found.
+2016-06-25 12:45:49,535885 Error during enrollment: user 92 Exception: Keypoints not found.
+2016-06-25 12:45:55,666306 Keypoints not found.
+2016-06-25 12:45:55,666435 Error during enrollment: user 110 Exception: Keypoints not found.
+2016-06-25 12:45:55,889238 Keypoints not found.
+2016-06-25 12:45:55,889368 Error during enrollment: user 110 Exception: Keypoints not found.

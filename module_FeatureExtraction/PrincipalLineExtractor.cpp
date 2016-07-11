@@ -52,7 +52,7 @@ Mat PrincipalLineExtractor::normalizeImage(Mat img){
 	/* Applying a low-pass filter */
 	blur(img, img, Size(3, 3), Point(-1, -1));
 
-	return img;
+    return img;
 }
 
 Mat PrincipalLineExtractor::locatePrincipalLineInGivenDirection(const Mat &img, std::vector<std::vector<double>> H1, std::vector<std::vector<double>> H2, int degree){
@@ -105,7 +105,7 @@ Mat PrincipalLineExtractor::locatePrincipalLineInGivenDirection(const Mat &img, 
 				bool derivChangeFound = false;
 
 				// Checking if the derivative's sign has changed by comparing #dw neighbors 
-				for (int dw = 1; dw < firstDerivChangeWidth; ++dw){
+                for (int dw = 1; dw <= firstDerivChangeWidth; ++dw){
 					if (isInsideTheBoundary(i - dw, j)){
 						if ((I_der[i][j] * I_der[i-dw][j]) < 0){
 							derivChangeFound = true;
@@ -133,7 +133,7 @@ Mat PrincipalLineExtractor::locatePrincipalLineInGivenDirection(const Mat &img, 
 
 				bool derivChangeFound = false;
 				// Checking if the derivative's sign has changed by comparing #dw neighbors 
-				for (int dw = 1; dw < firstDerivChangeWidth; ++dw){
+                for (int dw = 1; dw <= firstDerivChangeWidth; ++dw){
 					if (isInsideTheBoundary(i, j - dw)){
 						if ((I_der[i][j] * I_der[i][j - dw]) < 0){
 							derivChangeFound = true;
@@ -163,7 +163,7 @@ Mat PrincipalLineExtractor::locatePrincipalLineInGivenDirection(const Mat &img, 
 
 				bool derivChangeFound = false;
 				// Checking if the derivative's sign has changed by comparing #dw neighbors 
-				for (int dw = 1; dw < firstDerivChangeWidth; ++dw){
+                for (int dw = 1; dw <= firstDerivChangeWidth; ++dw){
 					if (isInsideTheBoundary(j - dw, i - j)){
 						if ((I_der[j][i - j] * I_der[j - dw][i - j]) < 0){
 							derivChangeFound = true;
@@ -193,7 +193,7 @@ Mat PrincipalLineExtractor::locatePrincipalLineInGivenDirection(const Mat &img, 
 				int index = (128 - 1) - (i - j);
 				bool derivChangeFound = false;
 				// Checking if the derivative's sign has changed by comparing #dw neighbors 
-				for (int dw = 1; dw < firstDerivChangeWidth; ++dw){
+                for (int dw = 1; dw <= firstDerivChangeWidth; ++dw){
 					if (isInsideTheBoundary(j - dw, index)){
 						if ((I_der[j][index] * I_der[j - dw][index]) < 0){
 							derivChangeFound = true;

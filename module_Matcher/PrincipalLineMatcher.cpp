@@ -67,18 +67,20 @@ pair<double,int> PrincipalLineMatcher::doMatching(IFeature* f){
 	for (int i = 0; i < storedFeatures.size(); ++i){
 		sum = 0;
 		vector<Point> temp = storedFeatures.at(i).second;
-        for (int j = 0; j < temp.size(); ++j){
-            sum += distanceTransImg.at<uchar>(temp.at(j).x, temp.at(j).y);
-		}
+        if(temp.size() != 0){
+            for (int j = 0; j < temp.size(); ++j){
+                sum += distanceTransImg.at<uchar>(temp.at(j).x, temp.at(j).y);
+            }
 
-        sum = sum / temp.size();
-		if (sum < min){
-			min = sum;
-			min_id = storedFeatures.at(i).first;
-            matchedIndex = i;
-		}
-		
-	}
+            sum = sum / (temp.size()*255);
+
+            if (sum < min){
+                min = sum;
+                min_id = storedFeatures.at(i).first;
+                matchedIndex = i;
+            }
+        }
+    }
 
     Mat matchedImage(f->getImageRepresentation().size(),CV_8UC1, Scalar(0,0,0));
 

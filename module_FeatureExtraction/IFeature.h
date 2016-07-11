@@ -20,6 +20,8 @@ public:
      */
     virtual cv::Mat getImageRepresentation() = 0;
 
+    virtual void setUserId(int) = 0;
+    virtual int getUserId() = 0;
     /**
      * @brief ~IFeature
      */

@@ -48,7 +48,6 @@ void AuthenticationThread::run(){
     MultPalmReader* reader = new MultPalmReader();
 
     reader->init(path.toStdString());
-
     while (reader->hasNextImage() && !isCanceled){
 
             // Reading image and user id
@@ -78,7 +77,7 @@ void AuthenticationThread::run(){
 
                 // Extracting features from the ROI
                 feature = featureExtraction->doFeatureExtraction(roi);
-
+                feature->setUserId(userId);
                 // Matching the extracted feature (1:N)
                 pair<double,int> matchedResult = matcher->doMatching(feature);
 
@@ -87,7 +86,8 @@ void AuthenticationThread::run(){
                     matchingScore++;
                 }
 
-                LOG(INFO) << "User " << userId << " matched to id: " << matchedResult.second;
+
+                //LOG(INFO) << "User " << userId << " matched to id: " << matchedResult.second;
             }catch (PPAException &e){
                 LOG(INFO) << "Error during authentication: user " << userId << " Exception: " << e.what();
             }

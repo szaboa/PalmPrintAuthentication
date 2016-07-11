@@ -45,6 +45,8 @@ public:
      */
 	Mat getImaginaryComponent();
 
+    int getUserId() override;
+    void setUserId(int) override;
 
 	~TextureFeature();
 private:
@@ -58,5 +60,6 @@ private:
 	unsigned char bitsToByte(std::string bits);
 
 	Mat reMat, imMat;
+    int userId;
 };
 

@@ -75,6 +75,14 @@ Mat TextureFeature::getImageRepresentation(){
     return reMat;
 }
 
+void TextureFeature::setUserId(int userId){
+    this->userId = userId;
+}
+
+int TextureFeature::getUserId(){
+    return userId;
+}
+
 TextureFeature::~TextureFeature()
 {
 	delete dbAdapter;

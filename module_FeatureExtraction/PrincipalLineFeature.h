@@ -28,11 +28,13 @@ public:
      */
     cv::Mat getImageRepresentation() override;
 
-	~PrincipalLineFeature();
+    void setUserId(int userId) override;
+    int getUserId() override;
+    ~PrincipalLineFeature();
 
 private:
 	cv::Mat img;
-
+    int userId;
 	DbAdapter *dbAdapter = nullptr;
 };
 

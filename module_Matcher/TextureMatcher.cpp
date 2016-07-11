@@ -8,6 +8,7 @@
 #include <string>
 #include <easylogging++.h>
 #include <utility/PPAException.h>
+#include <unistd.h>
 
 using namespace std;
 using namespace json11;
@@ -15,7 +16,7 @@ using namespace cv;
 
 TextureMatcher::TextureMatcher()
 {
-
+    dbAdapter = new DbAdapter();
 }
 
 Mat TextureMatcher::decode(vector<int> values){
@@ -40,7 +41,7 @@ Mat TextureMatcher::decode(vector<int> values){
 
 pair<double,int> TextureMatcher::doMatching(IFeature* f){
 
-	dbAdapter = new DbAdapter();
+
 
 	TextureFeature *tf = dynamic_cast<TextureFeature*> (f);
 	Mat searchReMat, searchImMat;
@@ -57,15 +58,15 @@ pair<double,int> TextureMatcher::doMatching(IFeature* f){
 	int minUserId;
 
     // Get the stored features
-	vector<pair<int,Json>> records = dbAdapter->getTextureFeatures();
+    vector<pair<int,Json>> records = dbAdapter->getTextureFeatures();
 
     if(records.size() == 0){
         throw PPAException("Error: database is empty");
     }
 
+
     // Iterate through the stored features and calculate the distance
 	for (auto it = records.begin(); it < records.end(); ++it){
-		
 
 		int userId = it->first;
 		Json data = it->second;

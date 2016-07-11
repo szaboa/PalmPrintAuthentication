@@ -44,12 +44,14 @@ public:
      * @return Line features
      */
     vector <pair<int, vector<Point>> >  getLineFeatures();
+    vector <pair<int, vector<Point>> >  getLineFeatures(int userId);
 
     /**
      * @brief Returns the stored texture features
      * @return Texture features
      */
 	vector <pair<int, json11::Json>> getTextureFeatures();
+    vector <pair<int, json11::Json>> getTextureFeatures(int userId);
 	
 	~DbAdapter();
 

@@ -49,19 +49,19 @@ private:
 	static const int roiHeight = 128;
 
     /**
-     * @brief Defines the second-order derivative's treshold value
-     */
-	int secondDerivTresholdValue = 10;
-
-    /**
      * @brief Defines the range of the first-order derivative's change detection
      */
-	int firstDerivChangeWidth = 4;
+    int firstDerivChangeWidth = 4;
+
+    /**
+     * @brief Defines the second-order derivative's treshold value
+     */
+    int secondDerivTresholdValue = 10;
 
     /**
      * @brief Defines the minimum size of a component (Connected-component labeling)
      */
-	int componentMinSize = 15;
+    int componentMinSize = 15;
 
 
     /**
